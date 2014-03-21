@@ -1,0 +1,18 @@
+[{
+	"modid": "cpc",
+	"name": "CreepyPastaCraft",
+	"description": "Player beware, you're in for a scare!",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+	"url": "http://www.minecraftforge.net/forum/index.php/topic,14637.msg74680.html",
+	"updateUrl": "",
+	"authors": ["Phuck_Yu_too", "The_NetZ"],
+	"credits": "Adopted from Phuck_Yu_Too by The_NetZ, build system by AbrarSyed",
+	"logoFile": "pack.png",
+	"screenshots": [],
+	"parent": "",
+	"requiredMods": [],
+	"dependencies": [],
+	"dependants": [],
+	"useDependencyInformation": "false"
+}]

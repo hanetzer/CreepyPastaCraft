@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
+    }
+}
+
+apply plugin: 'forge'
+
+group = 'netz.mods'
+version = "0.0.0"
+archivesBaseName = 'CreepyPastaCraft'
+
+minecraft {
+    version = "1.7.2-10.12.0.1047"
+    assetDir = "run/assets"
+}
+
+jenkins {
+    job = 'CreepyPastaCraft'
+}
+
+version = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version': project.version, 'mcversion': project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

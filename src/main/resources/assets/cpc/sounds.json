@@ -1,0 +1,39 @@
+{
+  "mob.pewds.death": {
+	  "category": "neutral",
+	  "sounds": [
+	      "mob/pewds/death1",
+	      "mob/pewds/death2"
+	  ]
+  },
+  "mob.pewds.hurt": {
+	"category": "neutral",
+	"sounds": [
+	  "mob/pewds/hurt1",
+	  "mob/pewds/hurt2"
+	]
+  },
+  "mob.pewds.say": {
+	"category": "neutral",
+	"sounds": [
+		"mob/pewds/say1",
+		"mob/pewds/say1",
+		"mob/pewds/say1"
+	]
+  },
+    "mob.pewds.scare": {
+        "category": "neutral",
+        "sounds": [
+            "mob/pewds/scare"
+        ]
+    },
+  "records.lavender": {
+	"category": "record",
+	"sounds": [
+	  {
+		"name": "records/lavender",
+		"stream": true
+	  }
+	]
+  }
+}
