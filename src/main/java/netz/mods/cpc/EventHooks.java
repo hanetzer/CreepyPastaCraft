@@ -7,7 +7,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import netz.mods.cpc.item.ItemHiltBlack;
+import netz.mods.cpc.common.item.ItemHiltBlack;
 
 public class EventHooks
 {

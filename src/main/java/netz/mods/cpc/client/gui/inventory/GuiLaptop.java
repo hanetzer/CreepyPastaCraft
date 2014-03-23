@@ -5,8 +5,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import netz.mods.cpc.inventory.ContainerLaptop;
-import netz.mods.cpc.tileentity.TileEntityLaptop;
+import netz.mods.cpc.common.inventory.ContainerLaptop;
+import netz.mods.cpc.common.tileentity.TileEntityLaptop;
 
 import org.lwjgl.opengl.GL11;
 

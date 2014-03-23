@@ -2,9 +2,9 @@ package netz.mods.cpc.client.gui.achievement;
 
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
-import netz.mods.cpc.block.CPCBlock;
-import netz.mods.cpc.item.CPArchive;
-import netz.mods.cpc.item.CPCItem;
+import netz.mods.cpc.common.block.CPCBlock;
+import netz.mods.cpc.common.item.CPArchive;
+import netz.mods.cpc.common.item.CPCItem;
 
 public class CPCAchievement
 {

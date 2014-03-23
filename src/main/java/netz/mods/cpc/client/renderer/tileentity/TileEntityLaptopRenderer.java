@@ -4,7 +4,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import netz.mods.cpc.client.model.ModelLaptop;
-import netz.mods.cpc.tileentity.TileEntityLaptop;
+import netz.mods.cpc.common.tileentity.TileEntityLaptop;
 
 import org.lwjgl.opengl.GL11;
 
