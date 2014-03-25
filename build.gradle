@@ -17,13 +17,14 @@ buildscript {
 
 apply plugin: 'forge'
 
-group = 'netz.mods'
+group = 'recraft'
 version = "0.0.0"
 archivesBaseName = 'CreepyPastaCraft'
 
 minecraft {
     version = "1.7.2-10.12.0.1047"
     assetDir = "run/assets"
+	mcpVersion = '9.01-pre'
 }
 
 jenkins {

@@ -1,4 +1,4 @@
-package netz.mods.cpc.common.entity.monster;
+package recraft.cpc.common.entity.monster;
 
 import java.util.Random;
 
