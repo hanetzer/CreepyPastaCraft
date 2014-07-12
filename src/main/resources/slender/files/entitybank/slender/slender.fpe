@@ -1,0 +1,69 @@
+;header
+desc          = Slenderman
+
+;ai
+aiinit        = appear1.fpi
+aimain        = 
+aidestroy     = destroy\leavecorpse.fpi
+aishoot       = 
+soundset      = slender
+
+;spawn
+spawnmax      = 0
+spawndelay    = 0
+spawnqty      = 0
+
+;orientation
+model         = slender.x
+offx          = 0
+offy          = 0
+offz          = 0
+rotx          = 0
+roty          = 0
+rotz          = 0
+scale         = 100
+fixnewy       = 180
+
+;cone of sight
+coneheight    = 53
+coneangle     = 50
+
+;visualinfo
+textured      = Slender_D2.dds
+effect        = 
+
+;decals
+decalmax      = 2
+decal0        = 
+decal1        = 
+
+;identity details
+strength      = 100
+ischaracter   = 1
+hasweapon     = 
+isobjective   = 0
+cantakeweapon = 0
+
+;bodypartslimbinfo (1=head/2=body/3+4=armslr/5+6=legslr)
+limbmax       = 0
+
+;animationinfo
+animmax       = 100
+;; Idle
+anim0         = 56,155
+anim1         = 
+;;Walk
+anim2         = 236,254
+anim3         =
+;; Scream 
+anim4         = 156,235
+anim5         = 
+;; Melee Attack
+anim6         = 255,275
+anim7         = 
+;; Death 1
+anim11        = 1,44 
+;;Death 2 
+anim12        = 46,55
+
+ 

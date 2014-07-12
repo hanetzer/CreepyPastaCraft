@@ -7,7 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import recraft.cpc.common.item.CPCItem;
+import recraft.cpc.core.CPCItem;
+import recraft.cpc.init.CPCItems;
 
 public class EntityStephano extends EntityThrowable {
 
@@ -20,7 +21,7 @@ public class EntityStephano extends EntityThrowable {
 	}
 
 	public EntityStephano(World par1World, EntityPlayer par2EntityLiving, int par3) {
-		this(par1World, par2EntityLiving, new ItemStack(CPCItem.stephano, 1, par3));
+		this(par1World, par2EntityLiving, new ItemStack(CPCItems.stephano, 1, par3));
 	}
 
 	public EntityStephano(World par1World, EntityPlayer par2EntityLiving, ItemStack par3ItemStack) {
@@ -29,7 +30,7 @@ public class EntityStephano extends EntityThrowable {
 	}
 
 	public EntityStephano(World par1World, double par2, double par4, double par6, int par8) {
-		this(par1World, par2, par4, par6, new ItemStack(CPCItem.stephano, 1, par8));
+		this(par1World, par2, par4, par6, new ItemStack(CPCItems.stephano, 1, par8));
 	}
 
 	public EntityStephano(World par1World, double par2, double par4, double par6, ItemStack par8ItemStack) {
@@ -51,7 +52,7 @@ public class EntityStephano extends EntityThrowable {
 
 	public void setPotionDamage(int par1) {
 		if(this.potionDamage == null) {
-			this.potionDamage = new ItemStack(CPCItem.stephano, 1, 0);
+			this.potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
 		}
 
 		this.potionDamage.setItemDamage(par1);
@@ -59,7 +60,7 @@ public class EntityStephano extends EntityThrowable {
 
 	public int getPotionDamage() {
 		if(this.potionDamage == null) {
-			this.potionDamage = new ItemStack(CPCItem.stephano, 1, 0);
+			this.potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
 		}
 		return this.potionDamage.getItemDamage();
 	}
@@ -99,7 +100,7 @@ public class EntityStephano extends EntityThrowable {
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
 		if(this.potionDamage != null) {
-			par1NBTTagCompound.setCompoundTag("Potion", this.potionDamage.writeToNBT(new NBTTagCompound()));
+			par1NBTTagCompound.setTag("Potion", this.potionDamage.writeToNBT(new NBTTagCompound()));
 		}
 
 	}

@@ -40,10 +40,8 @@ public class EntityMutahar extends EntityAnimal
 		super.tasks.addTask(1, new EntityAIAvoidEntity(this, CPEntity.class, 6.0F, 0.25F, 0.3F));
 	}
 
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
 	}
 
 	protected boolean isAIEnabled() {
@@ -70,10 +68,6 @@ public class EntityMutahar extends EntityAnimal
 	}
 	
 	public void onKillEntity(EntityLiving par1EntityLiving) {}
-
-	protected int getDropItemId() {
-		return Item.ghastTear.itemID;
-	}
 
 	public EntityAgeable createChild(EntityAgeable var1) {
 		return var1;

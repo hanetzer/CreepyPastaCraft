@@ -92,8 +92,7 @@ public class ChildHunt extends EntityAIBase
 	 */
 	public boolean continueExecuting()
 	{
-		EntityLivingBase entitylivingbase = this.attacker.getAttackTarget();
-		return entitylivingbase == null ? false : (!entitylivingbase.isEntityAlive() ? false : (!this.longMemory ? !this.attacker.getNavigator().noPath() : this.attacker.func_110176_b(MathHelper.floor_double(entitylivingbase.posX), MathHelper.floor_double(entitylivingbase.posY), MathHelper.floor_double(entitylivingbase.posZ))));
+		return this.attacker.getAttackTarget() == null ? false : (!this.attacker.getAttackTarget().isEntityAlive() ? false : (!this.longMemory ? !this.attacker.getNavigator().noPath() : this.attacker.isWithinHomeDistance(MathHelper.floor_double(this.attacker.getAttackTarget().posX), MathHelper.floor_double(this.attacker.getAttackTarget().posY), MathHelper.floor_double(this.attacker.getAttackTarget().posZ))));
 	}
 
 	/**

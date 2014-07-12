@@ -20,13 +20,16 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 import recraft.cpc.client.gui.achievement.CPCAchievement;
 import recraft.cpc.common.entity.passive.EntityCry;
 import recraft.cpc.common.entity.passive.EntityJane;
 import recraft.cpc.common.entity.passive.EntityPewds;
-import recraft.cpc.common.item.CPCItem;
+import recraft.cpc.core.CPCItem;
+import recraft.cpc.init.CPCItems;
 
 public class EntityJeff extends EntityMob implements IMob
 {
@@ -65,15 +68,15 @@ public class EntityJeff extends EntityMob implements IMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(16.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(32.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	public void addRandomArmor()
 	{
-		this.setCurrentItemOrArmor(0, new ItemStack(CPCItem.jeffKnife));
+		this.setCurrentItemOrArmor(0, new ItemStack(CPCItems.jeffKnife));
 	}
 
 	protected boolean isAIEnabled() {
@@ -131,8 +134,8 @@ public class EntityJeff extends EntityMob implements IMob
 		if(par1DamageSource.getEntity() instanceof EntityJane)
 		{
 			EntityClientPlayerMP par1EntityPlayer = Minecraft.getMinecraft().thePlayer;
-			this.dropItem(CPCItem.jeffKnife.itemID, 1);
-			Minecraft.getMinecraft().thePlayer.addChatMessage("\u00a7lJane The Killer: \u00a7rSleep well.");
+			this.dropItem(CPCItems.jeffKnife, 1);
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("\u00a7lJane The Killer: \u00a7rSleep well."));
 			par1EntityPlayer.addStat(CPCAchievement.noSleep, 1);
 		}
 

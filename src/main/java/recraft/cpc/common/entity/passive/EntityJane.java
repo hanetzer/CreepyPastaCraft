@@ -17,13 +17,12 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import recraft.cpc.common.entity.monster.EntityJeff;
 
 public class EntityJane extends EntityMob implements IMob {
-
-	public boolean isAttacking;
-
 
 	public EntityJane(World par1World) {
 		super(par1World);
@@ -51,10 +50,10 @@ public class EntityJane extends EntityMob implements IMob {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(40.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(16.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.7D);
-		this.getEntityAttribute(SharedMonsterAttributes.followRange).setAttribute(32.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.7D);
+		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
 	protected boolean isAIEnabled() {
@@ -67,7 +66,7 @@ public class EntityJane extends EntityMob implements IMob {
 
 	public void onKillEntity(EntityLiving par1EntityLiving) {}
 
-	protected int getDropItemId() {
-		return Block.plantRed.blockID;
+	protected Item getDropItem() {
+		return Item.getItemFromBlock(Blocks.red_flower);
 	}
 }

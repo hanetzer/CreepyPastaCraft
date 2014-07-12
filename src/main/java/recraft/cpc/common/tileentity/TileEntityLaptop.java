@@ -13,7 +13,10 @@ import recraft.cpc.CPC;
 import recraft.cpc.common.block.BlockLaptop;
 import recraft.cpc.common.block.CPCBlock;
 import recraft.cpc.common.item.crafting.LaptopRecipes;
+import recraft.cpc.common.registry.PastaRegistry;
+import recraft.cpc.init.CPCBlocks;
 
+import java.util.Map;
 import java.util.Random;
 
 public class TileEntityLaptop extends TileEntity implements ISidedInventory {
@@ -236,7 +239,7 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 		 * Begin of chest-like functions
 		 */
 		if (++this.ticksSinceSync % 20 * 4 == 0) {
-			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, CPCBlock.laptop.blockID, 1, this.numUsingPlayers);
+			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, CPCBlocks.laptop, 1, this.numUsingPlayers);
 		}
 
 		this.prevLidAngle = this.lidAngle;
@@ -289,6 +292,7 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 	@SuppressWarnings("unused")
 	public void smeltItem() {
 		if (this.canSmelt()) {
+			for (Map.Entry<String, Class> entry : PastaRegistry.pastaListStringClass.entrySet());
 			ItemStack itemstack = LaptopRecipes.smelting().getSmeltingResult(this.itemStacks[0].getItem().itemID);
 			Item[] var10000 = new Item[10];
 			CPC var10003 = this.cpc;
@@ -391,6 +395,43 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		return false;
+	}
+
+	/**
+	 * Returns an array containing the indices of the slots that can be accessed by automation on the given side of this
+	 * block.
+	 *
+	 * @param p_94128_1_
+	 */
+	@Override
+	public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+		return new int[0];
+	}
+
+	/**
+	 * Returns true if automation can insert the given item in the given slot from the given side. Args: Slot, item,
+	 * side
+	 *
+	 * @param par1int
+	 * @param par2Itemstack
+	 * @param p_102007_3_
+	 */
+	@Override
+	public boolean canInsertItem(int par1int, ItemStack par2Itemstack, int p_102007_3_) {
+		return this.isItemValidForSlot(par1int, par2Itemstack);
+	}
+
+	/**
+	 * Returns true if automation can extract the given item in the given slot from the given side. Args: Slot, item,
+	 * side
+	 *
+	 * @param p_102008_1_
+	 * @param p_102008_2_
+	 * @param p_102008_3_
+	 */
+	@Override
+	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
 		return false;
 	}
 }

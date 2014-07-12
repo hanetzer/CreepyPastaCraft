@@ -12,6 +12,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import recraft.cpc.common.entity.passive.EntityCry;
@@ -49,17 +50,17 @@ public class EntityRake extends EntityMob implements IMob
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(48.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(16.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(7.0F);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(48.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(7.0F);
 	}
 
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
 	}
 
-	protected int getDropItemId() {
-		return this.isBurning()?Item.porkCooked.itemID:Item.porkRaw.itemID;
+	protected Item getDropItem() {
+		return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
 	}
 
 	protected void dropFewItems(boolean par1, int par2) {
@@ -67,9 +68,9 @@ public class EntityRake extends EntityMob implements IMob
 
 		for(int var4 = 0; var4 < var3; ++var4) {
 			if(this.isBurning()) {
-				this.dropItem(Item.porkCooked.itemID, 1);
+				this.dropItem(Items.cooked_porkchop, 1);
 			} else {
-				this.dropItem(Item.porkRaw.itemID, 1);
+				this.dropItem(Items.porkchop, 1);
 			}
 		}
 

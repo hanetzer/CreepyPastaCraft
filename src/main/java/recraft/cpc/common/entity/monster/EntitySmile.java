@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec3;
@@ -45,9 +46,9 @@ public class EntitySmile extends CPEntity {
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setAttribute(50.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setAttribute(4.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(7.0F);
+		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(7.0F);
 	}
 
 	public boolean isAIEnabled() {
@@ -132,7 +133,7 @@ public class EntitySmile extends CPEntity {
 					return entityplayer;
 				}
 
-				mc.thePlayer.addChatMessage("Spread The Word.");
+				mc.thePlayer.addChatMessage(new ChatComponentText("Spread The Word."));
 				this.isAngry = true;
 				entityplayer.addPotionEffect(new PotionEffect(Potion.blindness.id, 700, 50));
 				entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 250, 50));

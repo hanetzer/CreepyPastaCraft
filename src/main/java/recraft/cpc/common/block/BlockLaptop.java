@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import recraft.cpc.CPC;
 import recraft.cpc.common.inventory.InventoryLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
+import recraft.cpc.init.CPCBlocks;
 
 public class BlockLaptop extends BlockContainer {
 	public BlockLaptop() {
@@ -25,7 +26,7 @@ public class BlockLaptop extends BlockContainer {
 	}
 
 	public Item getBlockDropped(int par1, Random par2Random, int par3) {
-		return CPCBlock.laptop;
+		return Item.getItemFromBlock(CPCBlocks.laptop);
 	}
 
 	public int quantityDropped(Random random) {
@@ -62,7 +63,6 @@ public class BlockLaptop extends BlockContainer {
 			par5EntityPlayer.openGui(CPC.instance, 0, par1World, par2x, par3y, par4z);
 			return true;
 		}
-		return false;
 	}
 
 	@Override

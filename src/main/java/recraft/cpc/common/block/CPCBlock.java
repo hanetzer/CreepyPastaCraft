@@ -1,6 +1,7 @@
 package recraft.cpc.common.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
@@ -16,16 +17,10 @@ public class CPCBlock
 	
 	public static void init()
 	{
-		initBlocks();
 		regBlocks();
 		addRecipes();
 	}
 	
-	private static void initBlocks()
-	{
-		laptop	 = (new BlockLaptop(501)).setHardness(2.0F).setResistance(20.0F);
-	}
-
 	private static void regBlocks()
 	{
 		GameRegistry.registerBlock(laptop,  "laptop");
@@ -35,6 +30,6 @@ public class CPCBlock
 
 	private static void addRecipes()
 	{
-		GameRegistry.addRecipe((new ItemStack(laptop, 1)), "xxx", "cdc", "xxx", 'x', (new ItemStack(Item.ingotIron)), 'c', (new ItemStack(Item.redstone)), 'd', (new ItemStack(Item.diamond)));
+		GameRegistry.addRecipe((new ItemStack(laptop, 1)), "xxx", "cdc", "xxx", 'x', (new ItemStack(Items.iron_ingot)), 'c', (new ItemStack(Items.redstone)), 'd', (new ItemStack(Items.diamond)));
 	}
 }

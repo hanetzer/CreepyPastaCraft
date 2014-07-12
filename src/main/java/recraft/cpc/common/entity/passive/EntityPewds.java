@@ -14,9 +14,11 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import recraft.cpc.common.entity.ai.PewDieRun;
-import recraft.cpc.common.item.CPCItem;
+import recraft.cpc.core.CPCItem;
+import recraft.cpc.init.CPCItems;
 
 public class EntityPewds extends EntityAnimal
 {
@@ -39,7 +41,7 @@ public class EntityPewds extends EntityAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 
 	public int getTalkInterval() {
@@ -71,8 +73,8 @@ public class EntityPewds extends EntityAnimal
 
 	public void onKillEntity(EntityLiving par1EntityLiving) {}
 
-	protected int getDropItemId() {
-		return CPCItem.stephano.itemID;
+	protected Item getDropItemId() {
+		return CPCItems.stephano;
 	}
 
 	public EntityAgeable createChild(EntityAgeable var1) {

@@ -15,6 +15,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
@@ -40,7 +41,7 @@ public class EntityCry extends EntityAnimal
 	protected void applyEntityAttributes()
 	{
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setAttribute(0.5D);
+		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
 	}
 
 	protected boolean isAIEnabled()
@@ -70,9 +71,9 @@ public class EntityCry extends EntityAnimal
 
 	public void onKillEntity(EntityLiving par1EntityLiving) {}
 
-	protected int getDropItemId()
+	protected Item getDropItem()
 	{
-		return Item.ghastTear.itemID;
+		return Items.ghast_tear;
 	}
 
 	public EntityAgeable createChild(EntityAgeable var1)

@@ -9,13 +9,11 @@ import recraft.cpc.common.entity.projectile.EntityStephano;
 
 public class ItemStephano extends Item
 {
-	public ItemStephano(int i)
-	{
-		super(i);
+	public ItemStephano() {
 		setMaxStackSize(8);
 		setMaxDamage(0);
 		setCreativeTab(CPC.tabCPC);
-		setUnlocalizedName("cpc.stephano");
+		setUnlocalizedName("cpc:stephano");
 		setTextureName("cpc:stephano");
 	}
 

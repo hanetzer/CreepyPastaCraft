@@ -2,22 +2,16 @@ package recraft.cpc.common.item;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import recraft.cpc.CPC;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArmorBaby extends ItemArmor {
-	@SideOnly(Side.CLIENT)
-	private IIcon[] icons;
-	public int armorType;
+	public int textureID;
 
-	public ItemArmorBaby(EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
-		super(par2EnumArmorMaterial, par3, par4);
-		this.armorType = par4;
+	public ItemArmorBaby(ArmorMaterial par1EnumArmorMaterial, int par2RenderIndex, int par3ArmorType) {
+		super(par1EnumArmorMaterial, par2RenderIndex, par3ArmorType);
+		textureID = par3ArmorType;
 		this.setCreativeTab(CPC.tabCPC);
 	}
 
@@ -25,26 +19,17 @@ public class ItemArmorBaby extends ItemArmor {
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
 		String textureLoc = "cpc:textures/models/armor/baby_layer_";
 		return this.armorType == 2 ? (textureLoc + "2.png") : (textureLoc + "1.png");
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		icons = new Icon[4];
-		icons[0] = iconRegister.registerIcon("cpc:bonnet");
-		icons[1] = iconRegister.registerIcon("cpc:bib");
-		icons[2] = iconRegister.registerIcon("cpc:diaper");
-		icons[3] = iconRegister.registerIcon("cpc:booties");
+		if (textureID == 0)      { itemIcon = iconRegister.registerIcon("cpc:bonnet"); }
+		else if (textureID == 1) { itemIcon = iconRegister.registerIcon("cpc:bib"); }
+		else if (textureID == 2) { itemIcon = iconRegister.registerIcon("cpc:diaper");}
+		else if (textureID == 3) { itemIcon = iconRegister.registerIcon("cpc:booties");}
+		else { itemIcon = iconRegister.registerIcon("cpc:horror"); }
 	}
-
-	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
-		return armorType <= 3 ? icons[armorType] : icons[0];
-	}
-
 }

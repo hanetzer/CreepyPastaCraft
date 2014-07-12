@@ -1,8 +1,8 @@
 package recraft.cpc.common.creativetab;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import recraft.cpc.common.item.CPCItem;
+import net.minecraft.item.Item;
+import recraft.cpc.init.CPCItems;
 
 public class CreativeTabCPC extends CreativeTabs
 {
@@ -10,7 +10,8 @@ public class CreativeTabCPC extends CreativeTabs
 		super(position, tabID);
 	}
 
-	public ItemStack getIconItemStack() {
-		return new ItemStack(CPCItem.horror, 1, 7);
+	public Item getTabIconItem() {
+		return CPCItems.horror;
 	}
+
 }
