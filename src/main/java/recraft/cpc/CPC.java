@@ -14,7 +14,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.MinecraftForge;
 import recraft.cpc.client.gui.achievement.CPCAchievement;
 import recraft.cpc.common.CommonProxy;
-import recraft.cpc.common.block.CPCBlock;
+import recraft.cpc.api.registry.PastaRegistry;
+import recraft.cpc.core.CPCBlock;
 import recraft.cpc.common.creativetab.CreativeTabCPC;
 import recraft.cpc.common.entity.CPCEntity;
 import recraft.cpc.common.handlers.CPCEventHandler;
@@ -48,6 +49,7 @@ public class CPC {
 		CPCItem.init();
 		CPCBlock.init();
 		CPCEntity.init();
+		PastaRegistry.init();
 		CPCAchievement.init();
 
 		//GameRegistry.registerCraftingHandler(new CraftHandler());
