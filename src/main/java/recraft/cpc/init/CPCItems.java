@@ -11,4 +11,5 @@ public class CPCItems {
 	public static Item horror;
 	public static Item stephano;
 	public static Item record_lavender;
+	public static Item archive;
 }

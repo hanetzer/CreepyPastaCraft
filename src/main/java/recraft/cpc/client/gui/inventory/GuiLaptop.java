@@ -28,10 +28,9 @@ public class GuiLaptop extends GuiContainer
 		this.ySize = i + this.inventoryRows * 18;
 	}
 
-	protected void drawGuiContainerForegroundLayer()
-	{
-		this.fontRenderer.drawString(this.playerInventory.isInvNameLocalized() ? this.playerInventory.getInvName() : I18n.getString(this.playerInventory.getInvName()), 8, 6, 4210752);
-		this.fontRenderer.drawString(this.laptopInventory.isInvNameLocalized() ? this.laptopInventory.getInvName() : I18n.getString(this.laptopInventory.getInvName()), 8, this.ySize - 96 + 2, 4210752);
+	protected void drawGuiContainerForegroundLayer(int par1int, int par2int) {
+		//this.fontRendererObj.drawString(this.playerInventory.isInvNameLocalized() ? this.playerInventory.getInvName() : I18n.getString(this.playerInventory.getInvName()), 8, 6, 4210752);
+		this.fontRendererObj.drawString(I18n.format("container.laptop"), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)

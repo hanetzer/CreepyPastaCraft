@@ -21,6 +21,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import recraft.cpc.common.entity.passive.EntityCry;
 import recraft.cpc.common.entity.passive.EntityPewds;
 
@@ -69,9 +71,9 @@ public class EntityJack extends CPEntity {
 	{
 		boolean flag = super.attackEntityAsMob(par1Entity);
 
-		if (flag && this.getHeldItem() == null && this.rand.nextFloat() < (float)this.worldObj.difficultySetting * 0.3F)
+		if (flag && this.getHeldItem() == null && this.rand.nextFloat() < (float)this.worldObj.difficultySetting.getDifficultyId() * 0.3F)
 		{
-			par1Entity.setFire(2 * this.worldObj.difficultySetting);
+			par1Entity.setFire(2 * this.worldObj.difficultySetting.getDifficultyId());
 		}
 
 		return flag;
@@ -155,65 +157,87 @@ public class EntityJack extends CPEntity {
 		super.onLivingUpdate();
 	}
 
-	protected boolean teleportToEntity(Entity par1Entity) {
-		Vec3 var2 = super.worldObj.getWorldVec3Pool().getVecFromPool(super.posX - par1Entity.posX, super.boundingBox.minY + (double)(super.height / 2.0F) - par1Entity.posY + (double)par1Entity.getEyeHeight(), super.posZ - par1Entity.posZ);
-		var2 = var2.normalize();
-		double var3 = 16.0D;
-		double var5 = super.posX + (super.rand.nextDouble() - 0.5D) * 8.0D - var2.xCoord * var3;
-		double var7 = super.posY + (double)(super.rand.nextInt(16) - 8) - var2.yCoord * var3;
-		double var9 = super.posZ + (super.rand.nextDouble() - 0.5D) * 8.0D - var2.zCoord * var3;
-		return this.teleportTo(var5, var7, var9);
+	protected boolean teleportToEntity(Entity par1Entity)
+	{
+		Vec3 vec3 = Vec3.createVectorHelper(this.posX - par1Entity.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - par1Entity.posY + (double)par1Entity.getEyeHeight(), this.posZ - par1Entity.posZ);
+		vec3 = vec3.normalize();
+		double d0 = 16.0D;
+		double d1 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.xCoord * d0;
+		double d2 = this.posY + (double)(this.rand.nextInt(16) - 8) - vec3.yCoord * d0;
+		double d3 = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.zCoord * d0;
+		return this.teleportTo(d1, d2, d3);
 	}
 
-	protected boolean teleportTo(double par1, double par3, double par5) {
-		double var7 = super.posX;
-		double var9 = super.posY;
-		double var11 = super.posZ;
-		super.posX = par1;
-		super.posY = par3;
-		super.posZ = par5;
-		boolean var13 = false;
-		int var14 = MathHelper.floor_double(super.posX);
-		int var15 = MathHelper.floor_double(super.posY);
-		int var16 = MathHelper.floor_double(super.posZ);
-		int var18;
-		if(super.worldObj.blockExists(var14, var15, var16)) {
-			boolean var30 = false;
+	protected boolean teleportTo(double p_70825_1_, double p_70825_3_, double p_70825_5_)
+	{
+		EnderTeleportEvent event = new EnderTeleportEvent(this, p_70825_1_, p_70825_3_, p_70825_5_, 0);
+		if (MinecraftForge.EVENT_BUS.post(event)){
+			return false;
+		}
+		double d3 = this.posX;
+		double d4 = this.posY;
+		double d5 = this.posZ;
+		this.posX = event.targetX;
+		this.posY = event.targetY;
+		this.posZ = event.targetZ;
+		boolean flag = false;
+		int i = MathHelper.floor_double(this.posX);
+		int j = MathHelper.floor_double(this.posY);
+		int k = MathHelper.floor_double(this.posZ);
 
-			while(!var30 && var15 > 0) {
-				var18 = super.worldObj.getBlockId(var14, var15 - 1, var16);
-				if(var18 != 0 && Block.blocksList[var18].blockMaterial.blocksMovement()) {
-					var30 = true;
-				} else {
-					--super.posY;
-					--var15;
+		if (this.worldObj.blockExists(i, j, k))
+		{
+			boolean flag1 = false;
+
+			while (!flag1 && j > 0)
+			{
+				Block block = this.worldObj.getBlock(i, j - 1, k);
+
+				if (block.getMaterial().blocksMovement())
+				{
+					flag1 = true;
+				}
+				else
+				{
+					--this.posY;
+					--j;
 				}
 			}
 
-			if(var30) {
-				this.setPosition(super.posX, super.posY, super.posZ);
-				if(super.worldObj.getCollidingBoundingBoxes(this, super.boundingBox).isEmpty() && !super.worldObj.isAnyLiquid(super.boundingBox)) {
-					var13 = true;
+			if (flag1)
+			{
+				this.setPosition(this.posX, this.posY, this.posZ);
+
+				if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox))
+				{
+					flag = true;
 				}
 			}
 		}
 
-		if(!var13) {
-			this.setPosition(var7, var9, var11);
+		if (!flag)
+		{
+			this.setPosition(d3, d4, d5);
 			return false;
-		} else {
-			short var301 = 128;
+		}
+		else
+		{
+			short short1 = 128;
 
-			for(var18 = 0; var18 < var301; ++var18) {
-				double var19 = (double)var18 / ((double)var301 - 1.0D);
-				double var24 = var7 + (super.posX - var7) * var19 + (super.rand.nextDouble() - 0.5D) * (double)super.width * 2.0D;
-				double var26 = var9 + (super.posY - var9) * var19 + super.rand.nextDouble() * (double)super.height;
-				double var28 = var11 + (super.posZ - var11) * var19 + (super.rand.nextDouble() - 0.5D) * (double)super.width * 2.0D;
-				super.worldObj.spawnParticle("portal", var24, var26, var28, 255.0D, 255.0D, 255.0D);
+			for (int l = 0; l < short1; ++l)
+			{
+				double d6 = (double)l / ((double)short1 - 1.0D);
+				float f = (this.rand.nextFloat() - 0.5F) * 0.2F;
+				float f1 = (this.rand.nextFloat() - 0.5F) * 0.2F;
+				float f2 = (this.rand.nextFloat() - 0.5F) * 0.2F;
+				double d7 = d3 + (this.posX - d3) * d6 + (this.rand.nextDouble() - 0.5D) * (double)this.width * 2.0D;
+				double d8 = d4 + (this.posY - d4) * d6 + this.rand.nextDouble() * (double)this.height;
+				double d9 = d5 + (this.posZ - d5) * d6 + (this.rand.nextDouble() - 0.5D) * (double)this.width * 2.0D;
+				this.worldObj.spawnParticle("portal", d7, d8, d9, (double)f, (double)f1, (double)f2);
 			}
 
-			super.worldObj.playSoundEffect(var7, var9, var11, "mob.endermen.portal", 1.0F, 1.0F);
-			super.worldObj.playSoundAtEntity(this, "mob.endermen.portal", 1.0F, 1.0F);
+			this.worldObj.playSoundEffect(d3, d4, d5, "mob.endermen.portal", 1.0F, 1.0F);
+			this.playSound("mob.endermen.portal", 1.0F, 1.0F);
 			return true;
 		}
 	}

@@ -1,22 +1,17 @@
 package recraft.cpc.common.tileentity;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import recraft.cpc.CPC;
 import recraft.cpc.common.block.BlockLaptop;
-import recraft.cpc.common.block.CPCBlock;
-import recraft.cpc.common.item.crafting.LaptopRecipes;
-import recraft.cpc.common.registry.PastaRegistry;
+import recraft.cpc.api.registry.PastaRegistry;
 import recraft.cpc.init.CPCBlocks;
 
-import java.util.Map;
 import java.util.Random;
 
 public class TileEntityLaptop extends TileEntity implements ISidedInventory {
@@ -32,10 +27,6 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 	public int numUsingPlayers;
 	public boolean opened;
 	private String customName;
-
-	public TileEntityLaptop() {
-		super();
-	}
 
 	public int getSizeInventory() {
 		return this.itemStacks.length;
@@ -284,71 +275,43 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 		if (this.itemStacks[0] == null) {
 			return false;
 		} else {
-			ItemStack itemstack = LaptopRecipes.smelting().getSmeltingResult(this.itemStacks[0].getItem().itemID);
+			ItemStack itemstack = new ItemStack(Items.paper);
 			return itemstack == null ? false : (this.itemStacks[2] == null ? true : (!this.itemStacks[2].isItemEqual(itemstack) ? false : (this.itemStacks[2].stackSize < this.getInventoryStackLimit() && this.itemStacks[2].stackSize < this.itemStacks[2].getMaxStackSize() ? true : this.itemStacks[2].stackSize < itemstack.getMaxStackSize())));
 		}
 	}
 
-	@SuppressWarnings("unused")
-	public void smeltItem() {
-		if (this.canSmelt()) {
-			for (Map.Entry<String, Class> entry : PastaRegistry.pastaListStringClass.entrySet());
-			ItemStack itemstack = LaptopRecipes.smelting().getSmeltingResult(this.itemStacks[0].getItem().itemID);
-			Item[] var10000 = new Item[10];
-			CPC var10003 = this.cpc;
-			var10000[0] = CPArchive.jeff;
-			var10003 = this.cpc;
-			var10000[1] = CPArchive.rake;
-			var10003 = this.cpc;
-			var10000[2] = CPArchive.smile;
-			var10003 = this.cpc;
-			var10000[3] = CPArchive.jane;
-			var10003 = this.cpc;
-			var10000[4] = CPArchive.strider;
-			var10003 = this.cpc;
-			var10000[5] = CPArchive.squid;
-			var10003 = this.cpc;
-			var10000[6] = CPArchive.slender;
-			var10003 = this.cpc;
-			var10000[7] = CPArchive.moth;
-			var10003 = this.cpc;
-			var10000[8] = CPArchive.jack;
-			var10003 = this.cpc;
-			var10000[9] = CPArchive.seed;
-			Item[] archives = var10000;
-			int q = this.rand.nextInt(1);
-			int maxArchives = this.rand.nextInt(archives.length);
-			if (q == 0) {
-				itemstack = new ItemStack(archives[maxArchives]);
-			}
 
-			if (this.itemStacks[2] == null) {
+
+	public void smeltItem()
+	{
+		if (this.canSmelt())
+		{
+			ItemStack itemstack = PastaRegistry.ArchiveRecipes.printing().getPrintingResult(this.itemStacks[0]);
+
+			if (this.itemStacks[2] == null)
+			{
 				this.itemStacks[2] = itemstack.copy();
-			} else if (this.itemStacks[2].itemID == itemstack.itemID) {
-				this.itemStacks[2].stackSize += itemstack.stackSize;
+			}
+			else if (this.itemStacks[2].getItem() == itemstack.getItem())
+			{
+				this.itemStacks[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple items
 			}
 
-			if (this.itemStacks[0].getItem().hasContainerItem()) {
-				this.itemStacks[0] = new ItemStack(this.itemStacks[0].getItem().setFull3D());
-			} else {
-				--this.itemStacks[0].stackSize;
-			}
+			--this.itemStacks[0].stackSize;
 
-			if (this.itemStacks[0].stackSize <= 0) {
+			if (this.itemStacks[0].stackSize <= 0)
+			{
 				this.itemStacks[0] = null;
 			}
-
-
 		}
 	}
 
 	public static int getItemBurnTime(ItemStack par1ItemStack) {
-		if (par1ItemStack == null) {
-			return 1;
-		} else {
-			// int i = par1ItemStack.getItem().itemID;
-			return GameRegistry.getFuelValue(par1ItemStack);
-		}
+			if (par1ItemStack == null) {
+				return 1;
+			} else {
+				return 2000;
+			}
 	}
 
 	public static boolean func_52005_b(ItemStack par0ItemStack) {
@@ -356,7 +319,7 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 	}
 
 	public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-		return super.worldObj.getTileEntity(super.xCoord, super.yCoord, super.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double) super.xCoord + 0.5D, (double) super.yCoord + 0.5D, (double) super.zCoord + 0.5D) <= 64.0D;
+		return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord)==this && par1EntityPlayer.getDistanceSq((double)this.xCoord + 0.5D, (double)this.yCoord + 0.5D, (double)this.zCoord + 0.5D) <= 64.0D;
 	}
 
 	public void openInventory() {
@@ -389,11 +352,6 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 	}
 
 	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		return false;
 	}
@@ -419,7 +377,7 @@ public class TileEntityLaptop extends TileEntity implements ISidedInventory {
 	 */
 	@Override
 	public boolean canInsertItem(int par1int, ItemStack par2Itemstack, int p_102007_3_) {
-		return this.isItemValidForSlot(par1int, par2Itemstack);
+		return false;
 	}
 
 	/**

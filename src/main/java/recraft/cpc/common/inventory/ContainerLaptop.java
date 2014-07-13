@@ -25,7 +25,7 @@ public class ContainerLaptop extends Container
 		this.addSlotToContainer(new Slot(par1TileEntityLaptop, 0, 56, 34));
 		this.addSlotToContainer(new SlotLaptop(Minecraft.getMinecraft().thePlayer, par1TileEntityLaptop, 2, 116, 35));
 		lowerInventory = par2InventoryPlayer;
-		laptop.openChest();
+		laptop.openInventory();
 		int i;
 
 		for (i = 0; i < 3; ++i)
@@ -90,8 +90,8 @@ public class ContainerLaptop extends Container
 	public void onContainerClosed(EntityPlayer par1EntityPlayer)
 	{
 		super.onContainerClosed(par1EntityPlayer);
-		this.lowerInventory.closeChest();
-		laptop.closeChest();
+		this.lowerInventory.closeInventory();
+		laptop.closeInventory();
 	}
 
 	/**

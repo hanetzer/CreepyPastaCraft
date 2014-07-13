@@ -59,14 +59,14 @@ public class PewDieRun extends EntityAIAvoidEntity
 		if(!this.theEntity.getEntitySenses().canSee(this.closestLivingEntity)) {
 			return false;
 		} else {
-			Vec3 var21 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, this.theEntity.worldObj.getWorldVec3Pool().getVecFromPool(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
-			if(var21 == null) {
+			Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+			if(vec3 == null) {
 				return false;
-			} else if(this.closestLivingEntity.getDistanceSq(var21.xCoord, var21.yCoord, var21.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
+			} else if(this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
 				return false;
 			} else {
-				this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(var21.xCoord, var21.yCoord, var21.zCoord);
-				return this.entityPathEntity == null?false:this.entityPathEntity.isDestinationSame(var21);
+				this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
+				return this.entityPathEntity == null?false:this.entityPathEntity.isDestinationSame(vec3);
 			}
 		}
 	}

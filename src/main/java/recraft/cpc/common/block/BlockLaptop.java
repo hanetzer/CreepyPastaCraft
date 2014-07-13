@@ -22,7 +22,7 @@ public class BlockLaptop extends BlockContainer {
 		super(Material.iron);
 		setCreativeTab(CPC.tabCPC);
 		setBlockTextureName("cpc:laptop");
-		setBlockName("cpc.computer");
+		setBlockName("cpc:laptop");
 	}
 
 	public Item getBlockDropped(int par1, Random par2Random, int par3) {

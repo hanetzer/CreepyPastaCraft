@@ -72,20 +72,20 @@ public class InventoryLaptop extends InventoryBasic
 	{
 		if (this.associated != null)
 		{
-			this.associated.openChest();
+			this.associated.openInventory();
 		}
 
-		super.openChest();
+		super.openInventory();
 	}
 
 	public void closeChest()
 	{
 		if (this.associated != null)
 		{
-			this.associated.closeChest();
+			this.associated.closeInventory();
 		}
 
-		super.closeChest();
+		super.closeInventory();
 		this.associated = null;
 	}
 

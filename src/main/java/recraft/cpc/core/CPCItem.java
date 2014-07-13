@@ -4,7 +4,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.village.MerchantRecipeList;
@@ -14,8 +13,9 @@ import recraft.cpc.CPC;
 import recraft.cpc.api.CPCItemHelper;
 import recraft.cpc.common.item.*;
 
-import static recraft.cpc.init.CPCItems.*;
 import java.util.Random;
+
+import static recraft.cpc.init.CPCItems.*;
 
 public class CPCItem {
 
@@ -35,13 +35,14 @@ public class CPCItem {
 
 	private static void regItems() {
 		horror    = registerItem(new ItemHorror().setUnlocalizedName("cpc:horror"));
-		jeffKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialJeffKnife, 0)).setUnlocalizedName("cpc:jeffKnife");
-		hiltBlack = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialHiltBlack, 1)).setUnlocalizedName("cpc:hiltBlack");
-		killKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialKillKnife, 2)).setUnlocalizedName("cpc:killKnife");
+		jeffKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialJeffKnife, 0).setUnlocalizedName("cpc:jeffKnife"));
+		hiltBlack = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialHiltBlack, 1).setUnlocalizedName("cpc:hiltBlack"));
+		killKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialKillKnife, 2).setUnlocalizedName("cpc:killKnife"));
 		diaper = registerItem(new ItemArmorBaby(CPCItemHelper.armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("cpc:diaper"));
 		stephano = registerItem(new ItemStephano().setUnlocalizedName("cpc:stephano"));
 		pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("cpc:pasta"));
 		record_lavender = registerItem(new ItemCPCRecord("lavender").setUnlocalizedName("cpc:record_lavender"));
+		archive = registerItem(new ItemCPCArchive().setUnlocalizedName("cpc:archive"));
 	}
 	
 	private static void addRecipes() {
@@ -55,7 +56,7 @@ public class CPCItem {
 	}
 
 	public static Item registerItem(Item item) {
-		GameRegistry.registerItem(item, item.getUnlocalizedName(), "cpc");
+		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.cpc:", ""));
 		return item;
 	}
 }

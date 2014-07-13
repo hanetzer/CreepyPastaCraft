@@ -45,6 +45,6 @@ public class SlotLaptop extends Slot
 	{
 		par1ItemStack.onCrafting(this.thePlayer.worldObj, this.thePlayer, this.field_48437_f);
 		this.field_48437_f = 0;
-		GameRegistry.onItemSmelted(this.thePlayer, par1ItemStack);
+		//GameRegistry.onItemSmelted(this.thePlayer, par1ItemStack);
 	}
 }
