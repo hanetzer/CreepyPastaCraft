@@ -17,31 +17,34 @@ public class CPCHiltBlackHandler {
 	@SubscribeEvent
 	public void entityAttacked(LivingAttackEvent event) {
 		EntityLivingBase attackedEnt = event.entityLiving;
-		DamageSource attackSource = event.source;
-		if(attackSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) attackSource.getEntity()).getItemInUse().getItem() == CPCItems.hiltBlack && ((EntityPlayer) attackSource.getEntity()).getItemInUse() != null) {
+		Entity entity = event.source.getEntity();
+		if(entity instanceof EntityPlayer && ((EntityPlayer) entity).getItemInUse().getItem() == CPCItems.hiltBlack) {
 			attackedEnt.attackEntityFrom(DamageSource.generic, 2);
-			if(CPC.mc.thePlayer.getHealth() < CPC.mc.thePlayer.getMaxHealth()) {
-				CPC.mc.thePlayer.setHealth(CPC.mc.thePlayer.getHealth() + 1);
+			EntityClientPlayerMP player = CPC.mc.thePlayer;
+			if(player.getHealth() < player.getMaxHealth()) {
+				player.setHealth(player.getHealth() + 1);
 			}
 		}
 	}
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if(event.player.getHeldItem().getItem() == CPCItems.hiltBlack) {
-			event.player.addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 1));
-			event.player.addPotionEffect(new PotionEffect(Potion.wither.id, 50, 1));
-			if(event.player.worldObj.isRemote) {
-				event.player.worldObj.spawnParticle("reddust", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
+		EntityPlayer player = event.player;
+		if(player.getHeldItem().getItem() == CPCItems.hiltBlack) {
+			player.addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 1));
+			player.addPotionEffect(new PotionEffect(Potion.wither.id, 50, 1));
+			World world = player.worldObj;
+			if(world.isRemote) {
+				world.spawnParticle("reddust", player.posX, player.posY - 0.4D, player.posZ, 0.0D, 0.0D, 0.0D);
 				if ((new Random()).nextInt(100) < 25) {
-					event.player.worldObj.spawnParticle("smoke", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
+					world.spawnParticle("smoke", player.posX, player.posY - 0.4D, player.posZ, 0.0D, 0.0D, 0.0D);
 				}
 			}
 
 		}
 		else {
-			event.player.removePotionEffect(Potion.wither.id);
-			event.player.removePotionEffect(Potion.blindness.id);
+			player.removePotionEffect(Potion.wither.id);
+			player.removePotionEffect(Potion.blindness.id);
 		}
 	}
 
