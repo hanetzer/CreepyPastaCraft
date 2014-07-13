@@ -22,6 +22,7 @@ import recraft.cpc.common.handlers.CPCEventHandler;
 import recraft.cpc.common.handlers.GuiHandler;
 import recraft.cpc.core.CPCItem;
 
+@SuppressWarnings("unused")
 @Mod(modid="cpc")
 public class CPC {
 	public static Minecraft mc = Minecraft.getMinecraft();
@@ -45,7 +46,7 @@ public class CPC {
 		configPath = event.getModConfigurationDirectory() + "/creepypastacraft/";
 		//CPCConfig.init(configPath);
 		tabCPC = new CreativeTabCPC(CreativeTabs.getNextID(), "tabCPC");
-		MinecraftForge.EVENT_BUS.register(new CPCEventHandler());
+		CPCEventHandler.init();
 		CPCItem.init();
 		CPCBlock.init();
 		CPCEntity.init();

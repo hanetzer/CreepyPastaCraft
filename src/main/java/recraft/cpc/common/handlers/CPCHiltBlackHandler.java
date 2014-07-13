@@ -18,7 +18,7 @@ public class CPCHiltBlackHandler {
 	public void entityAttacked(LivingAttackEvent event) {
 		EntityLivingBase attackedEnt = event.entityLiving;
 		DamageSource attackSource = event.source;
-		if(attackSource.getEntity() instanceof EntityPlayer && CPC.mc.thePlayer.getItemInUse().getItem() == CPCItems.hiltBlack) {
+		if(attackSource.getEntity() instanceof EntityPlayer && ((EntityPlayer) attackSource.getEntity()).getItemInUse().getItem() == CPCItems.hiltBlack && ((EntityPlayer) attackSource.getEntity()).getItemInUse() != null) {
 			attackedEnt.attackEntityFrom(DamageSource.generic, 2);
 			if(CPC.mc.thePlayer.getHealth() < CPC.mc.thePlayer.getMaxHealth()) {
 				CPC.mc.thePlayer.setHealth(CPC.mc.thePlayer.getHealth() + 1);
@@ -28,12 +28,14 @@ public class CPCHiltBlackHandler {
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if(event.player.getItemInUse().getItem() == CPCItems.hiltBlack) {
+		if(event.player.getItemInUse().getItem() == CPCItems.hiltBlack && event.player.getItemInUse().getItem() != null) {
 			event.player.addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 1));
 			event.player.addPotionEffect(new PotionEffect(Potion.wither.id, 50, 1));
-			event.player.worldObj.spawnParticle("reddust", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
-			if ((new Random()).nextInt(100) < 25) {
-				event.player.worldObj.spawnParticle("smoke", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
+			if(event.player.worldObj.isRemote) {
+				event.player.worldObj.spawnParticle("reddust", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
+				if ((new Random()).nextInt(100) < 25) {
+					event.player.worldObj.spawnParticle("smoke", event.player.posX, event.player.posY - 0.4D, event.player.posZ, 0.0D, 0.0D, 0.0D);
+				}
 			}
 
 		}
