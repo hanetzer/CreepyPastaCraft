@@ -9,26 +9,26 @@ item.cpc:diaper.name=A Diaper
 item.cpc:pasta.name=Pasta
 item.cpc:archive.name=CreepyPasta Archive
 item.cpc:page.name=A page...
-item.cpc:record.lavender.desc=Lavender Town
+item.cpc:record_lavender.desc=Lavender Town
 death.attack.slender=%1$s has been taken by the Slenderman
 death.chat.jeff=Go to sleep.
 
-item.cpcGroup.tabCPC=Creepy Pasta
+itemGroup.tabCPC=Creepy Pasta
 
 tile.cpc:laptop.name=Laptop
 
-entity.cpc.jeff.name=Jeff The Killer
-entity.cpc.jane.name=Jane The Killer
-entity.cpc.pewds.name=Pewdiepie
-entity.cpc.cry.name=Cryotic
-entity.cpc.jack.name=Eyeless Jack
-entity.cpc.slender.name=Slenderman
-entity.cpc.rake.name=The Rake
-entity.cpc.smile.name=Smile.dog
-entity.cpc.moth.name=MothMan
-entity.cpc.squid.name=Squidward
-entity.cpc.strider.name=The Strider
-entity.cpc.seed.name=Seed Eater
+entity.cpc:jeff.name=Jeff The Killer
+entity.cpc:jane.name=Jane The Killer
+entity.cpc:pewds.name=Pewdiepie
+entity.cpc:cry.name=Cryotic
+entity.cpc:jack.name=Eyeless Jack
+entity.cpc:slender.name=Slenderman
+entity.cpc:rake.name=The Rake
+entity.cpc:smile.name=Smile.dog
+entity.cpc:moth.name=MothMan
+entity.cpc:squidward.name=Squidward
+entity.cpc:strider.name=The Strider
+entity.cpc:seed.name=Seed Eater
 
 achievement.cpc.computer=Not For Kids
 achievement.cpc.computer.desc=Craft A Computer
