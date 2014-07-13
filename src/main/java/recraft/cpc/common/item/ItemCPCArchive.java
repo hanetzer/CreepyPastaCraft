@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -25,21 +26,13 @@ public class ItemCPCArchive extends Item {
 	public ItemCPCArchive() {
 		this.setHasSubtypes(true);
 		this.setCreativeTab(CPC.tabCPC);
+		this.setMaxStackSize(1);
 	}
 
-	public String getItemStackDisplayName(ItemStack par1ItemStack)
-	{
-		String s = ("" + StatCollector.translateToLocal(this.getUnlocalizedName() + ".name")).trim();
-		String s1 = PastaRegistry.getStringFromID(par1ItemStack.getItemDamage());
-
-		if (s1 != null)
-		{
-			s = s + " " + StatCollector.translateToLocal("entity." + s1 + ".name");
-		}
-
-		return s;
+	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean bool) {
+		String s = PastaRegistry.getStringFromID(itemStack.getItemDamage());
+		list.add(I18n.format("entity." + s + ".name"));
 	}
-
 	/**
 	 * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
 	 * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
