@@ -1,0 +1,168 @@
+package recraft.cpc.api.registry;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import recraft.cpc.common.entity.monster.*;
+import recraft.cpc.common.entity.passive.EntityJane;
+import recraft.cpc.common.entity.passive.EntityStrider;
+import recraft.cpc.init.CPCItems;
+
+import java.util.*;
+
+public class PastaRegistry {
+	private static final Logger logger = LogManager.getLogger();
+	public static Map pastaListStringClass = new HashMap();
+	public static Map pastaListClassString = new HashMap();
+	public static Map pastaListIDClass     = new HashMap();
+	public static Map pastaListClassID     = new HashMap();
+	public static Map pastaListStringID    = new HashMap();
+	public static HashMap pastaList        = new LinkedHashMap();
+
+	@SuppressWarnings("unchecked")
+	public static void registerPasta(Class pastaClass, String pastaName, int pastaID) {
+		if (pastaListStringClass.containsKey(pastaName)) {
+			throw new IllegalArgumentException("ID is already registered: " + pastaName);
+		}
+		else if (pastaListIDClass.containsKey(pastaID)) {
+			throw new IllegalArgumentException("ID is already registered: " + pastaID);
+		}
+		else {
+			pastaListStringClass.put(pastaClass, pastaName);
+			pastaListClassString.put(pastaClass, pastaName);
+			pastaListIDClass.put(pastaID, pastaClass);
+			pastaListClassID.put(pastaClass, pastaID);
+			pastaListStringID.put(pastaName, pastaID);
+			pastaList.put(pastaID, new PastaInfo(pastaID));
+		}
+	}
+
+	public static Entity createEntityByName(String par1PastaName, World par2World) {
+		Entity pasta = null;
+		try {
+			Class klass = (Class) pastaListStringClass.get(par1PastaName);
+
+			if (klass != null) {
+				pasta = (Entity)klass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1PastaName});
+			}
+		}
+		catch (Exception exception) {
+			exception.printStackTrace();
+		}
+
+		return pasta;
+	}
+	public static Entity createEntityByID(int par1PastaID, World par2World)
+	{
+		Entity entity = null;
+
+		try
+		{
+			Class oclass = getClassFromID(par1PastaID);
+
+			if (oclass != null)
+			{
+				entity = (Entity)oclass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par2World});
+			}
+		}
+		catch (Exception exception)
+		{
+			exception.printStackTrace();
+		}
+
+		if (entity == null)
+		{
+			logger.warn("Skipping Entity with id " + par1PastaID);
+		}
+
+		return entity;
+	}
+
+	/**
+	 * gets the entityID of a specific entity
+	 */
+	public static int getEntityID(Entity p_75619_0_)
+	{
+		Class oclass = p_75619_0_.getClass();
+		return pastaListClassID.containsKey(oclass) ? ((Integer)pastaListClassID.get(oclass)).intValue() : 0;
+	}
+
+	/**
+	 * Return the class assigned to this entity ID.
+	 */
+	public static Class getClassFromID(int p_90035_0_)
+	{
+		return (Class)pastaListIDClass.get(Integer.valueOf(p_90035_0_));
+	}
+
+	/**
+	 * Gets the string representation of a specific entity.
+	 */
+	public static String getEntityString(Entity p_75621_0_)
+	{
+		return (String)pastaListClassString.get(p_75621_0_.getClass());
+	}
+
+	/**
+	 * Finds the class using IDtoClassMapping and classToStringMapping
+	 */
+	public static String getStringFromID(int p_75617_0_)
+	{
+		Class oclass = getClassFromID(p_75617_0_);
+		return oclass != null ? (String)pastaListClassString.get(oclass) : null;
+	}
+
+	public static void func_151514_a() {}
+
+	public static Set func_151515_b()
+	{
+		return Collections.unmodifiableSet(pastaListStringID.keySet());
+	}
+
+	public static void init() {
+		registerPasta(EntityJeff.class,    "jeff",    0);
+		registerPasta(EntityJane.class,    "jane",    1);
+		registerPasta(EntityJack.class,    "jack",    2);
+		registerPasta(EntityRake.class,    "rake",    3);
+		registerPasta(EntitySmile.class,   "smile",   4);
+		registerPasta(EntitySeed.class,    "seed",    5);
+		registerPasta(EntityMothman.class, "moth",    6);
+		registerPasta(EntitySquid.class,   "squid",   7);
+		registerPasta(EntityStrider.class, "strider", 8);
+	}
+
+	public static class PastaInfo {
+		public final int spawnedID;
+
+		public PastaInfo(int par1int) {
+			this.spawnedID = par1int;
+		}
+	}
+
+	public static class ArchiveRecipes {
+		public static ArchiveRecipes printingBase = new ArchiveRecipes();
+		public Map archiveList = new HashMap();
+		public static ArchiveRecipes printing() {
+			return printingBase;
+		}
+		public ArchiveRecipes() {
+			Map myMap = PastaRegistry.pastaListStringID;
+			Collection en = myMap.values();
+			Object[] array = en.toArray();
+
+			for (int i = 0; i < en.size(); i++) {
+				this.archiveList.put(new ItemStack(Items.paper), new ItemStack(CPCItems.archive, 1, i));
+			}
+		}
+
+		public ItemStack getPrintingResult(ItemStack itemStack) {
+			Random rand = new Random();
+			int damage = rand.nextInt(0 - pastaListStringID.values().size());
+			return new ItemStack(CPCItems.archive, 1, damage);
+		}
+	}
+}

@@ -1,4 +1,4 @@
-package recraft.cpc.common.block;
+package recraft.cpc.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
