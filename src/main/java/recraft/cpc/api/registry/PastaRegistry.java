@@ -85,34 +85,34 @@ public class PastaRegistry {
 	/**
 	 * gets the entityID of a specific entity
 	 */
-	public static int getEntityID(Entity p_75619_0_)
+	public static int getEntityID(Entity entity)
 	{
-		Class oclass = p_75619_0_.getClass();
-		return pastaListClassID.containsKey(oclass) ? ((Integer)pastaListClassID.get(oclass)).intValue() : 0;
+		Class klazz = entity.getClass();
+		return pastaListClassID.containsKey(klazz) ? ((Integer)pastaListClassID.get(klazz)) : 0;
 	}
 
 	/**
 	 * Return the class assigned to this entity ID.
 	 */
-	public static Class getClassFromID(int p_90035_0_)
+	public static Class getClassFromID(int entityID)
 	{
-		return (Class)pastaListIDClass.get(Integer.valueOf(p_90035_0_));
+		return (Class)pastaListIDClass.get(entityID);
 	}
 
 	/**
 	 * Gets the string representation of a specific entity.
 	 */
-	public static String getEntityString(Entity p_75621_0_)
+	public static String getEntityString(Entity entity)
 	{
-		return (String)pastaListClassString.get(p_75621_0_.getClass());
+		return (String)pastaListClassString.get(entity.getClass());
 	}
 
 	/**
 	 * Finds the class using IDtoClassMapping and classToStringMapping
 	 */
-	public static String getStringFromID(int p_75617_0_)
+	public static String getStringFromID(int entityID)
 	{
-		Class oclass = getClassFromID(p_75617_0_);
+		Class oclass = getClassFromID(entityID);
 		return oclass != null ? (String)pastaListClassString.get(oclass) : null;
 	}
 
@@ -137,7 +137,6 @@ public class PastaRegistry {
 
 	public static class PastaInfo {
 		public final int spawnedID;
-
 		public PastaInfo(int par1int) {
 			this.spawnedID = par1int;
 		}
