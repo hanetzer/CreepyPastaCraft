@@ -28,7 +28,7 @@ public class CPCHiltBlackHandler {
 
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
-		if(event.player.getItemInUse().getItem() == CPCItems.hiltBlack && event.player.getItemInUse().getItem() != null) {
+		if(event.player.getHeldItem().getItem() == CPCItems.hiltBlack) {
 			event.player.addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 1));
 			event.player.addPotionEffect(new PotionEffect(Potion.wither.id, 50, 1));
 			if(event.player.worldObj.isRemote) {
