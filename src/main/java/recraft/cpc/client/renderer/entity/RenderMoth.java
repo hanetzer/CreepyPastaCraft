@@ -18,7 +18,7 @@ public class RenderMoth extends RenderLiving
 
 	protected ResourceLocation getTexture(EntityMothman par1EntityMoth)
 	{
-		return new ResourceLocation("cpc:textures/entity/moth.png");
+		return new ResourceLocation("cpc:textures/entity/mothman.png");
 	}
 
 	protected ResourceLocation getEntityTexture(Entity par1Entity)
