@@ -17,7 +17,7 @@ import recraft.cpc.common.CommonProxy;
 import recraft.cpc.api.registry.PastaRegistry;
 import recraft.cpc.core.CPCBlock;
 import recraft.cpc.common.creativetab.CreativeTabCPC;
-import recraft.cpc.common.entity.CPCEntity;
+import recraft.cpc.core.CPCEntity;
 import recraft.cpc.common.handlers.CPCEventHandler;
 import recraft.cpc.common.handlers.GuiHandler;
 import recraft.cpc.core.CPCItem;
