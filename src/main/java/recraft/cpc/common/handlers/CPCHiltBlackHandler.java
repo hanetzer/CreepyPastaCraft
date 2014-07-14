@@ -2,11 +2,14 @@ package recraft.cpc.common.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import recraft.cpc.CPC;
 import recraft.cpc.init.CPCItems;
@@ -27,7 +30,7 @@ public class CPCHiltBlackHandler {
 		}
 	}
 
-	@SubscribeEvent
+	//@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		EntityPlayer player = event.player;
 		if(player.getHeldItem().getItem() == CPCItems.hiltBlack) {
@@ -40,7 +43,6 @@ public class CPCHiltBlackHandler {
 					world.spawnParticle("smoke", player.posX, player.posY - 0.4D, player.posZ, 0.0D, 0.0D, 0.0D);
 				}
 			}
-
 		}
 		else {
 			player.removePotionEffect(Potion.wither.id);
