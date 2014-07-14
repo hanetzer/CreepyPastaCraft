@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 import recraft.cpc.CPC;
 import recraft.cpc.common.entity.projectile.EntityStephano;
 
-public class ItemStephano extends Item
+public class ItemCPCStephano extends Item
 {
-	public ItemStephano() {
+	public ItemCPCStephano() {
 		setMaxStackSize(8);
 		setMaxDamage(0);
 		setCreativeTab(CPC.tabCPC);

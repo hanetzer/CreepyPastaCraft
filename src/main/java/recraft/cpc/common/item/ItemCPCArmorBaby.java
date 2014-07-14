@@ -6,10 +6,10 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import recraft.cpc.CPC;
 
-public class ItemArmorBaby extends ItemArmor {
+public class ItemCPCArmorBaby extends ItemArmor {
 	public int textureID;
 
-	public ItemArmorBaby(ArmorMaterial par1EnumArmorMaterial, int par2RenderIndex, int par3ArmorType) {
+	public ItemCPCArmorBaby(ArmorMaterial par1EnumArmorMaterial, int par2RenderIndex, int par3ArmorType) {
 		super(par1EnumArmorMaterial, par2RenderIndex, par3ArmorType);
 		textureID = par3ArmorType;
 		this.setCreativeTab(CPC.tabCPC);
