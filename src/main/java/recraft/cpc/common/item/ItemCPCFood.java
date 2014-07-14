@@ -13,12 +13,12 @@ public class ItemCPCFood extends ItemFood {
 	public ItemCPCFood(int par1healAmount, float par2SaturationModifier, boolean par3IsWolfsFavoriteFood, int par4FoodType) {
 		super(par1healAmount, par2SaturationModifier, par3IsWolfsFavoriteFood);
 		this.setAlwaysEdible();
+		this.setMaxStackSize(1);
 		this.foodType = par4FoodType;
 		this.setCreativeTab(CPC.tabCPC);
 	}
 	
-	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-	{
+	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
 		if (foodType == 0) { return new ItemStack(Items.bowl); }
 		else return null;

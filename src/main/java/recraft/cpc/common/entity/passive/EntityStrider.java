@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import recraft.cpc.client.gui.achievement.CPCAchievement;
+import recraft.cpc.common.stats.CPCAchievementList;
 
 public class EntityStrider extends EntityAnimal {
 
@@ -76,7 +76,7 @@ public class EntityStrider extends EntityAnimal {
 		 return true;
 	  } else if(!super.worldObj.isRemote && super.riddenByEntity == null) {
 		 par1EntityPlayer.mountEntity(this);
-		 par1EntityPlayer.addStat(CPCAchievement.rideStrider, 1);
+		 par1EntityPlayer.addStat(CPCAchievementList.rideStrider, 1);
 		 return true;
 	  } else {
 		 ItemStack var1 = par1EntityPlayer.getCurrentEquippedItem();

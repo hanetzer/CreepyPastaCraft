@@ -24,7 +24,10 @@ minecraft {
     version = "1.7.10-10.13.0.1178"
     runDir = "run"
 }
-
+task cleanRun(type: Delete) {
+    delete minecraft.runDir + "/logs"
+    delete minecraft.runDir + "/crash-reports"
+}
 ext.jenkinsVersion = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
 processResources
 {

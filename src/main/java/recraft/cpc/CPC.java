@@ -11,15 +11,14 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.MinecraftForge;
-import recraft.cpc.client.gui.achievement.CPCAchievement;
+import recraft.cpc.common.stats.CPCAchievementList;
 import recraft.cpc.common.CommonProxy;
 import recraft.cpc.api.registry.PastaRegistry;
 import recraft.cpc.core.CPCBlock;
 import recraft.cpc.common.creativetab.CreativeTabCPC;
 import recraft.cpc.core.CPCEntity;
 import recraft.cpc.common.handlers.CPCEventHandler;
-import recraft.cpc.common.handlers.GuiHandler;
+import recraft.cpc.common.handlers.CPCLaptopGuiHandler;
 import recraft.cpc.core.CPCItem;
 
 @SuppressWarnings("unused")
@@ -42,7 +41,7 @@ public class CPC {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CPCLaptopGuiHandler());
 		configPath = event.getModConfigurationDirectory() + "/creepypastacraft/";
 		//CPCConfig.init(configPath);
 		tabCPC = new CreativeTabCPC(CreativeTabs.getNextID(), "tabCPC");
@@ -51,7 +50,7 @@ public class CPC {
 		CPCBlock.init();
 		CPCEntity.init();
 		PastaRegistry.init();
-		CPCAchievement.init();
+		CPCAchievementList.init();
 
 		//GameRegistry.registerCraftingHandler(new CraftHandler());
 

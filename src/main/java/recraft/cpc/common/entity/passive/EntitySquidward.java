@@ -9,7 +9,7 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import recraft.cpc.client.gui.achievement.CPCAchievement;
+import recraft.cpc.common.stats.CPCAchievementList;
 
 public class EntitySquidward extends EntityAnimal {
 
@@ -51,7 +51,7 @@ public class EntitySquidward extends EntityAnimal {
 			var10.setHealth(this.getMaxHealth());
 			var10.renderYawOffset = super.renderYawOffset;
 			super.worldObj.spawnEntityInWorld(var10);
-			par1EntityPlayer.addStat(CPCAchievement.suicide, 1);
+			par1EntityPlayer.addStat(CPCAchievementList.suicide, 1);
 			return true;
 		} else {
 			return false;

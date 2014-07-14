@@ -48,7 +48,7 @@ public class CPCItem {
 	
 	private static void addRecipes() {
 		GameRegistry.addRecipe((new ItemStack(diaper, 1)), "p p", "ppp", 'p', (new ItemStack(Items.paper, 1)));
-		GameRegistry.addRecipe((new ItemStack(pasta, 2)), "w", "b", 'w', (new ItemStack(Items.wheat, 1)), 'b', (new ItemStack(Items.bowl, 1)));
+		GameRegistry.addRecipe((new ItemStack(pasta, 1)), "w", "b", 'w', (new ItemStack(Items.wheat, 1)), 'b', (new ItemStack(Items.bowl, 1)));
 	}
 	
 	private static void genHooks() {

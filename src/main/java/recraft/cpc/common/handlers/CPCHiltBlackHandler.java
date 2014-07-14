@@ -36,7 +36,7 @@ public class CPCHiltBlackHandler {
 	public void entityUpdate(LivingEvent.LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer && event.entity != null) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			if (player !=null && player.getHeldItem().getItem() == CPCItems.hiltBlack) {
+			if (player.getHeldItem() != null && player.getHeldItem().getItem() == CPCItems.hiltBlack) {
 				player.addPotionEffect(new PotionEffect(Potion.blindness.id, 50, 1));
 				player.addPotionEffect(new PotionEffect(Potion.wither.id, 50, 1));
 				World world = player.worldObj;

@@ -1,6 +1,5 @@
 package recraft.cpc.common.stats;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraftforge.common.AchievementPage;
 import recraft.cpc.init.CPCBlocks;

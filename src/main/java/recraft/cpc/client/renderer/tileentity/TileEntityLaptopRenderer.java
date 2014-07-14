@@ -16,12 +16,10 @@ public class TileEntityLaptopRenderer extends TileEntitySpecialRenderer {
 
 	private ModelLaptop laptopModel = new ModelLaptop();
 
-	public void renderLaptop(TileEntityLaptop par1TileEntityLaptop, double x, double y, double z, float par8)
-	{
+	public void renderLaptop(TileEntityLaptop par1TileEntityLaptop, double x, double y, double z, float par8) {
 		int i = 0;
 
-		if (par1TileEntityLaptop.hasWorldObj())
-		{
+		if (par1TileEntityLaptop.hasWorldObj())	{
 			i = par1TileEntityLaptop.getBlockMetadata();
 		}
 
@@ -36,18 +34,15 @@ public class TileEntityLaptopRenderer extends TileEntitySpecialRenderer {
 			short1 = 180;
 		}
 
-		if (i == 3)
-		{
+		if (i == 3) {
 			short1 = 0;
 		}
 
-		if (i == 4)
-		{
+		if (i == 4) {
 			short1 = 90;
 		}
 
-		if (i == 5)
-		{
+		if (i == 5) {
 			short1 = -90;
 		}
 		GL11.glRotatef((float) short1, 0.0F, 1.0F, 0.0F);

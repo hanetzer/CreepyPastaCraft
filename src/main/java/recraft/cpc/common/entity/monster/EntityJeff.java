@@ -22,13 +22,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
-import recraft.cpc.client.gui.achievement.CPCAchievement;
+import recraft.cpc.common.stats.CPCAchievementList;
 import recraft.cpc.common.entity.passive.EntityCry;
 import recraft.cpc.common.entity.passive.EntityJane;
 import recraft.cpc.common.entity.passive.EntityPewds;
-import recraft.cpc.core.CPCItem;
 import recraft.cpc.init.CPCItems;
 
 public class EntityJeff extends EntityMob implements IMob
@@ -136,7 +134,6 @@ public class EntityJeff extends EntityMob implements IMob
 			EntityClientPlayerMP par1EntityPlayer = Minecraft.getMinecraft().thePlayer;
 			this.dropItem(CPCItems.jeffKnife, 1);
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("\u00a7lJane The Killer: \u00a7rSleep well."));
-			par1EntityPlayer.addStat(CPCAchievement.noSleep, 1);
 		}
 
 	}
