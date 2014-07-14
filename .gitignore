@@ -8,5 +8,3 @@
 !/*.gradle
 !/*.md
 .gradle
-!/old/
-!/old/*
