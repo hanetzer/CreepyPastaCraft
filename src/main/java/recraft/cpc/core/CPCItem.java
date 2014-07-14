@@ -34,15 +34,16 @@ public class CPCItem {
 	}
 
 	private static void regItems() {
-		horror    = registerItem(new ItemHorror().setUnlocalizedName("cpc:horror"));
+		horror    = registerItem(new ItemCPCTab().setUnlocalizedName("cpc:horror"));
 		jeffKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialJeffKnife, 0).setUnlocalizedName("cpc:jeffKnife"));
 		hiltBlack = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialHiltBlack, 1).setUnlocalizedName("cpc:hiltBlack"));
 		killKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialKillKnife, 2).setUnlocalizedName("cpc:killKnife"));
-		diaper = registerItem(new ItemArmorBaby(CPCItemHelper.armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("cpc:diaper"));
-		stephano = registerItem(new ItemStephano().setUnlocalizedName("cpc:stephano"));
+		diaper = registerItem(new ItemCPCArmorBaby(CPCItemHelper.armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("cpc:diaper"));
+		stephano = registerItem(new ItemCPCStephano().setUnlocalizedName("cpc:stephano"));
 		pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("cpc:pasta"));
 		record_lavender = registerItem(new ItemCPCRecord("lavender").setUnlocalizedName("cpc:record_lavender"));
 		archive = registerItem(new ItemCPCArchive().setUnlocalizedName("cpc:archive"));
+		smileJpg = registerItem(new ItemSmileJPG().setUnlocalizedName("cpc:smile.jpg"));
 	}
 	
 	private static void addRecipes() {
