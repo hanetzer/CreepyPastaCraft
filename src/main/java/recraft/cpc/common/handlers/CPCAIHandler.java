@@ -23,9 +23,9 @@ public class CPCAIHandler {
 			((EntityVillager) entity).tasks.addTask(1, new EntityAIAvoidEntity((EntityCreature) entity, EntityRake.class, 8.0F, 0.6D, 0.6D));
 			((EntityVillager) entity).tasks.addTask(1, new EntityAIAvoidEntity((EntityCreature) entity, EntitySeed.class, 8.0F, 0.6D, 0.6D));
 		}
-		else if(entity instanceof EntityBat) {
-			((EntityBat) entity).tasks.addTask(1, new EntityAIAttackOnCollide((EntityCreature)entity, EntityPlayer.class, 7.0D, false));
-		}
+	//	else if(entity instanceof EntityBat) {
+	//		((EntityBat) entity).tasks.addTask(1, new EntityAIAttackOnCollide((EntityCreature)entity, EntityPlayer.class, 7.0D, false));
+	//	}
 	}
 
 }
