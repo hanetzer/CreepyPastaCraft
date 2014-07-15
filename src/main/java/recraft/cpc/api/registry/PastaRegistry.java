@@ -144,26 +144,4 @@ public class PastaRegistry {
 		}
 		return null;
 	}
-	public static class ArchiveRecipes {
-		public static ArchiveRecipes printingBase = new ArchiveRecipes();
-		public Map archiveList = new HashMap();
-		public static ArchiveRecipes printing() {
-			return printingBase;
-		}
-		public ArchiveRecipes() {
-			Map myMap = PastaRegistry.pastaListStringID;
-			Collection en = myMap.values();
-			Object[] array = en.toArray();
-
-			for (int i = 0; i < en.size(); i++) {
-				this.archiveList.put(new ItemStack(Items.paper), new ItemStack(CPCItems.archive, 1, i));
-			}
-		}
-
-		public ItemStack getPrintingResult(ItemStack itemStack) {
-			Random rand = new Random();
-			int damage = rand.nextInt(0 - pastaListStringID.values().size());
-			return new ItemStack(CPCItems.archive, 1, damage);
-		}
-	}
 }
