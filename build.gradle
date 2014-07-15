@@ -28,13 +28,11 @@ minecraft {
 
 curse {
     apiKey    = project.curseforge_key
-    projectID = "222381"
+    projectId = "222381"
     releaseType = "beta"
+    changelog = "first curseforge release"
 }
-task cleanRun(type: Delete) {
-    delete minecraft.runDir + "/logs"
-    delete minecraft.runDir + "/crash-reports"
-}
+
 ext.jenkinsVersion = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
 processResources
 {
@@ -43,7 +41,7 @@ processResources
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.jenkinsVersion, 'mcversion':project.minecraft.version
     }
         
     from(sourceSets.main.resources.srcDirs) {
