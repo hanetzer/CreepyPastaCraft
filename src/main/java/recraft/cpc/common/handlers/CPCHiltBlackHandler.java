@@ -19,7 +19,7 @@ import java.util.Random;
 @SuppressWarnings("unused")
 public class CPCHiltBlackHandler {
 
-	@SubscribeEvent
+	//@SubscribeEvent
 	public void entityAttacked(LivingAttackEvent event) {
 		EntityLivingBase attackedEnt = event.entityLiving;
 		Entity entity = event.source.getEntity();

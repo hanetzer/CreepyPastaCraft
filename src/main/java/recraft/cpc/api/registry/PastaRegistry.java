@@ -134,14 +134,15 @@ public class PastaRegistry {
 	}
 
 	public static ItemStack getPrintingResult(ItemStack itemStack) {
+		ItemStack result = null;
 		if (itemStack.getItem() == Items.paper) {
 			if (new Random().nextInt(100) < 5) {
-				return new ItemStack(CPCItems.smileJpg);
+				result = new ItemStack(CPCItems.smileJpg);
 			} else {
 				int randMax = pastaListStringID.size();
-				return new ItemStack(CPCItems.archive, 1, (new Random().nextInt(randMax - 1)));
+				result = new ItemStack(CPCItems.archive, 1, (new Random().nextInt(randMax)));
 			}
 		}
-		return null;
+		return result;
 	}
 }

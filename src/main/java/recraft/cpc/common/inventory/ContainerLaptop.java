@@ -10,16 +10,14 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
-public class ContainerLaptop extends Container
-{
+public class ContainerLaptop extends Container {
 	private TileEntityLaptop laptop;
 	private IInventory lowerInventory;
 	private int lastCookTime = 0;
 	private int lastBurnTime = 0;
 	private int lastItemBurnTime = 0;
 
-	public ContainerLaptop(TileEntityLaptop par1TileEntityLaptop, InventoryPlayer par2InventoryPlayer)
-	{
+	public ContainerLaptop(TileEntityLaptop par1TileEntityLaptop, InventoryPlayer par2InventoryPlayer) {
 		super();
 		this.laptop = par1TileEntityLaptop;
 		this.addSlotToContainer(new Slot(par1TileEntityLaptop, 0, 56, 34));

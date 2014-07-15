@@ -7,24 +7,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import recraft.cpc.CPC;
 import recraft.cpc.api.registry.PastaRegistry;
 import recraft.cpc.common.block.BlockLaptop;
 
-import java.util.Random;
-
 public class TileEntityLaptop extends TileEntity implements IInventory {
 	private ItemStack[] laptopItemStacks;
-	public int printTime = 0;
-	public int currentPrintTime = 0;
+	public int printTime;
+	public static final int INPUT = 0, OUTPUT = 1;
+	public int currentPrintTime;
 	public int standardPrintTime = 0;
 	public float lidAngle;
 	public float prevLidAngle;
-	public Random rand = new Random();
-	public CPC cpc;
 	public int numUsingPlayers;
 	public boolean opened;
-	private String customName;
 
 	public int getSizeInventory() {
 		return this.laptopItemStacks.length;
@@ -34,7 +29,6 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		laptopItemStacks = new ItemStack[2];
 		printTime = 0;
 		currentPrintTime = 0;
-
 	}
 
 	public ItemStack getStackInSlot(int var1) {
@@ -83,27 +77,18 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 
 	@Override
 	public String getInventoryName() {
-		return this.hasCustomInventoryName() ? this.customName : "container.laptop";
+		return "container.laptop";
 	}
 
 	@Override
 	public boolean hasCustomInventoryName() {
-		return this.customName != null && this.customName.length() > 0;
-	}
-
-	public void setCustomInventoryName(String par1) {
-		this.customName = par1;
+		return false;
 	}
 
 	public void readFromNBT(NBTTagCompound par1NBTTagC) {
 		super.readFromNBT(par1NBTTagC);
 		NBTTagList nbttaglist = par1NBTTagC.getTagList("Items", 10);
 		this.laptopItemStacks = new ItemStack[this.getSizeInventory()];
-
-		if(par1NBTTagC.hasKey("CustomName", 8))
-		{
-			this.customName = par1NBTTagC.getString("CustomName");
-		}
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
@@ -115,7 +100,6 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		}
 		this.printTime = par1NBTTagC.getShort("PrintTime");
 		this.standardPrintTime = par1NBTTagC.getShort("StandardPrintTime");
-		this.currentPrintTime = getItemBurnTime(this.laptopItemStacks[1]);
 	}
 
 	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
@@ -134,17 +118,13 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		}
 		par1NBTTagCompound.setTag("Items", nbttaglist);
 
-		if(this.hasCustomInventoryName())
-		{
-			par1NBTTagCompound.setString("CustomName", this.customName);
-		}
 	}
 
 	public int getInventoryStackLimit() {
 		return 8;
 	}
 
-	public int getCookProgressScaled(int par1) {
+	public int getPrintProgressScaled(int par1) {
 		return this.standardPrintTime * par1 / 200;
 	}
 
@@ -155,7 +135,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		return this.printTime * par1 / this.currentPrintTime;
 	}
 
-	public boolean isBurning() {
+	public boolean isPrinting() {
 		return this.printTime > 0;
 	}
 
@@ -177,13 +157,13 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 		{
 			if (this.printTime == 0 && this.canPrint())
 			{
-				this.currentPrintTime = this.printTime = getItemBurnTime(this.laptopItemStacks[1]);
+				this.currentPrintTime = this.printTime = getItemBurnTime(this.laptopItemStacks[INPUT]);
 
 				if (this.printTime > 0)
 				{
 					flag1 = true;
 
-					if (this.laptopItemStacks[1] != null)
+					if (this.laptopItemStacks[OUTPUT] != null)
 					{
 						--this.laptopItemStacks[1].stackSize;
 
@@ -195,7 +175,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 				}
 			}
 
-			if (this.isBurning() && this.canPrint())
+			if (this.isPrinting() && this.canPrint())
 			{
 				++this.standardPrintTime;
 
@@ -206,8 +186,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 					flag1 = true;
 				}
 			}
-			else
-			{
+			else {
 				this.standardPrintTime = 0;
 			}
 
@@ -262,31 +241,31 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	}
 
 	private boolean canPrint() {
-		if (this.laptopItemStacks[0] == null) {
+		if (this.laptopItemStacks[INPUT] == null) {
 			return false;
 		}
 		else {
-			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[0]);
+			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[INPUT]);
 			if (itemStack == null) return false;
-			if (this.laptopItemStacks[1] == null) return true;
-			if (!this.laptopItemStacks[1].isItemEqual(itemStack)) return false;
-			int result = laptopItemStacks[1].stackSize + itemStack.stackSize;
-			return result <= getInventoryStackLimit() && result <= this.laptopItemStacks[1].getMaxStackSize();
+			if (this.laptopItemStacks[OUTPUT] == null) return true;
+			if (!this.laptopItemStacks[OUTPUT].isItemEqual(itemStack)) return false;
+			int result = laptopItemStacks[OUTPUT].stackSize + itemStack.stackSize;
+			return result <= getInventoryStackLimit() && result <= this.laptopItemStacks[OUTPUT].getMaxStackSize();
 		}
 	}
 
 	public void printItem() {
 		if (this.canPrint()) {
-			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[0]);
+			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[INPUT]);
 
-			if (this.laptopItemStacks[1] == null) {
-				this.laptopItemStacks[1] = itemStack.copy();
+			if (this.laptopItemStacks[OUTPUT] == null) {
+				this.laptopItemStacks[OUTPUT] = itemStack.copy();
 			}
 
-			--this.laptopItemStacks[0].stackSize;
+			--this.laptopItemStacks[INPUT].stackSize;
 
-			if (this.laptopItemStacks[0].stackSize <= 0) {
-				this.laptopItemStacks[0] = null;
+			if (this.laptopItemStacks[INPUT].stackSize <= 0) {
+				this.laptopItemStacks[INPUT] = null;
 			}
 		}
 	}
@@ -296,7 +275,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 			return 0;
 		}
 		else if (par1ItemStack.getItem() == Items.paper) {
-				return 2000;
+				return 200;
 		}
 		else {
 			return 0;
