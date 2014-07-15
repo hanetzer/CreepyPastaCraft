@@ -23,7 +23,7 @@ public class ContainerLaptop extends Container
 		super();
 		this.laptop = par1TileEntityLaptop;
 		this.addSlotToContainer(new Slot(par1TileEntityLaptop, 0, 56, 34));
-		this.addSlotToContainer(new SlotLaptop(Minecraft.getMinecraft().thePlayer, par1TileEntityLaptop, 2, 116, 35));
+		this.addSlotToContainer(new SlotLaptop(Minecraft.getMinecraft().thePlayer, par1TileEntityLaptop, 1, 116, 35));
 		lowerInventory = par2InventoryPlayer;
 		laptop.openInventory();
 		int i;

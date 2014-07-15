@@ -133,6 +133,17 @@ public class PastaRegistry {
 		}
 	}
 
+	public static ItemStack getPrintingResult(ItemStack itemStack) {
+		if (itemStack.getItem() == Items.paper) {
+			if (new Random().nextInt(100) < 5) {
+				return new ItemStack(CPCItems.smileJpg);
+			} else {
+				int randMax = pastaListStringID.size();
+				return new ItemStack(CPCItems.archive, 1, (new Random().nextInt(randMax - 1)));
+			}
+		}
+		return null;
+	}
 	public static class ArchiveRecipes {
 		public static ArchiveRecipes printingBase = new ArchiveRecipes();
 		public Map archiveList = new HashMap();

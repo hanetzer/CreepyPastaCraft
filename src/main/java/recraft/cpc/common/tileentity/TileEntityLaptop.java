@@ -8,8 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import recraft.cpc.CPC;
-import recraft.cpc.common.block.BlockLaptop;
 import recraft.cpc.api.registry.PastaRegistry;
+import recraft.cpc.common.block.BlockLaptop;
 
 import java.util.Random;
 
@@ -175,7 +175,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 
 		if (!this.worldObj.isRemote)
 		{
-			if (this.printTime == 0 && this.canSmelt())
+			if (this.printTime == 0 && this.canPrint())
 			{
 				this.currentPrintTime = this.printTime = getItemBurnTime(this.laptopItemStacks[1]);
 
@@ -195,14 +195,14 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 				}
 			}
 
-			if (this.isBurning() && this.canSmelt())
+			if (this.isBurning() && this.canPrint())
 			{
 				++this.standardPrintTime;
 
 				if (this.standardPrintTime == 200)
 				{
 					this.standardPrintTime = 0;
-					this.smeltItem();
+					this.printItem();
 					flag1 = true;
 				}
 			}
@@ -259,49 +259,51 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 				this.lidAngle = 0.0F;
 			}
 		}
-
 	}
 
-	private boolean canSmelt() {
+	private boolean canPrint() {
 		if (this.laptopItemStacks[0] == null) {
 			return false;
-		} else {
-			ItemStack itemstack = new ItemStack(Items.paper);
-			return itemstack == null ? false : (this.laptopItemStacks[2] == null ? true : (!this.laptopItemStacks[2].isItemEqual(itemstack) ? false : (this.laptopItemStacks[2].stackSize < this.getInventoryStackLimit() && this.laptopItemStacks[2].stackSize < this.laptopItemStacks[2].getMaxStackSize() ? true : this.laptopItemStacks[2].stackSize < itemstack.getMaxStackSize())));
+		}
+		else {
+			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[0]);
+			if (itemStack == null) return false;
+			if (this.laptopItemStacks[1] == null) return true;
+			if (!this.laptopItemStacks[1].isItemEqual(itemStack)) return false;
+			int result = laptopItemStacks[1].stackSize + itemStack.stackSize;
+			return result <= getInventoryStackLimit() && result <= this.laptopItemStacks[1].getMaxStackSize();
 		}
 	}
 
-	public void smeltItem() {
-		if (this.canSmelt()) {
-			ItemStack itemstack = PastaRegistry.ArchiveRecipes.printing().getPrintingResult(this.laptopItemStacks[0]);
+	public void printItem() {
+		if (this.canPrint()) {
+			ItemStack itemStack = PastaRegistry.getPrintingResult(laptopItemStacks[0]);
 
-			if (this.laptopItemStacks[2] == null)
-			{
-				this.laptopItemStacks[2] = itemstack.copy();
-			}
-			else if (this.laptopItemStacks[2].getItem() == itemstack.getItem())
-			{
-				this.laptopItemStacks[2].stackSize += itemstack.stackSize; // Forge BugFix: Results may have multiple items
+			if (this.laptopItemStacks[1] == null) {
+				this.laptopItemStacks[1] = itemStack.copy();
 			}
 
 			--this.laptopItemStacks[0].stackSize;
 
-			if (this.laptopItemStacks[0].stackSize <= 0)
-			{
+			if (this.laptopItemStacks[0].stackSize <= 0) {
 				this.laptopItemStacks[0] = null;
 			}
 		}
 	}
 
 	public static int getItemBurnTime(ItemStack par1ItemStack) {
-			if (par1ItemStack == null) {
-				return 1;
-			} else {
+		if (par1ItemStack == null) {
+			return 0;
+		}
+		else if (par1ItemStack.getItem() == Items.paper) {
 				return 2000;
-			}
+		}
+		else {
+			return 0;
+		}
 	}
 
-	public static boolean func_52005_b(ItemStack par0ItemStack) {
+	public static boolean isPaper(ItemStack par0ItemStack) {
 		return getItemBurnTime(par0ItemStack) > 0;
 	}
 
@@ -310,8 +312,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	}
 
 	public void openInventory() {
-		if (numUsingPlayers < 0)
-		{
+		if (numUsingPlayers < 0) {
 			numUsingPlayers = 0;
 		}
 
@@ -321,26 +322,26 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	}
 
 	public void closeInventory() {
-		if (this.getBlockType() instanceof BlockLaptop)
-		{
+		if (this.getBlockType() instanceof BlockLaptop) {
 			this.numUsingPlayers -= 1;
 			opened = false;
 			this.worldObj.addBlockEvent(this.xCoord, this.yCoord, this.zCoord, this.getBlockType(), 1, this.numUsingPlayers);
 		}
 	}
 
+	@Override
+	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
+		return false;
+	}
+
 	public boolean receiveClientEvent(int par1, int par2) {
 		if (par1 == 1) {
 			this.numUsingPlayers = par2;
 			return true;
-		} else {
+		}
+		else {
 			return super.receiveClientEvent(par1, par2);
 		}
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return false;
 	}
 
 }
