@@ -41,11 +41,12 @@ public class CPCItem {
 		pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("cpc:pasta"));
 		record_lavender = registerItem(new ItemCPCRecord("lavender").setUnlocalizedName("cpc:record_lavender"));
 		archive = registerItem(new ItemCPCArchive().setUnlocalizedName("cpc:archive"));
-		smileJpg = registerItem(new ItemSmileJPG().setUnlocalizedName("cpc:smile.jpg"));
+		smileJpg = registerItem(new ItemCPCSmileJPG().setUnlocalizedName("cpc:smile.jpg"));
 	}
 	
 	private static void addRecipes() {
 		GameRegistry.addRecipe((new ItemStack(diaper, 1)), "p p", "ppp", 'p', (new ItemStack(Items.paper, 1)));
+		GameRegistry.addRecipe((new ItemStack(archive, 1, 4)), "a", 'a', (new ItemStack(smileJpg, 1)));
 		GameRegistry.addRecipe((new ItemStack(pasta, 1)), "w", "b", 'w', (new ItemStack(Items.wheat, 1)), 'b', (new ItemStack(Items.bowl, 1)));
 	}
 	
