@@ -1,5 +1,6 @@
 package recraft.cpc.common.handlers;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 @SuppressWarnings("unused")
@@ -11,8 +12,8 @@ public class CPCEventHandler {
 	}
 
 	private static void registerItemEventHandler() {
-		MinecraftForge.EVENT_BUS.register(new CPCCraftingHandler());
-		MinecraftForge.EVENT_BUS.register(new CPCItemPickupHandler());
+		FMLCommonHandler.instance().bus().register(new CPCCraftingHandler());
+		FMLCommonHandler.instance().bus().register(new CPCItemPickupHandler());
 		MinecraftForge.EVENT_BUS.register(new CPCHiltBlackHandler());
 	}
 
