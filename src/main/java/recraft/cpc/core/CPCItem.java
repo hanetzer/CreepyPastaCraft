@@ -29,7 +29,7 @@ public class CPCItem {
 	private static void initMaterials() {
 		CPCItemHelper.toolMaterialJeffKnife = EnumHelper.addToolMaterial("JEFF", 0, -1, 0.0F, 11.0F, 0);
 		CPCItemHelper.toolMaterialHiltBlack = EnumHelper.addToolMaterial("HILT", 0, -1, 0.0F, 11.0F, 0);
-		CPCItemHelper.armorMaterialBaby     = EnumHelper.addArmorMaterial("BABY", 2, new int[] {110, 160, 160, 130}, 0);
+		CPCItemHelper.armorMaterialBaby     = EnumHelper.addArmorMaterial("BABY", 5, new int[]{1, 3, 2, 1}, 0);
 	}
 
 	private static void regItems() {
