@@ -7,7 +7,6 @@ import net.minecraft.item.ItemArmor;
 public class CPCItemHelper {
 	public static Item.ToolMaterial toolMaterialJeffKnife;
 	public static Item.ToolMaterial toolMaterialHiltBlack;
-	public static Item.ToolMaterial toolMaterialKillKnife;
 	public static ItemArmor.ArmorMaterial armorMaterialBaby;
 
 	public static String getUniqueName(Item item) {

@@ -29,7 +29,6 @@ public class CPCItem {
 	private static void initMaterials() {
 		CPCItemHelper.toolMaterialJeffKnife = EnumHelper.addToolMaterial("JEFF", 0, -1, 0.0F, 11.0F, 0);
 		CPCItemHelper.toolMaterialHiltBlack = EnumHelper.addToolMaterial("HILT", 0, -1, 0.0F, 11.0F, 0);
-		CPCItemHelper.toolMaterialKillKnife = EnumHelper.addToolMaterial("KILL", 0, -1, 0.0F, 0.F, 0);
 		CPCItemHelper.armorMaterialBaby     = EnumHelper.addArmorMaterial("BABY", 2, new int[] {110, 160, 160, 130}, 0);
 	}
 
@@ -37,7 +36,6 @@ public class CPCItem {
 		horror    = registerItem(new ItemCPCTab().setUnlocalizedName("cpc:horror"));
 		jeffKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialJeffKnife, 0).setUnlocalizedName("cpc:jeffKnife"));
 		hiltBlack = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialHiltBlack, 1).setUnlocalizedName("cpc:hiltBlack"));
-		killKnife = registerItem(new ItemCPCKnife(CPCItemHelper.toolMaterialKillKnife, 2).setUnlocalizedName("cpc:killKnife"));
 		diaper = registerItem(new ItemCPCArmorBaby(CPCItemHelper.armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("cpc:diaper"));
 		stephano = registerItem(new ItemCPCStephano().setUnlocalizedName("cpc:stephano"));
 		pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("cpc:pasta"));

@@ -26,7 +26,6 @@ public class ItemCPCKnife extends ItemSword {
 	public void registerIcons(IIconRegister iconRegister) {
 		if      (textureID == 0) { itemIcon = iconRegister.registerIcon("cpc:jeffKnife"); }
 		else if (textureID == 1) { itemIcon = iconRegister.registerIcon("cpc:hiltBlack"); }
-		else if (textureID == 2) { itemIcon = iconRegister.registerIcon("cpc:killKnife"); }
 		else { itemIcon = iconRegister.registerIcon("cpc:horror"); }
 	}
 

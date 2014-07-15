@@ -13,8 +13,5 @@ public class CPCItemPickupHandler {
 			event.player.addStat(CPCAchievementList.noSleep, 1);
 		}
 
-		if(event.pickedUp.getEntityItem().getItem() == CPCItems.killKnife) {
-			event.player.addStat(CPCAchievementList.mothSwat, 1);
-		}
 	}
 }
