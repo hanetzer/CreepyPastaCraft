@@ -15,6 +15,7 @@ buildscript {
     }
 }
 
+apply plugin: 'curseforge'
 apply plugin: 'forge'
 
 version = "0.0.0"
@@ -23,6 +24,12 @@ archivesBaseName = "CreepyPastaCraft"
 minecraft {
     version = "1.7.10-10.13.0.1178"
     runDir = "run"
+}
+
+curse {
+    apiKey    = project.curseforge_key
+    projectID = "222381"
+    releaseType = "beta"
 }
 task cleanRun(type: Delete) {
     delete minecraft.runDir + "/logs"
