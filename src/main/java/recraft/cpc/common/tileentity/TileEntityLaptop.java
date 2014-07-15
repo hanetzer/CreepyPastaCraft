@@ -121,7 +121,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 	}
 
 	public int getInventoryStackLimit() {
-		return 8;
+		return 64;
 	}
 
 	public int getPrintProgressScaled(int par1) {
