@@ -19,7 +19,8 @@ public class ItemCPCArmorBaby extends ItemArmor {
 		return false;
 	}
 
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, int layer) {
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		String textureLoc = "cpc:textures/models/armor/baby_layer_";
 		return this.armorType == 2 ? (textureLoc + "2.png") : (textureLoc + "1.png");
 	}
