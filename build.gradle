@@ -47,5 +47,6 @@ curse {
     apiKey    = project.curseforge_key
     projectId = "222381"
     releaseType = "beta"
+    changelog = ""
 }
 
