@@ -19,11 +19,28 @@ apply plugin: 'curseforge'
 apply plugin: 'forge'
 
 version = "0.0.0"
-group= "recraft" 
+group= "recraft"
 archivesBaseName = "CreepyPastaCraft"
 minecraft {
     version = "1.7.10-10.13.0.1178"
     runDir = "run"
+}
+
+version = "${minecraft.version}-${version}.${System.getenv().BUILD_NUMBER}"
+
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
 }
 
 curse {
@@ -33,18 +50,3 @@ curse {
     changelog = "first curseforge release"
 }
 
-ext.jenkinsVersion = "${minecraft.version}-$version.${System.getenv().BUILD_NUMBER}"
-processResources
-{
-    inputs.property "version", project.jenkinsVersion
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.jenkinsVersion, 'mcversion':project.minecraft.version
-    }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
