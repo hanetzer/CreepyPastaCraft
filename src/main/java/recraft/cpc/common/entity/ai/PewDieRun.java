@@ -1,8 +1,5 @@
 package recraft.cpc.common.entity.ai;
 
-import java.util.List;
-import java.util.Random;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -12,6 +9,9 @@ import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
+
+import java.util.List;
+import java.util.Random;
 
 public class PewDieRun extends EntityAIAvoidEntity
 {
@@ -66,7 +66,7 @@ public class PewDieRun extends EntityAIAvoidEntity
 				return false;
 			} else {
 				this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-				return this.entityPathEntity == null?false:this.entityPathEntity.isDestinationSame(vec3);
+				return this.entityPathEntity != null && this.entityPathEntity.isDestinationSame(vec3);
 			}
 		}
 	}

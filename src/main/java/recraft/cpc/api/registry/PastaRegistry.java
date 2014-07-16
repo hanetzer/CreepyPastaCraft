@@ -47,7 +47,7 @@ public class PastaRegistry {
 			Class klazz = (Class) pastaListStringClass.get(par1PastaName);
 
 			if (klazz != null) {
-				pasta = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1PastaName});
+				pasta = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(par1PastaName);
 			}
 		}
 		catch (Exception exception) {
@@ -56,6 +56,7 @@ public class PastaRegistry {
 
 		return pasta;
 	}
+
 	public static Entity createEntityByID(int par1PastaID, World par2World) {
 		Entity entity = null;
 
@@ -63,7 +64,7 @@ public class PastaRegistry {
 			Class klazz = getClassFromID(par1PastaID);
 
 			if (klazz != null) {
-				entity = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par2World});
+				entity = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(par2World);
 			}
 		}
 		catch (Exception exception) {
@@ -103,8 +104,8 @@ public class PastaRegistry {
 	 * Finds the class using IDtoClassMapping and classToStringMapping
 	 */
 	public static String getStringFromID(int entityID) {
-		Class oclass = getClassFromID(entityID);
-		return oclass != null ? (String)pastaListClassString.get(oclass) : null;
+		Class klazz = getClassFromID(entityID);
+		return klazz != null ? (String)pastaListClassString.get(klazz) : null;
 	}
 
 	public static void func_151514_a() {}

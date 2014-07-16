@@ -9,8 +9,7 @@ import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class ChildHunt extends EntityAIBase
-{
+public class ChildHunt extends EntityAIBase {
 	World worldObj;
 	EntityCreature attacker;
 
@@ -54,21 +53,21 @@ public class ChildHunt extends EntityAIBase
 	 */
 	public boolean shouldExecute()
 	{
-		EntityAgeable entitylivingbase = (EntityAgeable) this.attacker.getAttackTarget();
+		EntityAgeable entityAgeable = (EntityAgeable) this.attacker.getAttackTarget();
 
-		if (entitylivingbase == null)
+		if (entityAgeable == null)
 		{
 			return false;
 		}
-		else if (!entitylivingbase.isEntityAlive())
+		else if (!entityAgeable.isEntityAlive())
 		{
 			return false;
 		}
-		else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entitylivingbase.getClass()))
+		else if (this.classTarget != null && !this.classTarget.isAssignableFrom(entityAgeable.getClass()))
 		{
 			return false;
 		}
-		else if(!entitylivingbase.isChild())
+		else if(!entityAgeable.isChild())
 		{
 			return false;
 		}
@@ -76,7 +75,7 @@ public class ChildHunt extends EntityAIBase
 		{
 			if (-- this.field_75445_i <= 0)
 			{
-				this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(entitylivingbase);
+				this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(entityAgeable);
 				this.field_75445_i = 4 + this.attacker.getRNG().nextInt(7);
 				return this.entityPathEntity != null;
 			}
@@ -90,16 +89,27 @@ public class ChildHunt extends EntityAIBase
 	/**
 	 * Returns whether an in-progress EntityAIBase should continue executing
 	 */
-	public boolean continueExecuting()
-	{
-		return this.attacker.getAttackTarget() == null ? false : (!this.attacker.getAttackTarget().isEntityAlive() ? false : (!this.longMemory ? !this.attacker.getNavigator().noPath() : this.attacker.isWithinHomeDistance(MathHelper.floor_double(this.attacker.getAttackTarget().posX), MathHelper.floor_double(this.attacker.getAttackTarget().posY), MathHelper.floor_double(this.attacker.getAttackTarget().posZ))));
+	public boolean continueExecuting() {
+		if (this.attacker.getAttackTarget() != null) {
+			if (this.attacker.getAttackTarget().isEntityAlive()) {
+				if (!this.longMemory) {
+					if (!this.attacker.getNavigator().noPath()) {
+						return true;
+					}
+				} else {
+					if (this.attacker.isWithinHomeDistance(MathHelper.floor_double(this.attacker.getAttackTarget().posX), MathHelper.floor_double(this.attacker.getAttackTarget().posY), MathHelper.floor_double(this.attacker.getAttackTarget().posZ))) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
-	public void startExecuting()
-	{
+	public void startExecuting() {
 		this.attacker.getNavigator().setPath(this.entityPathEntity, this.speedTowardsTarget);
 		this.field_75445_i = 0;
 	}
@@ -107,8 +117,7 @@ public class ChildHunt extends EntityAIBase
 	/**
 	 * Resets the task
 	 */
-	public void resetTask()
-	{
+	public void resetTask() {
 		this.attacker.getNavigator().clearPathEntity();
 	}
 

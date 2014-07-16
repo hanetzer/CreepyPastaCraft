@@ -2,22 +2,18 @@ package recraft.cpc.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 import recraft.cpc.common.inventory.ContainerLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
-import org.lwjgl.opengl.GL11;
-
 public class GuiLaptop extends GuiContainer {
 	private TileEntityLaptop laptopInventory;
-	private IInventory playerInventory;
 	private int inventoryRows;
 
 	public GuiLaptop(InventoryPlayer inventoryPlayer, TileEntityLaptop tileEntityLaptop) {
 		super(new ContainerLaptop(inventoryPlayer, tileEntityLaptop));
 		this.laptopInventory = tileEntityLaptop;
-		this.playerInventory = inventoryPlayer;
 		this.allowUserInput = false;
 		short short1 = 222;
 		int i = short1 - 108;

@@ -77,7 +77,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 
 	@Override
 	public String getInventoryName() {
-		return "container.laptop";
+		return "container.cpc:laptop";
 	}
 
 	@Override

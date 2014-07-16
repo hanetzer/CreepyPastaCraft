@@ -20,12 +20,22 @@ public class ItemCPCFood extends ItemFood {
 	
 	public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
-		if (foodType == 0) { return new ItemStack(Items.bowl); }
-		else return null;
+		switch (foodType) {
+			case 0:
+				return new ItemStack(Items.bowl);
+			default:
+				return null;
+		}
 	}
 
 	public void registerIcons(IIconRegister iconRegister) {
-		if (foodType == 0) { itemIcon = iconRegister.registerIcon("cpc:pasta"); }
-		else { itemIcon = iconRegister.registerIcon("cpc:horror"); }
+		switch (foodType) {
+			case 0:
+				itemIcon = iconRegister.registerIcon("cpc:pasta");
+				break;
+			default:
+				itemIcon = iconRegister.registerIcon("cpc:horror");
+				break;
+		}
 	}
 }

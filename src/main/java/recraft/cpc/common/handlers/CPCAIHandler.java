@@ -2,13 +2,9 @@ package recraft.cpc.common.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import recraft.cpc.common.entity.monster.EntityJeff;
 import recraft.cpc.common.entity.monster.EntityRake;

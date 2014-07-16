@@ -22,15 +22,32 @@ public class ItemCPCArmorBaby extends ItemArmor {
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
 		String textureLoc = "cpc:textures/models/armor/baby_layer_";
-		return this.armorType == 2 ? (textureLoc + "2.png") : (textureLoc + "1.png");
+		switch (this.armorType) {
+			case 2:
+				return (textureLoc + "2.png");
+			default:
+				return (textureLoc + "1.png");
+		}
 	}
 
 	@Override
 	public void registerIcons(IIconRegister iconRegister) {
-		if (textureID == 0)      { itemIcon = iconRegister.registerIcon("cpc:bonnet"); }
-		else if (textureID == 1) { itemIcon = iconRegister.registerIcon("cpc:bib"); }
-		else if (textureID == 2) { itemIcon = iconRegister.registerIcon("cpc:diaper");}
-		else if (textureID == 3) { itemIcon = iconRegister.registerIcon("cpc:booties");}
-		else { itemIcon = iconRegister.registerIcon("cpc:horror"); }
+		switch (textureID) {
+			case 0:
+				itemIcon = iconRegister.registerIcon("cpc:bonnet");
+				break;
+			case 1:
+				itemIcon = iconRegister.registerIcon("cpc:bib");
+				break;
+			case 2:
+				itemIcon = iconRegister.registerIcon("cpc:diaper");
+				break;
+			case 3:
+				itemIcon = iconRegister.registerIcon("cpc:booties");
+				break;
+			default:
+				itemIcon = iconRegister.registerIcon("cpc:horror");
+				break;
+		}
 	}
 }

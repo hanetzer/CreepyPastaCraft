@@ -1,9 +1,5 @@
 package recraft.cpc.common.item;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.block.BlockJukebox;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +12,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import recraft.cpc.CPC;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ItemCPCRecord extends ItemRecord
 {
@@ -52,8 +52,7 @@ public class ItemCPCRecord extends ItemRecord
 			{
 				//TODO:						  .insertRecord()
 				((BlockJukebox)Blocks.jukebox).func_149926_b(world, x, y, z, itemStack);
-				//TODO:													    Item.getIdFromItem()
-				world.playAuxSFXAtEntity((EntityPlayer)null, 1005, x, y, z, Item.getIdFromItem(this));
+				world.playAuxSFXAtEntity(null, 1005, x, y, z, Item.getIdFromItem(this));
 				--itemStack.stackSize;
 				return true;
 			}

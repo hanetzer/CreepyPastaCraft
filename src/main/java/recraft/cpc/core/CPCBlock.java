@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import recraft.cpc.common.block.BlockLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
-import static recraft.cpc.init.CPCBlocks.*;
+import static recraft.cpc.init.CPCBlocks.laptop;
 
 public class CPCBlock {
 

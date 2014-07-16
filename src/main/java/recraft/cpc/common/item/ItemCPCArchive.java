@@ -13,12 +13,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.Facing;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import recraft.cpc.CPC;
 import recraft.cpc.api.registry.PastaRegistry;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class ItemCPCArchive extends Item {
@@ -151,10 +152,9 @@ public class ItemCPCArchive extends Item {
 	 */
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item par1Item, CreativeTabs par2CreativeTabs, List par3List) {
-		Iterator iterator = PastaRegistry.pastaList.values().iterator();
 
-		while (iterator.hasNext()) {
-			PastaRegistry.PastaInfo pastaInfo = (PastaRegistry.PastaInfo)iterator.next();
+		for (Object o : PastaRegistry.pastaList.values()) {
+			PastaRegistry.PastaInfo pastaInfo = (PastaRegistry.PastaInfo) o;
 			par3List.add(new ItemStack(par1Item, 1, pastaInfo.spawnedID));
 		}
 	}

@@ -4,17 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityVillager;
@@ -23,7 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import recraft.cpc.common.stats.CPCAchievementList;
 import recraft.cpc.common.entity.passive.EntityCry;
 import recraft.cpc.common.entity.passive.EntityJane;
 import recraft.cpc.common.entity.passive.EntityPewds;
@@ -114,8 +103,7 @@ public class EntityJeff extends EntityMob implements IMob
 	{
 		super.onKillEntity(par1EntityLivingBase);
 
-		if(!this.isSaying)
-		{
+		if (!this.isSaying) {
 			this.worldObj.playSoundAtEntity(this, "cpc:mob.jeff.kill", 1.0F, 1.0F);
 			this.isSaying = true;
 		}

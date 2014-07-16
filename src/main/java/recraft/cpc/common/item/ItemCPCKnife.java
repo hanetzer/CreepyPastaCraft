@@ -1,7 +1,5 @@
 package recraft.cpc.common.item;
 
-import java.util.List;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.StatCollector;
 import recraft.cpc.CPC;
+
+import java.util.List;
 
 public class ItemCPCKnife extends ItemSword {
 	public int textureID;
@@ -24,9 +24,17 @@ public class ItemCPCKnife extends ItemSword {
 	}
 
 	public void registerIcons(IIconRegister iconRegister) {
-		if      (textureID == 0) { itemIcon = iconRegister.registerIcon("cpc:jeffKnife"); }
-		else if (textureID == 1) { itemIcon = iconRegister.registerIcon("cpc:hiltBlack"); }
-		else { itemIcon = iconRegister.registerIcon("cpc:horror"); }
+		switch (textureID) {
+			case 0:
+				itemIcon = iconRegister.registerIcon("cpc:jeffKnife");
+				break;
+			case 1:
+				itemIcon = iconRegister.registerIcon("cpc:hiltBlack");
+				break;
+			default:
+				itemIcon = iconRegister.registerIcon("cpc:horror");
+				break;
+		}
 	}
 
 	public boolean isFull3D() {

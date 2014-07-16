@@ -1,12 +1,12 @@
 package recraft.cpc.common.handlers;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import recraft.cpc.client.gui.inventory.GuiLaptop;
 import recraft.cpc.common.inventory.ContainerLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CPCLaptopGuiHandler implements IGuiHandler
 {

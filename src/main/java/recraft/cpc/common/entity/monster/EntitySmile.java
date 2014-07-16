@@ -5,11 +5,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -72,17 +68,17 @@ public class EntitySmile extends CPEntity {
 
 		if (par1)
 		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 | 2)));
+			this.dataWatcher.updateObject(16, (byte) (b0 | 2));
 		}
 		else
 		{
-			this.dataWatcher.updateObject(16, Byte.valueOf((byte)(b0 & -3)));
+			this.dataWatcher.updateObject(16, (byte) (b0 & -3));
 		}
 	}
 
 	protected void entityInit() {
 		super.entityInit();
-		super.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+		super.dataWatcher.addObject(16, (byte) 0);
 	}
 
 	/**

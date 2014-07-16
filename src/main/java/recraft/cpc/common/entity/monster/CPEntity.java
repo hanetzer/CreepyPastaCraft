@@ -97,7 +97,6 @@ public abstract class CPEntity extends EntityMob implements IMob {
 				var4 = super.worldObj.getBlockLightValue(var1, var2, var3);
 				super.worldObj.skylightSubtracted = var5;
 			}
-
 			return var4 <= super.rand.nextInt(8);
 		}
 	}

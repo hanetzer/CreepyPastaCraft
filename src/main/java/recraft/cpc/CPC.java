@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import recraft.cpc.api.registry.PastaRegistry;
 import recraft.cpc.common.CommonProxy;
@@ -24,8 +23,6 @@ import recraft.cpc.core.CPCItem;
 @SuppressWarnings("unused")
 @Mod(modid="cpc")
 public class CPC {
-	//public static Minecraft mc = Minecraft.getMinecraft();
-
 	@Instance("cpc")
 	public static CPC instance;
 

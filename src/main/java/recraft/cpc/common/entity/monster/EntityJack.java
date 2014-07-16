@@ -6,16 +6,7 @@ import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
@@ -58,8 +49,8 @@ public class EntityJack extends CPEntity {
 	}
 
 	private boolean isBlockTransparent(int i) {
-		for(int j = 0; j < this.transparentBlocks.length; ++j) {
-			if(i == this.transparentBlocks[j]) {
+		for (int transparentBlock : this.transparentBlocks) {
+			if (i == transparentBlock) {
 				return true;
 			}
 		}
@@ -117,7 +108,7 @@ public class EntityJack extends CPEntity {
 			vec3d1 = vec3d1.normalize();
 			double d1 = vec3d.dotProduct(vec3d1);
 			Minecraft mc = Minecraft.getMinecraft();
-			return d1 > 1.0D - 0.025D / d && mc.playerController.isNotCreative()?par1EntityPlayer.canEntityBeSeen(this):false;
+			return d1 > 1.0D - 0.025D / d && mc.playerController.isNotCreative() && par1EntityPlayer.canEntityBeSeen(this);
 		} else {
 			return false;
 		}

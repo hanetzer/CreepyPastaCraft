@@ -1,7 +1,5 @@
 package recraft.cpc.common.block;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,9 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import recraft.cpc.CPC;
-import recraft.cpc.common.inventory.InventoryLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 import recraft.cpc.init.CPCBlocks;
+
+import java.util.Random;
 
 public class BlockLaptop extends BlockContainer {
 	public BlockLaptop() {

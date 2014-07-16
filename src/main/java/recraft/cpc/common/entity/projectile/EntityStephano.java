@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import recraft.cpc.core.CPCItem;
 import recraft.cpc.init.CPCItems;
 
 public class EntityStephano extends EntityThrowable {

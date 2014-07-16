@@ -1,11 +1,9 @@
 package recraft.cpc.common.inventory;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import recraft.cpc.api.registry.PastaRegistry;
@@ -13,18 +11,16 @@ import recraft.cpc.common.tileentity.TileEntityLaptop;
 
 public class ContainerLaptop extends Container {
 	private TileEntityLaptop laptop;
-	private IInventory lowerInventory;
 	public static final int INPUT = 0, OUTPUT = 1;
 	private int lastCookTime = 0;
 	private int lastBurnTime = 0;
 	private int lastItemBurnTime = 0;
 
-	public ContainerLaptop(InventoryPlayer inventoryPlayer,TileEntityLaptop tileEntityLaptop) {
+	public ContainerLaptop(InventoryPlayer inventoryPlayer, TileEntityLaptop tileEntityLaptop) {
 		super();
 		this.laptop = tileEntityLaptop;
 		this.addSlotToContainer(new Slot(tileEntityLaptop, INPUT, 56, 34));
 		this.addSlotToContainer(new SlotLaptop(inventoryPlayer.player, tileEntityLaptop, OUTPUT, 116, 35));
-		lowerInventory = inventoryPlayer;
 		laptop.openInventory();
 		int i;
 
@@ -56,23 +52,22 @@ public class ContainerLaptop extends Container {
 				icrafting.sendProgressBarUpdate(this, 2, this.laptop.currentPrintTime);
 			}
 		}
-
 		this.lastCookTime = this.laptop.standardPrintTime;
 		this.lastBurnTime = this.laptop.printTime;
 		this.lastItemBurnTime = this.laptop.currentPrintTime;
 	}
 
 	public void updateProgressBar(int par1, int par2) {
-		if(par1 == 0) {
-			this.laptop.standardPrintTime = par2;
-		}
-
-		if(par1 == 1) {
-			this.laptop.printTime = par2;
-		}
-
-		if(par1 == 2) {
-			this.laptop.currentPrintTime = par2;
+		switch (par1) {
+			case 0:
+				this.laptop.standardPrintTime = par2;
+				break;
+			case 1:
+				this.laptop.printTime = par2;
+				break;
+			case 2:
+				this.laptop.currentPrintTime = par2;
+				break;
 		}
 
 	}
@@ -130,19 +125,10 @@ public class ContainerLaptop extends Container {
 		return itemStack;
 	}
 
-	public void onContainerClosed(EntityPlayer par1EntityPlayer)
-	{
+	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
 		super.onContainerClosed(par1EntityPlayer);
-		this.lowerInventory.closeInventory();
 		laptop.closeInventory();
 	}
 
-	/**
-	 * Return this chest container's lower chest inventory.
-	 */
-	 public IInventory getLowerChestInventory()
-	 {
-		 return this.lowerInventory;
-	 }
 }
 

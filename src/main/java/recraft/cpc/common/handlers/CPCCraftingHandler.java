@@ -2,7 +2,6 @@ package recraft.cpc.common.handlers;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import recraft.cpc.common.stats.CPCAchievementList;
 import recraft.cpc.init.CPCBlocks;
