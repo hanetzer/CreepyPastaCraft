@@ -14,14 +14,14 @@ public class GuiLaptop extends GuiContainer {
 	private IInventory playerInventory;
 	private int inventoryRows;
 
-	public GuiLaptop(TileEntityLaptop par1TileEntityLaptop, InventoryPlayer par2InventoryPlayer) {
-		super(new ContainerLaptop(par1TileEntityLaptop, par2InventoryPlayer));
-		this.laptopInventory = par1TileEntityLaptop;
-		this.playerInventory = par2InventoryPlayer;
+	public GuiLaptop(InventoryPlayer inventoryPlayer, TileEntityLaptop tileEntityLaptop) {
+		super(new ContainerLaptop(inventoryPlayer, tileEntityLaptop));
+		this.laptopInventory = tileEntityLaptop;
+		this.playerInventory = inventoryPlayer;
 		this.allowUserInput = false;
 		short short1 = 222;
 		int i = short1 - 108;
-		this.inventoryRows = par2InventoryPlayer.getSizeInventory() / 9;
+		this.inventoryRows = inventoryPlayer.getSizeInventory() / 9;
 		this.ySize = i + this.inventoryRows * 18;
 	}
 

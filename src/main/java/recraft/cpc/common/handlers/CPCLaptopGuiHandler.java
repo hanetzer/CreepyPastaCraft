@@ -15,7 +15,7 @@ public class CPCLaptopGuiHandler implements IGuiHandler
 	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityLaptop) {
-			return new ContainerLaptop((TileEntityLaptop) tileEntity, player.inventory);
+			return new ContainerLaptop(player.inventory, (TileEntityLaptop) tileEntity);
 		}
 		return null;
 	}
@@ -25,7 +25,7 @@ public class CPCLaptopGuiHandler implements IGuiHandler
 	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityLaptop) {
-			return new GuiLaptop((TileEntityLaptop) tileEntity, player.inventory);
+			return new GuiLaptop(player.inventory, (TileEntityLaptop) tileEntity);
 		}
 		return null;
 	}

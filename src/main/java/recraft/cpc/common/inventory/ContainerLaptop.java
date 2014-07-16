@@ -19,23 +19,23 @@ public class ContainerLaptop extends Container {
 	private int lastBurnTime = 0;
 	private int lastItemBurnTime = 0;
 
-	public ContainerLaptop(TileEntityLaptop par1TileEntityLaptop, InventoryPlayer par2InventoryPlayer) {
+	public ContainerLaptop(InventoryPlayer inventoryPlayer,TileEntityLaptop tileEntityLaptop) {
 		super();
-		this.laptop = par1TileEntityLaptop;
-		this.addSlotToContainer(new Slot(par1TileEntityLaptop, INPUT, 56, 34));
-		this.addSlotToContainer(new SlotLaptop(Minecraft.getMinecraft().thePlayer, par1TileEntityLaptop, OUTPUT, 116, 35));
-		lowerInventory = par2InventoryPlayer;
+		this.laptop = tileEntityLaptop;
+		this.addSlotToContainer(new Slot(tileEntityLaptop, INPUT, 56, 34));
+		this.addSlotToContainer(new SlotLaptop(inventoryPlayer.player, tileEntityLaptop, OUTPUT, 116, 35));
+		lowerInventory = inventoryPlayer;
 		laptop.openInventory();
 		int i;
 
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(par2InventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(par2InventoryPlayer, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
 

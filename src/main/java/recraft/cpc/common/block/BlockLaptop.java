@@ -50,19 +50,15 @@ public class BlockLaptop extends BlockContainer {
 		super.breakBlock(par1world, par2, par3, par4, par5Block, par6);
 	}
 
-	public boolean onBlockActivated(World par1World, int par2x, int par3y, int par4z, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		if (par1World.isRemote)
-		{
+	public boolean onBlockActivated(World world, int x, int y, int z,
+									EntityPlayer entityPlayer, int par6,
+									float par7, float par8, float par9) {
+		TileEntity tileEntity = world.getTileEntity(x, y ,z);
+		if (tileEntity instanceof TileEntityLaptop) {
+			entityPlayer.openGui(CPC.instance, 0, world, x, y, z);
 			return true;
 		}
-		else
-		{
-			TileEntityLaptop tileentitylaptop = (TileEntityLaptop) par1World.getTileEntity(par2x, par3y, par4z);
-			InventoryLaptop inventoryLaptop = new InventoryLaptop();
-			inventoryLaptop.setAssociated(tileentitylaptop);
-			par5EntityPlayer.openGui(CPC.instance, 0, par1World, par2x, par3y, par4z);
-			return true;
-		}
+		return false;
 	}
 
 	@Override
