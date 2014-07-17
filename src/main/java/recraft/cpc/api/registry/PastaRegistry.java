@@ -137,7 +137,7 @@ public class PastaRegistry {
 		registerPasta(EntityJane.class,      "cpc:jane",     2);
 		registerPasta(EntityJack.class,      "cpc:jack",     3);
 		registerPasta(EntityRake.class,      "cpc:rake",     4);
-		registerPasta(EntitySmile.class,     "cpc:smile",    5);
+		registerPasta(EntitySmileDog.class,  "cpc:smile",    5);
 		registerPasta(EntitySeed.class,      "cpc:seed",     6);
 		registerPasta(EntityMothman.class,   "cpc:moth",     7);
 		registerPasta(EntitySquidward.class, "cpc:squidward",8);
@@ -151,10 +151,10 @@ public class PastaRegistry {
 		}
 	}
 
-	public static ItemStack getPrinting(ItemStack itemStack) {
+	public static ItemStack getPrinting(ItemStack stack) {
 		ItemStack result = null;
-        int rand = randInt(0, stringToID.size() + 1);
-		if (itemStack.getItem() == Items.paper) {
+        int rand = randInt(0, stringToID.size());
+		if (stack.getItem() == Items.paper) {
             switch(rand) {
                 case 0:
                     result = new ItemStack(CPCItems.smileJpg);

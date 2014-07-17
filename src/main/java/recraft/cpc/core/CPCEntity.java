@@ -8,8 +8,7 @@ import recraft.cpc.common.entity.monster.*;
 import recraft.cpc.common.entity.passive.*;
 import recraft.cpc.common.entity.projectile.EntityStephano;
 
-public class CPCEntity
-{
+public class CPCEntity {
 	public static EntityStephano stephano;
 	public static void init() {
 		EntityRegistry.registerGlobalEntityID(EntityJeff.class, "cpc:jeff", EntityRegistry.findGlobalUniqueEntityId());
@@ -38,9 +37,9 @@ public class CPCEntity
 		EntityRegistry.registerModEntity(EntityRake.class, "cpc:rake", 2006, CPC.instance, 80, 3, true);
 		EntityRegistry.addSpawn(EntityRake.class, 1, 1, 1, EnumCreatureType.monster, BiomeGenBase.forestHills);
 
-		EntityRegistry.registerGlobalEntityID(EntitySmile.class, "cpc:smile", EntityRegistry.findGlobalUniqueEntityId());
-		EntityRegistry.registerModEntity(EntitySmile.class, "cpc:smile", 2007, CPC.instance, 80, 3, true);
-		EntityRegistry.addSpawn(EntitySmile.class, 4, 1, 1, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills);
+		EntityRegistry.registerGlobalEntityID(EntitySmileDog.class, "cpc:smile", EntityRegistry.findGlobalUniqueEntityId());
+		EntityRegistry.registerModEntity(EntitySmileDog.class, "cpc:smile", 2007, CPC.instance, 80, 3, true);
+		EntityRegistry.addSpawn(EntitySmileDog.class, 4, 1, 1, EnumCreatureType.monster, BiomeGenBase.forest, BiomeGenBase.forestHills);
 
 		EntityRegistry.registerGlobalEntityID(EntitySeed.class, "cpc:seed", EntityRegistry.findGlobalUniqueEntityId());
 		EntityRegistry.registerModEntity(EntitySeed.class, "cpc:seed", 2009, CPC.instance, 80, 3, true);
