@@ -57,6 +57,5 @@ public class CPC {
 
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent event) {
-		//mc.gameSettings.gammaSetting = -0.7f;
 	}
 }
