@@ -44,9 +44,10 @@ public class CPCHiltBlackHandler {
 						world.spawnParticle("smoke", player.posX, player.posY - 0.4D, player.posZ, 0.0D, 0.0D, 0.0D);
 					}
 				}
-			} else {
+			}
+            else {
 				player.removePotionEffect(Potion.wither.id);
-				player.removePotionEffect(Potion.blindness.id);
+				//player.removePotionEffect(Potion.blindness.id);
 			}
 		}
 	}
