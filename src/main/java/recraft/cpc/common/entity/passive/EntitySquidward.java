@@ -7,11 +7,13 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import recraft.cpc.common.stats.CPCAchievementList;
 
 public class EntitySquidward extends EntityAnimal {
+    private int mood;
+    private int madTime;
 
     public EntitySquidward(World world) {
         super(world);
@@ -19,8 +21,9 @@ public class EntitySquidward extends EntityAnimal {
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(5, new EntityAIWander(this, 0.6D));
-        tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
         tasks.addTask(7, new EntityAILookIdle(this));
+        tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+        //setMood(0);
     }
 
     public boolean isAIEnabled() {
@@ -29,40 +32,52 @@ public class EntitySquidward extends EntityAnimal {
 
     protected void entityInit() {
         super.entityInit();
-        super.dataWatcher.addObject(16, (byte) 0);
+        this.dataWatcher.addObject(16, 0);
     }
 
-    public void writeEntityToNBT(NBTTagCompound compound) {
-        super.writeEntityToNBT(compound);
+    public int getMood() {
+        return (this.dataWatcher.getWatchableObjectInt(16));
     }
 
-    public void readEntityFromNBT(NBTTagCompound compound) {
-        super.readEntityFromNBT(compound);
+    private void setMood(int i) {
+        this.dataWatcher.updateObject(16, i);
     }
 
-    public boolean interact(EntityPlayer player) {
-        if (super.interact(player)) {
-            return true;
-        } else if (!super.worldObj.isRemote) {
-            this.setDead();
-            EntitySquidwardSuicide entity = new EntitySquidwardSuicide(super.worldObj);
-            entity.setLocationAndAngles(super.posX, super.posY, super.posZ, super.rotationYaw, super.rotationPitch);
-            entity.setHealth(this.getMaxHealth());
-            entity.renderYawOffset = super.renderYawOffset;
-            super.worldObj.spawnEntityInWorld(entity);
-            player.addStat(CPCAchievementList.suicide, 1);
-            return true;
-        } else {
-            return false;
+    public void onLivingUpdate() {
+        switch (getMood()) {
+            case 0:
+                super.onLivingUpdate();
+                break;
+            case 1:
+                if (!super.worldObj.isRemote && --this.madTime <= 0) {
+                    setMood(2);
+                    super.onLivingUpdate();
+                }
+                break;
+            case 2:
+                super.onLivingUpdate();
+                worldObj.playSoundAtEntity(this, "mob.wolf.growl", 1.0F, (super.rand.nextFloat() - super.rand.nextFloat()) * 0.2F + 1.0F);
+                attackEntityFrom(DamageSource.drown, 15);
+                break;
         }
     }
 
-    public static boolean spawnCreature(World world, int par1, double x, double y, double z) {
-        EntitySquidwardSuicide entity = new EntitySquidwardSuicide(world);
-        entity.setLocationAndAngles(x, y, z, world.rand.nextFloat() * 360.0F, 0.0F);
-        world.spawnEntityInWorld(entity);
-        entity.playLivingSound();
-        return true;
+    public boolean interact(EntityPlayer player) {
+        if(getMood() != 0) {
+            return false;
+        }
+        else if(super.interact(player)) {
+            return true;
+        }
+        else if(!super.worldObj.isRemote) {
+            setMood(1);
+            madTime = rand.nextInt(200);
+            player.addStat(CPCAchievementList.suicide, 1);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public EntityAgeable createChild(EntityAgeable entity) {

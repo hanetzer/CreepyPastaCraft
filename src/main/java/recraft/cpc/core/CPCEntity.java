@@ -5,6 +5,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import recraft.cpc.CPC;
 import recraft.cpc.common.entity.monster.*;
+import recraft.cpc.common.entity.monster.EntitySmileDog;
 import recraft.cpc.common.entity.passive.*;
 import recraft.cpc.common.entity.projectile.EntityStephano;
 
@@ -50,8 +51,8 @@ public class CPCEntity {
         EntityRegistry.registerModEntity(EntityMothman.class, "cpc:moth", 2010, CPC.instance, 80, 3, true);
         EntityRegistry.addSpawn(EntityMothman.class, 3, 1, 1, EnumCreatureType.monster);
 
-        EntityRegistry.registerGlobalEntityID(EntitySquidward.class, "cpc:squidwardward", EntityRegistry.findGlobalUniqueEntityId());
-        EntityRegistry.registerModEntity(EntitySquidward.class, "cpc:squidward", 2012, CPC.instance, 80, 3, true);
+        EntityRegistry.registerGlobalEntityID(recraft.cpc.common.entity.passive.EntitySquidward.class, "cpc:squidwardward", EntityRegistry.findGlobalUniqueEntityId());
+        EntityRegistry.registerModEntity(recraft.cpc.common.entity.passive.EntitySquidward.class, "cpc:squidward", 2012, CPC.instance, 80, 3, true);
 
         EntityRegistry.registerGlobalEntityID(EntityStrider.class, "cpc:strider", EntityRegistry.findGlobalUniqueEntityId());
         EntityRegistry.registerModEntity(EntityStrider.class, "cpc:strider", 2013, CPC.instance, 80, 3, true);

@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import recraft.cpc.common.entity.monster.*;
 import recraft.cpc.common.entity.passive.EntityJane;
-import recraft.cpc.common.entity.passive.EntitySquidward;
 import recraft.cpc.common.entity.passive.EntityStrider;
 import recraft.cpc.init.CPCItems;
 
@@ -135,7 +134,7 @@ public class PastaRegistry {
         registerPasta(EntitySmileDog.class, "cpc:smile", 5);
         registerPasta(EntitySeed.class, "cpc:seed", 6);
         registerPasta(EntityMothman.class, "cpc:moth", 7);
-        registerPasta(EntitySquidward.class, "cpc:squidward", 8);
+        registerPasta(recraft.cpc.common.entity.passive.EntitySquidward.class, "cpc:squidward", 8);
         registerPasta(EntityStrider.class, "cpc:strider", 9);
     }
 

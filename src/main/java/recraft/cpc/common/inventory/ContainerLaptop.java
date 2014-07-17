@@ -77,18 +77,18 @@ public class ContainerLaptop extends Container {
     }
 
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-        ItemStack itemStack = null;
+        ItemStack stack = null;
         Slot slot = (Slot) this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemStack1 = slot.getStack();
-            itemStack = itemStack1.copy();
+            stack = itemStack1.copy();
 
             if (index == OUTPUT) {
                 if (!mergeItemStack(itemStack1, OUTPUT + 1, OUTPUT + 36 + 1, true)) {
                     return null;
                 }
-                slot.onSlotChange(itemStack1, itemStack);
+                slot.onSlotChange(itemStack1, stack);
             } else if (index != INPUT) {
                 if (PastaRegistry.getPrinting(itemStack1) != null) {
                     if (!mergeItemStack(itemStack1, INPUT, INPUT + 1, false)) {
@@ -111,12 +111,12 @@ public class ContainerLaptop extends Container {
                 slot.onSlotChanged();
             }
 
-            if (itemStack1.stackSize == itemStack.stackSize) {
+            if (itemStack1.stackSize == stack.stackSize) {
                 return null;
             }
             slot.onPickupFromSlot(player, itemStack1);
         }
-        return itemStack;
+        return stack;
     }
 
     public void onContainerClosed(EntityPlayer player) {
