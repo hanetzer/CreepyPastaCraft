@@ -18,20 +18,20 @@ public class ContainerLaptop extends Container {
 
 	public ContainerLaptop(InventoryPlayer inventoryPlayer, TileEntityLaptop tileEntityLaptop) {
 		super();
-		this.laptop = tileEntityLaptop;
-		this.addSlotToContainer(new Slot(tileEntityLaptop, INPUT, 56, 34));
-		this.addSlotToContainer(new SlotLaptop(inventoryPlayer.player, tileEntityLaptop, OUTPUT, 116, 35));
+		laptop = tileEntityLaptop;
+		addSlotToContainer(new Slot(tileEntityLaptop, INPUT, 56, 34));
+		addSlotToContainer(new SlotLaptop(inventoryPlayer.player, tileEntityLaptop, OUTPUT, 116, 35));
 		laptop.openInventory();
 		int i;
 
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
 	}
 
@@ -39,22 +39,22 @@ public class ContainerLaptop extends Container {
 		super.detectAndSendChanges();
 
 		for (Object crafter : super.crafters) {
-			ICrafting icrafting = (ICrafting) crafter;
+			ICrafting crafting = (ICrafting) crafter;
 			if (this.lastCookTime != this.laptop.standardPrintTime) {
-				icrafting.sendProgressBarUpdate(this, 0, this.laptop.standardPrintTime);
+				crafting.sendProgressBarUpdate(this, 0, laptop.standardPrintTime);
 			}
 
 			if (this.lastBurnTime != this.laptop.printTime) {
-				icrafting.sendProgressBarUpdate(this, 1, this.laptop.printTime);
+				crafting.sendProgressBarUpdate(this, 1, laptop.printTime);
 			}
 
 			if (this.lastItemBurnTime != this.laptop.currentPrintTime) {
-				icrafting.sendProgressBarUpdate(this, 2, this.laptop.currentPrintTime);
+				crafting.sendProgressBarUpdate(this, 2, laptop.currentPrintTime);
 			}
 		}
-		this.lastCookTime = this.laptop.standardPrintTime;
-		this.lastBurnTime = this.laptop.printTime;
-		this.lastItemBurnTime = this.laptop.currentPrintTime;
+		lastCookTime = laptop.standardPrintTime;
+		lastBurnTime = laptop.printTime;
+		lastItemBurnTime = laptop.currentPrintTime;
 	}
 
 	public void updateProgressBar(int par1, int par2) {
@@ -72,41 +72,40 @@ public class ContainerLaptop extends Container {
 
 	}
 
-	public boolean canInteractWith(EntityPlayer var1) {
-		return this.laptop.isUseableByPlayer(var1);
+	public boolean canInteractWith(EntityPlayer player) {
+		return this.laptop.isUseableByPlayer(player);
 	}
 
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2SlotIndex) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		ItemStack itemStack = null;
-		Slot slot = (Slot)this.inventorySlots.get(par2SlotIndex);
+		Slot slot = (Slot)this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemStack1 = slot.getStack();
 			itemStack = itemStack1.copy();
 
-			if (par2SlotIndex == OUTPUT) {
-				if (!this.mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+36+1, true)) {
+			if (index == OUTPUT) {
+				if (!mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+36+1, true)) {
 					return null;
 				}
-
 				slot.onSlotChange(itemStack1, itemStack);
 			}
-			else if (par2SlotIndex != INPUT) {
+			else if (index != INPUT) {
 				if (PastaRegistry.getPrinting(itemStack1) != null) {
-					if (!this.mergeItemStack(itemStack1, INPUT, INPUT+1, false)) {
+					if (!mergeItemStack(itemStack1, INPUT, INPUT+1, false)) {
 						return null;
 					}
 				}
-				else if (par2SlotIndex >= OUTPUT+1 && par2SlotIndex < OUTPUT+28) {
-					if (!this.mergeItemStack(itemStack1, OUTPUT+28, OUTPUT+37, false)) {
+				else if (index >= OUTPUT+1 && index < OUTPUT+28) {
+					if (!mergeItemStack(itemStack1, OUTPUT+28, OUTPUT+37, false)) {
 						return null;
 					}
 				}
-				else if (par2SlotIndex >= OUTPUT+28 && par2SlotIndex < OUTPUT+37 && !this.mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+28, false)) {
+				else if (index >= OUTPUT+28 && index < OUTPUT+37 && !mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+28, false)) {
 					return null;
 				}
 			}
-			else if (!this.mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+37, false)) {
+			else if (!mergeItemStack(itemStack1, OUTPUT+1, OUTPUT+37, false)) {
 				return null;
 			}
 
@@ -120,15 +119,13 @@ public class ContainerLaptop extends Container {
 			if (itemStack1.stackSize == itemStack.stackSize) {
 				return null;
 			}
-			slot.onPickupFromSlot(par1EntityPlayer, itemStack1);
+			slot.onPickupFromSlot(player, itemStack1);
 		}
 		return itemStack;
 	}
 
-	public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-		super.onContainerClosed(par1EntityPlayer);
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
 		laptop.closeInventory();
 	}
-
 }
-

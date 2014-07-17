@@ -23,5 +23,4 @@ public class CPCAIHandler {
 	//		((EntityBat) entity).tasks.addTask(1, new EntityAIAttackOnCollide((EntityCreature)entity, EntityPlayer.class, 7.0D, false));
 	//	}
 	}
-
 }

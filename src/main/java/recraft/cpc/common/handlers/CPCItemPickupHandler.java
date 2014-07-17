@@ -12,6 +12,5 @@ public class CPCItemPickupHandler {
 		if(event.pickedUp.getEntityItem().getItem() == CPCItems.jeffKnife) {
 			event.player.addStat(CPCAchievementList.noSleep, 1);
 		}
-
 	}
 }

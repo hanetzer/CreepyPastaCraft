@@ -10,31 +10,29 @@ import net.minecraft.world.World;
 import recraft.cpc.init.CPCItems;
 
 public class EntityStephano extends EntityThrowable {
-
 	public EntityPlayer shootingEntity;
 	private ItemStack potionDamage;
 
-
-	public EntityStephano(World par1World) {
-		super(par1World);
+	public EntityStephano(World world) {
+		super(world);
 	}
 
-	public EntityStephano(World par1World, EntityPlayer par2EntityLiving, int par3) {
-		this(par1World, par2EntityLiving, new ItemStack(CPCItems.stephano, 1, par3));
+	public EntityStephano(World world, EntityPlayer player, int damage) {
+		this(world, player, new ItemStack(CPCItems.stephano, 1, damage));
 	}
 
-	public EntityStephano(World par1World, EntityPlayer par2EntityLiving, ItemStack par3ItemStack) {
-		super(par1World, par2EntityLiving);
-		this.potionDamage = par3ItemStack;
+	public EntityStephano(World world, EntityPlayer player, ItemStack stack) {
+		super(world, player);
+		potionDamage = stack;
 	}
 
-	public EntityStephano(World par1World, double par2, double par4, double par6, int par8) {
-		this(par1World, par2, par4, par6, new ItemStack(CPCItems.stephano, 1, par8));
+	public EntityStephano(World world, double x, double y, double z, int damage) {
+		this(world, x, y, z, new ItemStack(CPCItems.stephano, 1, damage));
 	}
 
-	public EntityStephano(World par1World, double par2, double par4, double par6, ItemStack par8ItemStack) {
-		super(par1World, par2, par4, par6);
-		this.potionDamage = par8ItemStack;
+	public EntityStephano(World world, double x, double y, double z, ItemStack stack) {
+		super(world, x, y, z);
+		potionDamage = stack;
 	}
 
 	protected float getGravityVelocity() {
@@ -49,57 +47,56 @@ public class EntityStephano extends EntityThrowable {
 		return -20.0F;
 	}
 
-	public void setPotionDamage(int par1) {
-		if(this.potionDamage == null) {
-			this.potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
+	public void setPotionDamage(int damage) {
+		if(potionDamage == null) {
+			potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
 		}
 
-		this.potionDamage.setItemDamage(par1);
+		potionDamage.setItemDamage(damage);
 	}
 
 	public int getPotionDamage() {
-		if(this.potionDamage == null) {
-			this.potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
+		if(potionDamage == null) {
+			potionDamage = new ItemStack(CPCItems.stephano, 1, 0);
 		}
-		return this.potionDamage.getItemDamage();
+		return potionDamage.getItemDamage();
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition par1MovingObjectPosition) {
-		if(!this.worldObj.isRemote) {
-			if(par1MovingObjectPosition.entityHit != null) {
-				par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, this.shootingEntity), 6);
-				par1MovingObjectPosition.entityHit.setFire(6);
+	protected void onImpact(MovingObjectPosition objectPosition) {
+		if(!worldObj.isRemote) {
+			if(objectPosition.entityHit != null) {
+				objectPosition.entityHit.attackEntityFrom(DamageSource.causeIndirectMagicDamage(this, shootingEntity), 6);
+				objectPosition.entityHit.setFire(6);
 			}
 
-			if(!this.worldObj.isRemote) {
-				this.worldObj.createExplosion(this, posX, posY, posZ, 0.5F, true);
+			if(!worldObj.isRemote) {
+				worldObj.createExplosion(this, posX, posY, posZ, 0.5F, true);
 			}
+			worldObj.playSoundAtEntity(this, "random.glass", 1.0F, 1.0F);
+			setDead();
+		}
+	}
 
-			this.worldObj.playSoundAtEntity(this, "random.glass", 1.0F, 1.0F);
-			this.setDead();
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		if(compound.hasKey("Potion")) {
+			potionDamage = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Potion"));
+		}
+        else {
+			setPotionDamage(compound.getInteger("potionValue"));
+		}
+
+		if(potionDamage == null) {
+			setDead();
 		}
 
 	}
 
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
-		if(par1NBTTagCompound.hasKey("Potion")) {
-			this.potionDamage = ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("Potion"));
-		} else {
-			this.setPotionDamage(par1NBTTagCompound.getInteger("potionValue"));
-		}
-
-		if(this.potionDamage == null) {
-			this.setDead();
-		}
-
-	}
-
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeEntityToNBT(par1NBTTagCompound);
-		if(this.potionDamage != null) {
-			par1NBTTagCompound.setTag("Potion", this.potionDamage.writeToNBT(new NBTTagCompound()));
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		if(potionDamage != null) {
+			compound.setTag("Potion", potionDamage.writeToNBT(new NBTTagCompound()));
 		}
 
 	}
@@ -108,4 +105,3 @@ public class EntityStephano extends EntityThrowable {
 		super.onUpdate();
 	}
 }
-

@@ -10,88 +10,73 @@ import net.minecraft.world.World;
 import recraft.cpc.common.stats.CPCAchievementList;
 
 public class EntityStrider extends EntityAnimal {
+    private final EntityAIControlledByPlayer ai;
 
-   private final EntityAIControlledByPlayer aiControlledByPlayer;
+    public EntityStrider(World world) {
+        super(world);
+        setSize(2.0F, 2.5F);
+        getNavigator().setAvoidsWater(true);
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+        tasks.addTask(2, this.ai = new EntityAIControlledByPlayer(this, 0.34F));
+        tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
+        tasks.addTask(5, new EntityAIWander(this, 1.0D));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(7, new EntityAILookIdle(this));
+    }
 
+    public boolean isAIEnabled() {
+        return true;
+    }
 
-   public EntityStrider(World par1World) {
-	  super(par1World);
-	  this.setSize(2.0F, 2.5F);
-	  this.getNavigator().setAvoidsWater(true);
-	  float var2 = 0.2F;
-	  float moveSpeed = 0.2F;
-	  super.tasks.addTask(0, new EntityAISwimming(this));
-	  super.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-	  super.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
-	  super.tasks.addTask(2, new EntityAIMate(this, var2));
-	  super.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-	  super.tasks.addTask(5, new EntityAIWander(this, var2));
-	  super.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-	  super.tasks.addTask(7, new EntityAILookIdle(this));
-   }
+    protected void updateAITasks() {
+        super.updateAITasks();
+    }
 
-   public boolean isAIEnabled() {
-	  return true;
-   }
+    public boolean canBeSteered() {
+        ItemStack heldItem = ((EntityPlayer) super.riddenByEntity).getHeldItem();
+        return heldItem != null;
+    }
 
-   protected void updateAITasks() {
-	  super.updateAITasks();
-   }
+    public EntityAIControlledByPlayer getAIControlledByPlayer() {
+        return this.ai;
+    }
 
-   public boolean canBeSteered() {
-	  ItemStack var1 = ((EntityPlayer)super.riddenByEntity).getHeldItem();
-	  return var1 != null || var1 == null;
-   }
+    protected void entityInit() {
+        super.entityInit();
+        super.dataWatcher.addObject(16, (byte) 0);
+    }
 
-   public EntityAIControlledByPlayer getAIControlledByPlayer() {
-	  return this.aiControlledByPlayer;
-   }
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+    }
 
-   protected void entityInit() {
-	  super.entityInit();
-	  super.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-   }
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+    }
 
-   public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-	  super.writeEntityToNBT(par1NBTTagCompound);
-   }
+    public double getMountedYOffset() {
+        return 2.7D;
+    }
 
-   public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-	  super.readEntityFromNBT(par1NBTTagCompound);
-   }
+    public boolean interact(EntityPlayer player) {
+        if (super.interact(player)) {
+            return true;
+        }
+        else if (!worldObj.isRemote && (riddenByEntity == null || riddenByEntity == player)) {
+            player.mountEntity(this);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
-   public double getMountedYOffset() {
-	  return 2.7D;
-   }
+    protected void fall(float par1) {
+        super.fall(par1);
+    }
 
-   public boolean interact(EntityPlayer par1EntityPlayer) {
-	  if(super.interact(par1EntityPlayer)) {
-		 return true;
-	  } else if(!super.worldObj.isRemote && super.riddenByEntity == null) {
-		 par1EntityPlayer.mountEntity(this);
-		 par1EntityPlayer.addStat(CPCAchievementList.rideStrider, 1);
-		 return true;
-	  } else {
-		 ItemStack var1 = par1EntityPlayer.getCurrentEquippedItem();
-		 if(!super.worldObj.isRemote && super.riddenByEntity == par1EntityPlayer && var1 == null) {
-			par1EntityPlayer.mountEntity(this);
-			return true;
-		 } else {
-			return false;
-		 }
-	  }
-   }
-
-   protected void fall(float par1) {
-	  super.fall(par1);
-   }
-
-   public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal) {
-	  return new EntityStrider(super.worldObj);
-   }
-
-   public EntityAgeable createChild(EntityAgeable var1) {
-	  return var1;
-   }
-
+    public EntityAgeable createChild(EntityAgeable entity) {
+        return entity;
+    }
 }

@@ -13,19 +13,16 @@ import net.minecraft.world.World;
 
 public class EntitySquidwardMad extends EntityAnimal {
 
-   public int DamageDelay;
-
-
-   public EntitySquidwardMad(World par1World) {
-	  super(par1World);
-	  this.setSize(0.9F, 2.0F);
-	  this.getNavigator().setAvoidsWater(true);
-	  float var2 = 0.25F;
-	  this.DamageDelay = super.rand.nextInt(100);
-	  super.tasks.addTask(0, new EntityAISwimming(this));
-	  super.tasks.addTask(5, new EntityAIWander(this, var2));
-	  super.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
-	  super.tasks.addTask(7, new EntityAILookIdle(this));
+   public int damageDelay;
+   public EntitySquidwardMad(World world) {
+	  super(world);
+	  setSize(0.9F, 2.0F);
+	  getNavigator().setAvoidsWater(true);
+	  damageDelay = super.rand.nextInt(100);
+	  tasks.addTask(0, new EntityAISwimming(this));
+	  tasks.addTask(5, new EntityAIWander(this, 0.6D));
+	  tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
+	  tasks.addTask(7, new EntityAILookIdle(this));
    }
 
    public void onLivingUpdate() {
@@ -38,27 +35,22 @@ public class EntitySquidwardMad extends EntityAnimal {
 
    protected void entityInit() {
 	  super.entityInit();
-	  super.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+	  super.dataWatcher.addObject(16, (byte) 0);
    }
 
-   public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-	  super.writeEntityToNBT(par1NBTTagCompound);
+   public void writeEntityToNBT(NBTTagCompound compound) {
+	  super.writeEntityToNBT(compound);
    }
 
-   public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-	  super.readEntityFromNBT(par1NBTTagCompound);
+   public void readEntityFromNBT(NBTTagCompound compound) {
+	  super.readEntityFromNBT(compound);
    }
 
    public boolean interact(EntityPlayer par1EntityPlayer) {
 	  return super.interact(par1EntityPlayer);
    }
 
-   public EntityAnimal spawnBabyAnimal(EntityAnimal par1EntityAnimal) {
-	  return new EntitySquidwardMad(super.worldObj);
+   public EntityAgeable createChild(EntityAgeable entity) {
+	  return entity;
    }
-
-   public EntityAgeable createChild(EntityAgeable var1) {
-	  return var1;
-   }
-
 }

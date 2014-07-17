@@ -9,9 +9,8 @@ import recraft.cpc.common.inventory.ContainerLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
 public class CPCLaptopGuiHandler implements IGuiHandler {
-
 	@Override
-	public Object getServerGuiElement(int id, EntityPlayer player,
+    public Object getServerGuiElement(int id, EntityPlayer player,
                                       World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityLaptop) {

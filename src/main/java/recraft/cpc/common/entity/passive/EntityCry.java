@@ -2,7 +2,6 @@ package recraft.cpc.common.entity.passive;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -11,11 +10,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
-public class EntityCry extends EntityAnimal
-{
-	public EntityCry(World par1World)
-	{
-		super(par1World);
+public class EntityCry extends EntityAnimal {
+	public EntityCry(World world) 	{
+		super(world);
 		setSize(1.0F,0.5F);
 		isImmuneToFire = true;
 		getNavigator().setBreakDoors(true);
@@ -30,46 +27,35 @@ public class EntityCry extends EntityAnimal
 		tasks.addTask(1, new EntityAIAvoidEntity(this, EntityMob.class, 8.0F, 0.6D, 0.6D));
 	}
 
-	protected void applyEntityAttributes()
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-	}
-
-	protected boolean isAIEnabled()
-	{
+	protected boolean isAIEnabled() {
 		return true;
 	}
 
-	public void onLivingUpdate()
-	{
+	public void onLivingUpdate() {
 		super.onLivingUpdate();
 	}
 
 	@Override
-	public boolean getCanSpawnHere()
-	{
-		if(worldObj.villageCollectionObj.getVillageList().iterator().hasNext() && worldObj.villageCollectionObj.findNearestVillage((int)this.posX, (int)this.posY, (int)this.posZ, 10) == null)
-		{
-			return false;
-		}
+	public boolean getCanSpawnHere() {
+        if (worldObj.villageCollectionObj.getVillageList().iterator().hasNext()) {
+            if (worldObj.villageCollectionObj.findNearestVillage((int) posX, (int) posY, (int) posZ, 10) == null) {
+                return false;
+            }
+        }
 		return true;
 	}
 
-	protected boolean canDespawn()
-	{
+	protected boolean canDespawn() {
 		return true;
 	}
 
-	public void onKillEntity(EntityLiving par1EntityLiving) {}
+	public void onKillEntity(EntityLiving entity) {}
 
-	protected Item getDropItem()
-	{
+	protected Item getDropItem() {
 		return Items.ghast_tear;
 	}
 
-	public EntityAgeable createChild(EntityAgeable var1)
-	{
-		return var1;
+	public EntityAgeable createChild(EntityAgeable entity) {
+		return entity;
 	}
 }
