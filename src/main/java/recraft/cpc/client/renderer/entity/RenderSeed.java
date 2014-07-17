@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.monster.EntitySeed;
 
 @SideOnly(Side.CLIENT)
 public class RenderSeed extends RenderLiving {
-	public RenderSeed(ModelBase model, float par2) {
-		super(model, par2);
-	}
+    public RenderSeed(ModelBase model, float par2) {
+        super(model, par2);
+    }
 
-	protected ResourceLocation getTexture(EntitySeed entitySeed) {
-		return new ResourceLocation("cpc:textures/entity/seed.png");
-	}
+    protected ResourceLocation getTexture(EntitySeed entitySeed) {
+        return new ResourceLocation("cpc:textures/entity/seed.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntitySeed)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntitySeed) entity);
+    }
 }

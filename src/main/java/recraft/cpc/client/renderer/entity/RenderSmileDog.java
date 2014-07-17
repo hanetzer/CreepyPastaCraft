@@ -7,21 +7,20 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.monster.EntitySmileDog;
 
 public class RenderSmileDog extends RenderLiving {
-	public RenderSmileDog(ModelBase model, float f) {
-		super(model, f);
-	}
-	
-	public ResourceLocation getTexture(EntitySmileDog entitySmile) {
+    public RenderSmileDog(ModelBase model, float f) {
+        super(model, f);
+    }
+
+    public ResourceLocation getTexture(EntitySmileDog entitySmile) {
         if (entitySmile.isTransformed()) {
             return new ResourceLocation("cpc:textures/entity/smiledog/angry.png");
-        }
-        else {
+        } else {
             return new ResourceLocation("cpc:textures/entity/smiledog/idle.png");
         }
-	}
+    }
 
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntitySmileDog)entity);
-	}
+    @Override
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntitySmileDog) entity);
+    }
 }

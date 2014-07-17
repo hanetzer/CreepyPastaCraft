@@ -5,11 +5,12 @@ import net.minecraft.item.Item;
 import recraft.cpc.CPC;
 
 public class ItemCPCSmileJPG extends Item {
-	public ItemCPCSmileJPG() {
-		super();
-		this.setCreativeTab(CPC.tabCPC);
-	}
-	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon("cpc:horror");
-	}
+    public ItemCPCSmileJPG() {
+        super();
+        this.setCreativeTab(CPC.tabCPC);
+    }
+
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("cpc:horror");
+    }
 }

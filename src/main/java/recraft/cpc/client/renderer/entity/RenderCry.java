@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.passive.EntityCry;
 
 @SideOnly(Side.CLIENT)
 public class RenderCry extends RenderLiving {
-	public RenderCry(ModelBase modelBase, float par2) {
-		super(modelBase, par2);
-	}
+    public RenderCry(ModelBase modelBase, float par2) {
+        super(modelBase, par2);
+    }
 
-	protected ResourceLocation getTexture(EntityCry entityCry) {
-		return new ResourceLocation("cpc:textures/entity/cry.png");
-	}
+    protected ResourceLocation getTexture(EntityCry entityCry) {
+        return new ResourceLocation("cpc:textures/entity/cry.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntityCry)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntityCry) entity);
+    }
 }

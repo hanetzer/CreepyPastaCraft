@@ -9,23 +9,23 @@ import recraft.cpc.common.inventory.ContainerLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
 public class CPCLaptopGuiHandler implements IGuiHandler {
-	@Override
+    @Override
     public Object getServerGuiElement(int id, EntityPlayer player,
                                       World world, int x, int y, int z) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if(tileEntity instanceof TileEntityLaptop) {
-			return new ContainerLaptop(player.inventory, (TileEntityLaptop) tileEntity);
-		}
-		return null;
-	}
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity instanceof TileEntityLaptop) {
+            return new ContainerLaptop(player.inventory, (TileEntityLaptop) tileEntity);
+        }
+        return null;
+    }
 
-	@Override
-	public Object getClientGuiElement(int id, EntityPlayer player,
+    @Override
+    public Object getClientGuiElement(int id, EntityPlayer player,
                                       World world, int x, int y, int z) {
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if(tileEntity instanceof TileEntityLaptop) {
-			return new GuiLaptop(player.inventory, (TileEntityLaptop) tileEntity);
-		}
-		return null;
-	}
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity instanceof TileEntityLaptop) {
+            return new GuiLaptop(player.inventory, (TileEntityLaptop) tileEntity);
+        }
+        return null;
+    }
 }

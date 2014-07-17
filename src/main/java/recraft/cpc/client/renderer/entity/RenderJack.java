@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.monster.EntityJack;
 
 @SideOnly(Side.CLIENT)
 public class RenderJack extends RenderLiving {
-	public RenderJack(ModelBase model, float par2) {
-		super(model, par2);
-	}
+    public RenderJack(ModelBase model, float par2) {
+        super(model, par2);
+    }
 
-	protected ResourceLocation getTexture(EntityJack entityJack) {
-		return new ResourceLocation("cpc:textures/entity/jack.png");
-	}
+    protected ResourceLocation getTexture(EntityJack entityJack) {
+        return new ResourceLocation("cpc:textures/entity/jack.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntityJack)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntityJack) entity);
+    }
 }

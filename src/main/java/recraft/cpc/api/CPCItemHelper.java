@@ -5,11 +5,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 
 public class CPCItemHelper {
-	public static Item.ToolMaterial toolMaterialJeffKnife;
-	public static Item.ToolMaterial toolMaterialHiltBlack;
-	public static ItemArmor.ArmorMaterial armorMaterialBaby;
+    public static Item.ToolMaterial toolMaterialJeffKnife;
+    public static Item.ToolMaterial toolMaterialHiltBlack;
+    public static ItemArmor.ArmorMaterial armorMaterialBaby;
 
-	public static String getUniqueName(Item item) {
-		return GameData.getItemRegistry().getNameForObject(item);
-	}
+    public static String getUniqueName(Item item) {
+        return GameData.getItemRegistry().getNameForObject(item);
+    }
 }

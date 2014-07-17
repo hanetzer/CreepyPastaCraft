@@ -17,58 +17,58 @@ import recraft.cpc.init.CPCBlocks;
 import java.util.Random;
 
 public class BlockLaptop extends BlockContainer {
-	public BlockLaptop() {
-		super(Material.iron);
-		setCreativeTab(CPC.tabCPC);
-		setBlockTextureName("cpc:laptop");
-		setBlockName("cpc:laptop");
-	}
+    public BlockLaptop() {
+        super(Material.iron);
+        setCreativeTab(CPC.tabCPC);
+        setBlockTextureName("cpc:laptop");
+        setBlockName("cpc:laptop");
+    }
 
-	public Item getBlockDropped(int par1, Random random, int par3) {
-		return Item.getItemFromBlock(CPCBlocks.laptop);
-	}
+    public Item getBlockDropped(int par1, Random random, int par3) {
+        return Item.getItemFromBlock(CPCBlocks.laptop);
+    }
 
-	public int quantityDropped(Random random) {
-		return 1;
-	}
+    public int quantityDropped(Random random) {
+        return 1;
+    }
 
-	public int getRenderType() {
-		return -1;
-	}
+    public int getRenderType() {
+        return -1;
+    }
 
-	public boolean isOpaqueCube() {
-		return false;
-	}
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
 
-	public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-		world.func_147453_f(x, y, z, block);
-		super.breakBlock(world, x, y, z, block, par6);
-	}
+    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+        world.func_147453_f(x, y, z, block);
+        super.breakBlock(world, x, y, z, block, par6);
+    }
 
-	public boolean onBlockActivated(World world, int x, int y, int z,
-									EntityPlayer entityPlayer, int par6,
-									float par7, float par8, float par9) {
-		TileEntity tileEntity = world.getTileEntity(x, y ,z);
-		if (tileEntity instanceof TileEntityLaptop) {
-			entityPlayer.openGui(CPC.instance, 0, world, x, y, z);
-			return true;
-		}
-		return false;
-	}
+    public boolean onBlockActivated(World world, int x, int y, int z,
+                                    EntityPlayer entityPlayer, int par6,
+                                    float par7, float par8, float par9) {
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity instanceof TileEntityLaptop) {
+            entityPlayer.openGui(CPC.instance, 0, world, x, y, z);
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int par2) {
-		return new TileEntityLaptop();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int par2) {
+        return new TileEntityLaptop();
+    }
 
-	public void onBlockPlacedBy(World world, int x, int y, int z,
+    public void onBlockPlacedBy(World world, int x, int y, int z,
                                 EntityLivingBase entity, ItemStack stack) {
-		byte b0 = 0;
-		int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        byte b0 = 0;
+        int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         switch (l) {
             case 0:
@@ -84,6 +84,6 @@ public class BlockLaptop extends BlockContainer {
                 b0 = 4;
                 break;
         }
-		world.setBlockMetadataWithNotify(x, y, z, b0, 2);
-	}
+        world.setBlockMetadataWithNotify(x, y, z, b0, 2);
+    }
 }

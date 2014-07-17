@@ -5,12 +5,12 @@ import net.minecraft.item.Item;
 import recraft.cpc.init.CPCItems;
 
 public class CreativeTabCPC extends CreativeTabs {
-	public CreativeTabCPC(int position, String tabID) {
-		super(position, tabID);
-	}
+    public CreativeTabCPC(int position, String tabID) {
+        super(position, tabID);
+    }
 
-	public Item getTabIconItem() {
-		return CPCItems.horror;
-	}
+    public Item getTabIconItem() {
+        return CPCItems.horror;
+    }
 
 }

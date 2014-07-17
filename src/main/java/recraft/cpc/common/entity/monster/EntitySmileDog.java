@@ -103,8 +103,7 @@ public class EntitySmileDog extends EntityMob {
                 afflictPlayer(player);
                 speak(player);
                 return player;
-            }
-            else {
+            } else {
                 setTransformed(false);
             }
         }

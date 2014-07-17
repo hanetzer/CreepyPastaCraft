@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.monster.EntityRake;
 
 @SideOnly(Side.CLIENT)
 public class RenderRake extends RenderLiving {
-	public RenderRake(ModelBase model, float par2) {
-		super(model, par2);
-	}
+    public RenderRake(ModelBase model, float par2) {
+        super(model, par2);
+    }
 
-	protected ResourceLocation getTexture(EntityRake entityRake) {
-		return new ResourceLocation("cpc:textures/entity/rake.png");
-	}
+    protected ResourceLocation getTexture(EntityRake entityRake) {
+        return new ResourceLocation("cpc:textures/entity/rake.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntityRake)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntityRake) entity);
+    }
 }

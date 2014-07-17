@@ -22,7 +22,8 @@ public class GuiLaptop extends GuiContainer {
         this.texture = new ResourceLocation("cpc:textures/gui/laptop.png");
     }
 
-    protected void drawGuiContainerForegroundLayer(int i, int j) {}
+    protected void drawGuiContainerForegroundLayer(int i, int j) {
+    }
 
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

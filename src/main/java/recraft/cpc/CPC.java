@@ -21,41 +21,37 @@ import recraft.cpc.core.CPCEntity;
 import recraft.cpc.core.CPCItem;
 
 @SuppressWarnings("unused")
-@Mod(modid="cpc")
+@Mod(modid = "cpc")
 public class CPC {
-	@Instance("cpc")
-	public static CPC instance;
+    @Instance("cpc")
+    public static CPC instance;
 
-	@SidedProxy(
-			clientSide="recraft.cpc.client.ClientProxy",
-			serverSide="recraft.cpc.common.CommonProxy")
-	public static CommonProxy proxy;
-	public static CreativeTabs tabCPC;
+    @SidedProxy(
+            clientSide = "recraft.cpc.client.ClientProxy",
+            serverSide = "recraft.cpc.common.CommonProxy")
+    public static CommonProxy proxy;
+    public static CreativeTabs tabCPC;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new CPCLaptopGuiHandler());
-		tabCPC = new CreativeTabCPC(CreativeTabs.getNextID(), "tabCPC");
-		CPCEventHandler.init();
-		CPCItem.init();
-		CPCBlock.init();
-		CPCEntity.init();
-		PastaRegistry.init();
-		CPCAchievementList.init();
-	}
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new CPCLaptopGuiHandler());
+        tabCPC = new CreativeTabCPC(CreativeTabs.getNextID(), "tabCPC");
+        CPCEventHandler.init();
+        CPCItem.init();
+        CPCBlock.init();
+        CPCEntity.init();
+        PastaRegistry.init();
+        CPCAchievementList.init();
+    }
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
-		proxy.init();
-	}
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        proxy.init();
+    }
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		//TickRegistry.registerTickHandler(new CPClientTickHandler(), Side.CLIENT);
-	}
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {}
 
-	@EventHandler
-	public void serverStart(FMLServerStartingEvent event) {
-	}
+    @EventHandler
+    public void serverStart(FMLServerStartingEvent event) {}
 }

@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.passive.EntityPewds;
 
 @SideOnly(Side.CLIENT)
 public class RenderPewds extends RenderLiving {
-	public RenderPewds(ModelBase model, float par2) {
-		super(model, par2);
-	}
+    public RenderPewds(ModelBase model, float par2) {
+        super(model, par2);
+    }
 
-	protected ResourceLocation getTexture(EntityPewds entityPewds) {
-		return new ResourceLocation("cpc:textures/entity/pewds.png");
-	}
+    protected ResourceLocation getTexture(EntityPewds entityPewds) {
+        return new ResourceLocation("cpc:textures/entity/pewds.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntityPewds)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntityPewds) entity);
+    }
 }

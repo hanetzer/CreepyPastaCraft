@@ -7,10 +7,10 @@ import recraft.cpc.init.CPCItems;
 
 @SuppressWarnings("unused")
 public class CPCItemPickupHandler {
-	@SubscribeEvent
-	public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
-		if(event.pickedUp.getEntityItem().getItem() == CPCItems.jeffKnife) {
-			event.player.addStat(CPCAchievementList.noSleep, 1);
-		}
-	}
+    @SubscribeEvent
+    public void onItemPickup(PlayerEvent.ItemPickupEvent event) {
+        if (event.pickedUp.getEntityItem().getItem() == CPCItems.jeffKnife) {
+            event.player.addStat(CPCAchievementList.noSleep, 1);
+        }
+    }
 }

@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import recraft.cpc.CPC;
 
@@ -20,65 +19,63 @@ import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class ItemCPCRecord extends ItemRecord {
-	private static final Map records = new HashMap();
-	public final String recordName;
+    private static final Map records = new HashMap();
+    public final String recordName;
 
-	public ItemCPCRecord(String recordName) {
-		super(recordName);
-		this.recordName = recordName;
-		this.maxStackSize = 1;
-		this.setCreativeTab(CPC.tabCPC);
-		records.put(recordName, this);
-	}
+    public ItemCPCRecord(String recordName) {
+        super(recordName);
+        this.recordName = recordName;
+        this.maxStackSize = 1;
+        this.setCreativeTab(CPC.tabCPC);
+        records.put(recordName, this);
+    }
 
-	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		itemIcon = iconRegister.registerIcon("cpc:" + "record_" + recordName);
-	}
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        itemIcon = iconRegister.registerIcon("cpc:" + "record_" + recordName);
+    }
 
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player,
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player,
                              World world, int x, int y, int z,
                              int par7, float par8, float par9, float par10) {
-		if (world.getBlock(x, y, z) == Blocks.jukebox && world.getBlockMetadata(x, y, z) == 0) {
-			if (world.isRemote) {
+        if (world.getBlock(x, y, z) == Blocks.jukebox && world.getBlockMetadata(x, y, z) == 0) {
+            if (world.isRemote) {
+                return true;
+            } else {
+                //TODO:						  .insertRecord()
+                ((BlockJukebox) Blocks.jukebox).func_149926_b(world, x, y, z, stack);
+                world.playAuxSFXAtEntity(null, 1005, x, y, z, Item.getIdFromItem(this));
+                --stack.stackSize;
                 return true;
             }
-			else {
-				//TODO:						  .insertRecord()
-				((BlockJukebox)Blocks.jukebox).func_149926_b(world, x, y, z, stack);
-				world.playAuxSFXAtEntity(null, 1005, x, y, z, Item.getIdFromItem(this));
-				--stack.stackSize;
-				return true;
-			}
-		}
-		else {
+        } else {
             return false;
         }
-	}
+    }
 
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list,
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list,
                                boolean par4) {
-		list.add(this.getRecordNameLocal());
-	}
+        list.add(this.getRecordNameLocal());
+    }
 
-	@Override
-	public String getRecordNameLocal() {
-		return I18n.format(this.getUnlocalizedName() + ".desc");
-	}
+    @Override
+    public String getRecordNameLocal() {
+        return I18n.format(this.getUnlocalizedName() + ".desc");
+    }
 
-	@Override
-	public EnumRarity getRarity(ItemStack itemStack) {
-		return EnumRarity.rare;
-	}
+    @Override
+    public EnumRarity getRarity(ItemStack itemStack) {
+        return EnumRarity.rare;
+    }
 
-	public static ItemCPCRecord getRecord(String name) {
-		return (ItemCPCRecord)records.get(name);
-	}
+    public static ItemCPCRecord getRecord(String name) {
+        return (ItemCPCRecord) records.get(name);
+    }
 
-	@Override
-	public ResourceLocation getRecordResource(String name) {
-		return new ResourceLocation("cpc:" + name);
-	}
+    @Override
+    public ResourceLocation getRecordResource(String name) {
+        return new ResourceLocation("cpc:" + name);
+    }
 }

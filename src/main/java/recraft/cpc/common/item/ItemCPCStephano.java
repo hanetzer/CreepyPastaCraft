@@ -9,26 +9,26 @@ import recraft.cpc.common.entity.projectile.EntityStephano;
 
 public class ItemCPCStephano extends Item {
 
-	public ItemCPCStephano() {
-		setMaxStackSize(8);
-		setMaxDamage(0);
-		setCreativeTab(CPC.tabCPC);
-		setUnlocalizedName("cpc:stephano");
-		setTextureName("cpc:stephano");
-	}
+    public ItemCPCStephano() {
+        setMaxStackSize(8);
+        setMaxDamage(0);
+        setCreativeTab(CPC.tabCPC);
+        setUnlocalizedName("cpc:stephano");
+        setTextureName("cpc:stephano");
+    }
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world,
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world,
                                       EntityPlayer player) {
-		if(!player.capabilities.isCreativeMode) {
-			--stack.stackSize;
-		}
+        if (!player.capabilities.isCreativeMode) {
+            --stack.stackSize;
+        }
 
-		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-		if(!world.isRemote) {
-			world.spawnEntityInWorld(new EntityStephano(world, player, 1));
-		}
-		return stack;
-	}
-	
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        if (!world.isRemote) {
+            world.spawnEntityInWorld(new EntityStephano(world, player, 1));
+        }
+        return stack;
+    }
+
 }

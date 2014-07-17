@@ -10,15 +10,15 @@ import recraft.cpc.common.entity.passive.EntityMutahar;
 
 @SideOnly(Side.CLIENT)
 public class RenderMutahar extends RenderLiving {
-	public RenderMutahar(ModelBase model, float par2) {
-		super(model, par2);
-	}
+    public RenderMutahar(ModelBase model, float par2) {
+        super(model, par2);
+    }
 
-	protected ResourceLocation getTexture(EntityMutahar entityMutahar) {
-		return new ResourceLocation("cpc:textures/entity/mutahar.png");
-	}
+    protected ResourceLocation getTexture(EntityMutahar entityMutahar) {
+        return new ResourceLocation("cpc:textures/entity/mutahar.png");
+    }
 
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return this.getTexture((EntityMutahar)entity);
-	}
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return this.getTexture((EntityMutahar) entity);
+    }
 }
