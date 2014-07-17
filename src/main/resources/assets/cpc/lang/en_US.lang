@@ -26,6 +26,7 @@ entity.cpc:jack.name=Eyeless Jack
 entity.cpc:slender.name=Slenderman
 entity.cpc:rake.name=The Rake
 entity.cpc:smile.name=Smile.dog
+entity.cpc:smile.say=Spread the word
 entity.cpc:moth.name=MothMan
 entity.cpc:squidward.name=Squidward
 entity.cpc:strider.name=The Strider
