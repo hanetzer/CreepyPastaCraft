@@ -26,69 +26,81 @@ public class PewDieRun extends EntityAIAvoidEntity {
 	public PewDieRun(EntityCreature creature, Class<?extends EntityMob> klazz,
                      double par3, double par4, double par5) {
 		super(creature, klazz, 1, par5, par5);
-		this.theEntity = creature;
-		this.targetEntityClass = klazz;
-		this.distanceFromEntity = par3;
-		this.farSpeed = par4;
-		this.nearSpeed = par5;
-		this.entityPathNavigate = creature.getNavigator();
-		this.setMutexBits(1);
+		theEntity = creature;
+		targetEntityClass = klazz;
+		distanceFromEntity = par3;
+		farSpeed = par4;
+		nearSpeed = par5;
+		entityPathNavigate = creature.getNavigator();
+		setMutexBits(1);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public boolean shouldExecute() {
-		if(this.targetEntityClass != EntityMob.class) {
-			if(this.theEntity instanceof EntityTameable && ((EntityTameable)this.theEntity).isTamed()) {
+		if(targetEntityClass != EntityMob.class) {
+			if(theEntity instanceof EntityTameable && ((EntityTameable)theEntity).isTamed()) {
 				return false;
 			}
 
-			this.closestLivingEntity = this.theEntity.worldObj.getClosestPlayerToEntity(this.theEntity, (double)this.distanceFromEntity);
-			if(this.closestLivingEntity == null) {
+			closestLivingEntity = theEntity.worldObj.getClosestPlayerToEntity(theEntity, distanceFromEntity);
+			if(closestLivingEntity == null) {
 				return false;
 			}
-		} else {
-			List var2 = this.theEntity.worldObj.getEntitiesWithinAABB(this.targetEntityClass, this.theEntity.boundingBox.expand((double)this.distanceFromEntity, 3.0D, (double)this.distanceFromEntity));
-			if(var2.isEmpty()) {
+		}
+        else {
+			List list = theEntity.worldObj.getEntitiesWithinAABB(targetEntityClass,
+                    theEntity.boundingBox.expand(distanceFromEntity, 3.0D, distanceFromEntity));
+			if(list.isEmpty()) {
 				return false;
 			}
 
-			this.closestLivingEntity = (Entity)var2.get(0);
+			closestLivingEntity = (Entity)list.get(0);
 		}
 
-		if(!this.theEntity.getEntitySenses().canSee(this.closestLivingEntity)) {
+		if(!theEntity.getEntitySenses().canSee(closestLivingEntity)) {
 			return false;
-		} else {
-			Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(this.theEntity, 16, 7, Vec3.createVectorHelper(this.closestLivingEntity.posX, this.closestLivingEntity.posY, this.closestLivingEntity.posZ));
+		}
+        else {
+			Vec3 vec3 = RandomPositionGenerator.findRandomTargetBlockAwayFrom(theEntity,
+                    16, 7, Vec3.createVectorHelper(
+                            closestLivingEntity.posX,
+                            closestLivingEntity.posY,
+                            closestLivingEntity.posZ)
+            );
 			if(vec3 == null) {
 				return false;
-			} else if(this.closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < this.closestLivingEntity.getDistanceSqToEntity(this.theEntity)) {
+			}
+            else if(closestLivingEntity.getDistanceSq(vec3.xCoord, vec3.yCoord, vec3.zCoord) < closestLivingEntity.getDistanceSqToEntity(theEntity)) {
 				return false;
-			} else {
-				this.entityPathEntity = this.entityPathNavigate.getPathToXYZ(vec3.xCoord, vec3.yCoord, vec3.zCoord);
-				return this.entityPathEntity != null && this.entityPathEntity.isDestinationSame(vec3);
+			}
+            else {
+				entityPathEntity = entityPathNavigate.getPathToXYZ(
+                        vec3.xCoord, vec3.yCoord, vec3.zCoord);
+				return entityPathEntity != null && entityPathEntity.isDestinationSame(vec3);
 			}
 		}
 	}
 
 	public boolean continueExecuting() {
-		return !this.entityPathNavigate.noPath();
+		return !entityPathNavigate.noPath();
 	}
 
 	public void startExecuting() {
-		this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
-		this.theEntity.worldObj.playSoundAtEntity(this.theEntity, "cpc:mob.pewds.scare", 1.0F, 1.0F);
+		entityPathNavigate.setPath(entityPathEntity, farSpeed);
+		theEntity.worldObj.playSoundAtEntity(theEntity, "cpc:mob.pewds.scare", 1.0F, 1.0F);
 	}
 
 	public void resetTask() {
-		this.closestLivingEntity = null;
+		closestLivingEntity = null;
 	}
 
 	public void updateTask() {
-		if(this.theEntity.getDistanceSqToEntity(this.closestLivingEntity) < 49.0D) {
+		if(theEntity.getDistanceSqToEntity(closestLivingEntity) < 49.0D) {
 			new Random();
-			this.theEntity.getNavigator().setSpeed(this.nearSpeed);
-		} else {
-			this.theEntity.getNavigator().setSpeed(this.farSpeed);
+			theEntity.getNavigator().setSpeed(nearSpeed);
+		}
+        else {
+			theEntity.getNavigator().setSpeed(farSpeed);
 		}
 	}
 }
