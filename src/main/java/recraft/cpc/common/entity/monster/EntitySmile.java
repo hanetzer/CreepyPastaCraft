@@ -26,9 +26,8 @@ public class EntitySmile extends CPEntity {
 	public ItemStack itemstack;
 
 
-	public EntitySmile(World par1World)
-	{
-		super(par1World);
+	public EntitySmile(World world) {
+		super(world);
 		this.setSize(0.6F, 0.8F);
 		this.stepHeight = 1.0F;
 		this.getNavigator().setAvoidsWater(true);
@@ -39,8 +38,7 @@ public class EntitySmile extends CPEntity {
 		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 	}
 
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
@@ -54,24 +52,20 @@ public class EntitySmile extends CPEntity {
 	/**
 	 * Determines whether this wolf is angry or not.
 	 */
-	public boolean isAngry()
-	{
+	public boolean isAngry() {
 		return (this.dataWatcher.getWatchableObjectByte(16) & 2) != 0;
 	}
 
 	/**
 	 * Sets whether this wolf is angry or not.
 	 */
-	public void setAngry(boolean par1)
-	{
+	public void setAngry(boolean par1) {
 		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
 
-		if (par1)
-		{
+		if (par1) {
 			this.dataWatcher.updateObject(16, (byte) (b0 | 2));
 		}
-		else
-		{
+        else {
 			this.dataWatcher.updateObject(16, (byte) (b0 & -3));
 		}
 	}
@@ -84,19 +78,17 @@ public class EntitySmile extends CPEntity {
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setBoolean("Angry", this.isAngry());
+	public void writeEntityToNBT(NBTTagCompound compound) {
+		super.writeEntityToNBT(compound);
+		compound.setBoolean("Angry", this.isAngry());
 	}
 
 	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-	{
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.setAngry(par1NBTTagCompound.getBoolean("Angry"));
+	public void readEntityFromNBT(NBTTagCompound compound) {
+		super.readEntityFromNBT(compound);
+		this.setAngry(compound.getBoolean("Angry"));
 	}
 
 	protected boolean canDespawn() {
@@ -120,44 +112,57 @@ public class EntitySmile extends CPEntity {
 	}
 
 	protected Entity findPlayerToAttack() {
-		EntityPlayer entityplayer = super.worldObj.getClosestVulnerablePlayerToEntity(this, 64.0D);
-		if(entityplayer != null) {
+		EntityPlayer player = super.worldObj.getClosestVulnerablePlayerToEntity(this, 64.0D);
+		if(player != null) {
 			Minecraft mc = Minecraft.getMinecraft();
-			if(this.shouldAttackPlayer(entityplayer) && mc.playerController.isNotCreative()) {
-				if(this.field_35185_e++ == 5) {
-					this.field_35185_e = 0;
-					return entityplayer;
-				}
+            if (this.shouldAttackPlayer(player)) {
+                if (mc.playerController.isNotCreative()) {
+                    if (this.field_35185_e++ == 5) {
+                        this.field_35185_e = 0;
+                        return player;
+                    }
 
-				mc.thePlayer.addChatMessage(new ChatComponentText("Spread The Word."));
-				this.isAngry = true;
-				entityplayer.addPotionEffect(new PotionEffect(Potion.blindness.id, 700, 50));
-				entityplayer.addPotionEffect(new PotionEffect(Potion.confusion.id, 250, 50));
-				entityplayer.addPotionEffect(new PotionEffect(Potion.harm.id, 1, 1));
-				entityplayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 80, 2));
-			} else {
-				this.field_35185_e = 0;
-			}
+                    mc.thePlayer.addChatMessage(new ChatComponentText("Spread The Word."));
+                    this.isAngry = true;
+                    player.addPotionEffect(new PotionEffect(Potion.blindness.id, 700, 50));
+                    player.addPotionEffect(new PotionEffect(Potion.confusion.id, 250, 50));
+                    player.addPotionEffect(new PotionEffect(Potion.harm.id, 1, 1));
+                    player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 80, 2));
+                }
+                else {
+                    this.field_35185_e = 0;
+                }
+            }
+            else {
+                this.field_35185_e = 0;
+            }
 		}
 
 		return null;
 	}
 
-	private boolean shouldAttackPlayer(EntityPlayer par1EntityPlayer) {
-		if(par1EntityPlayer != null) {
-			Vec3 vec3d = par1EntityPlayer.getLook(1.0F).normalize();
-			Vec3 vec3d1 = Vec3.createVectorHelper(super.posX - par1EntityPlayer.posX, super.boundingBox.minY + (double)(super.height / 2.0F) - (par1EntityPlayer.posY + (double)par1EntityPlayer.getEyeHeight()), super.posZ - par1EntityPlayer.posZ);
+	private boolean shouldAttackPlayer(EntityPlayer player) {
+		if(player != null) {
+			Vec3 vec3d = player.getLook(1.0F).normalize();
+			Vec3 vec3d1 = Vec3.createVectorHelper(super.posX - player.posX, super.boundingBox.minY + (double)(super.height / 2.0F) - (player.posY + (double)player.getEyeHeight()), super.posZ - player.posZ);
 			double d = vec3d1.lengthVector();
 			vec3d1 = vec3d1.normalize();
 			double d1 = vec3d.dotProduct(vec3d1);
 			Minecraft mc = Minecraft.getMinecraft();
-			if(d1 > 1.0D - 0.025D / d && mc.playerController.isNotCreative()) {
-				this.isAngry = true;
-				return par1EntityPlayer.canEntityBeSeen(this);
-			} else {
-				return false;
-			}
-		} else {
+            if (d1 > 1.0D - 0.025D / d) {
+                if (mc.playerController.isNotCreative()) {
+                    this.isAngry = true;
+                    return player.canEntityBeSeen(this);
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+		}
+        else {
 			return false;
 		}
 	}
@@ -193,9 +198,7 @@ public class EntitySmile extends CPEntity {
 				super.moveStrafing = super.moveForward = 0.0F;
 				super.moveSpeed = 0.0F;
 			}
-
 			super.onLivingUpdate();
 		}
-
 	}
 }

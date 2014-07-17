@@ -13,8 +13,7 @@ import net.minecraft.util.Vec3;
 import java.util.List;
 import java.util.Random;
 
-public class PewDieRun extends EntityAIAvoidEntity
-{
+public class PewDieRun extends EntityAIAvoidEntity {
 	private EntityCreature theEntity;
 	private double farSpeed;
 	private double nearSpeed;
@@ -24,15 +23,15 @@ public class PewDieRun extends EntityAIAvoidEntity
 	private PathNavigate entityPathNavigate;
 	private Class<?extends EntityMob> targetEntityClass;
 
-	public PewDieRun(EntityCreature par1EntityCreature, Class<?extends EntityMob> par2Class, double par3, double par4, double par5)
-	{
-		super(par1EntityCreature, par2Class, 1, par5, par5);
-		this.theEntity = par1EntityCreature;
-		this.targetEntityClass = par2Class;
+	public PewDieRun(EntityCreature creature, Class<?extends EntityMob> klazz,
+                     double par3, double par4, double par5) {
+		super(creature, klazz, 1, par5, par5);
+		this.theEntity = creature;
+		this.targetEntityClass = klazz;
 		this.distanceFromEntity = par3;
 		this.farSpeed = par4;
 		this.nearSpeed = par5;
-		this.entityPathNavigate = par1EntityCreature.getNavigator();
+		this.entityPathNavigate = creature.getNavigator();
 		this.setMutexBits(1);
 	}
 
@@ -91,6 +90,5 @@ public class PewDieRun extends EntityAIAvoidEntity
 		} else {
 			this.theEntity.getNavigator().setSpeed(this.farSpeed);
 		}
-
 	}
 }

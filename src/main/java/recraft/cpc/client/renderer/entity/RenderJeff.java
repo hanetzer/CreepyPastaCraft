@@ -9,21 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.monster.EntityJeff;
 
 @SideOnly(Side.CLIENT)
-public class RenderJeff extends RenderLiving
-{
-	public RenderJeff(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderJeff extends RenderLiving {
+	public RenderJeff(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityJeff par1EntityJeff)
-	{
+	protected ResourceLocation getTexture(EntityJeff entityJeff) {
 		return new ResourceLocation("cpc:textures/entity/jeff.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityJeff)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityJeff)entity);
 	}
-
 }

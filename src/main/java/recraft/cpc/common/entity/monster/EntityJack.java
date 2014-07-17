@@ -18,7 +18,6 @@ import recraft.cpc.common.entity.passive.EntityCry;
 import recraft.cpc.common.entity.passive.EntityPewds;
 
 public class EntityJack extends CPEntity {
-
 	public boolean isAttacking;
 	public static int sleepDelay;
 	public static boolean wasPlayerSleeping;
@@ -54,19 +53,18 @@ public class EntityJack extends CPEntity {
 				return true;
 			}
 		}
-
 		return false;
 	}
 
-	public boolean attackEntityAsMob(Entity par1Entity)
-	{
-		boolean flag = super.attackEntityAsMob(par1Entity);
-
-		if (flag && this.getHeldItem() == null && this.rand.nextFloat() < (float)this.worldObj.difficultySetting.getDifficultyId() * 0.3F)
-		{
-			par1Entity.setFire(2 * this.worldObj.difficultySetting.getDifficultyId());
-		}
-
+	public boolean attackEntityAsMob(Entity entity) {
+		boolean flag = super.attackEntityAsMob(entity);
+        if (flag) {
+            if (this.getHeldItem() == null) {
+                if (this.rand.nextFloat() < (float) this.worldObj.difficultySetting.getDifficultyId() * 0.3F) {
+                    entity.setFire(2 * this.worldObj.difficultySetting.getDifficultyId());
+                }
+            }
+        }
 		return flag;
 	}
 
@@ -82,34 +80,34 @@ public class EntityJack extends CPEntity {
 	}
 
 	protected Entity findPlayerToAttack() {
-		EntityPlayer entityplayer = super.worldObj.getClosestVulnerablePlayerToEntity(this, 64.0D);
-		if(entityplayer != null) {
+		EntityPlayer player = super.worldObj.getClosestVulnerablePlayerToEntity(this, 64.0D);
+		if(player != null) {
 			Minecraft mc = Minecraft.getMinecraft();
-			if(this.shouldAttackPlayer(entityplayer) && mc.playerController.isNotCreative()) {
+			if(this.shouldAttackPlayer(player) && mc.playerController.isNotCreative()) {
 				if(this.field_35185_e++ == 5) {
 					this.field_35185_e = 0;
-					return entityplayer;
+					return player;
 				}
-
-				this.teleportToEntity(entityplayer);
-			} else {
+				this.teleportToEntity(player);
+			}
+            else {
 				this.field_35185_e = 0;
 			}
 		}
-
 		return null;
 	}
 
-	private boolean shouldAttackPlayer(EntityPlayer par1EntityPlayer) {
-		if(par1EntityPlayer != null) {
-			Vec3 vec3d = par1EntityPlayer.getLook(1.0F).normalize();
-			Vec3 vec3d1 = Vec3.createVectorHelper(super.posX - par1EntityPlayer.posX, super.boundingBox.minY + (double)(super.height / 2.0F) - (par1EntityPlayer.posY + (double)par1EntityPlayer.getEyeHeight()), super.posZ - par1EntityPlayer.posZ);
+	private boolean shouldAttackPlayer(EntityPlayer player) {
+		if(player != null) {
+			Vec3 vec3d = player.getLook(1.0F).normalize();
+			Vec3 vec3d1 = Vec3.createVectorHelper(super.posX - player.posX, super.boundingBox.minY + (double)(super.height / 2.0F) - (player.posY + (double)player.getEyeHeight()), super.posZ - player.posZ);
 			double d = vec3d1.lengthVector();
 			vec3d1 = vec3d1.normalize();
 			double d1 = vec3d.dotProduct(vec3d1);
 			Minecraft mc = Minecraft.getMinecraft();
-			return d1 > 1.0D - 0.025D / d && mc.playerController.isNotCreative() && par1EntityPlayer.canEntityBeSeen(this);
-		} else {
+			return d1 > 1.0D - 0.025D / d && mc.playerController.isNotCreative() && player.canEntityBeSeen(this);
+		}
+        else {
 			return false;
 		}
 	}
@@ -141,28 +139,33 @@ public class EntityJack extends CPEntity {
 			this.faceEntity(super.entityToAttack, 100.0F, 100.0F);
 		}
 
-		if(!super.worldObj.isRemote && this.isEntityAlive() && super.entityToAttack != null && super.entityToAttack instanceof EntityPlayer && this.shouldAttackPlayer((EntityPlayer)super.entityToAttack)) {
-			super.moveStrafing = super.moveForward = 0.0F;
-		}
-
+        if (!super.worldObj.isRemote) {
+            if (this.isEntityAlive()) {
+                if (super.entityToAttack != null) {
+                    if (super.entityToAttack instanceof EntityPlayer) {
+                        if (this.shouldAttackPlayer((EntityPlayer) super.entityToAttack)) {
+                            super.moveStrafing = super.moveForward = 0.0F;
+                        }
+                    }
+                }
+            }
+        }
 		super.onLivingUpdate();
 	}
 
-	protected boolean teleportToEntity(Entity par1Entity)
-	{
-		Vec3 vec3 = Vec3.createVectorHelper(this.posX - par1Entity.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - par1Entity.posY + (double)par1Entity.getEyeHeight(), this.posZ - par1Entity.posZ);
+	protected boolean teleportToEntity(Entity entity) {
+		Vec3 vec3 = Vec3.createVectorHelper(this.posX - entity.posX, this.boundingBox.minY + (double)(this.height / 2.0F) - entity.posY + (double)entity.getEyeHeight(), this.posZ - entity.posZ);
 		vec3 = vec3.normalize();
 		double d0 = 16.0D;
-		double d1 = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.xCoord * d0;
-		double d2 = this.posY + (double)(this.rand.nextInt(16) - 8) - vec3.yCoord * d0;
-		double d3 = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.zCoord * d0;
-		return this.teleportTo(d1, d2, d3);
+		double x = this.posX + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.xCoord * d0;
+		double y = this.posY + (double)(this.rand.nextInt(16) - 8) - vec3.yCoord * d0;
+		double z = this.posZ + (this.rand.nextDouble() - 0.5D) * 8.0D - vec3.zCoord * d0;
+		return this.teleportTo(x, y, z);
 	}
 
-	protected boolean teleportTo(double p_70825_1_, double p_70825_3_, double p_70825_5_)
-	{
-		EnderTeleportEvent event = new EnderTeleportEvent(this, p_70825_1_, p_70825_3_, p_70825_5_, 0);
-		if (MinecraftForge.EVENT_BUS.post(event)){
+	protected boolean teleportTo(double x, double y, double z) {
+		EnderTeleportEvent event = new EnderTeleportEvent(this, x, y, z, 0);
+		if (MinecraftForge.EVENT_BUS.post(event)) {
 			return false;
 		}
 		double d3 = this.posX;
@@ -180,43 +183,35 @@ public class EntityJack extends CPEntity {
 		{
 			boolean flag1 = false;
 
-			while (!flag1 && j > 0)
-			{
+			while (!flag1 && j > 0) {
 				Block block = this.worldObj.getBlock(i, j - 1, k);
 
-				if (block.getMaterial().blocksMovement())
-				{
+				if (block.getMaterial().blocksMovement()) {
 					flag1 = true;
 				}
-				else
-				{
+				else {
 					--this.posY;
 					--j;
 				}
 			}
 
-			if (flag1)
-			{
+			if (flag1) {
 				this.setPosition(this.posX, this.posY, this.posZ);
 
-				if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox))
-				{
+				if (this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(this.boundingBox)) {
 					flag = true;
 				}
 			}
 		}
 
-		if (!flag)
-		{
+		if (!flag) {
 			this.setPosition(d3, d4, d5);
 			return false;
 		}
-		else
-		{
+		else {
 			short short1 = 128;
 
-			for (int l = 0; l < short1; ++l)
-			{
+			for (int l = 0; l < short1; ++l) {
 				double d6 = (double)l / ((double)short1 - 1.0D);
 				float f = (this.rand.nextFloat() - 0.5F) * 0.2F;
 				float f1 = (this.rand.nextFloat() - 0.5F) * 0.2F;
@@ -233,7 +228,7 @@ public class EntityJack extends CPEntity {
 		}
 	}
 
-	public void onKillEntity(EntityLiving par1EntityLiving) {}
+	public void onKillEntity(EntityLiving entityLiving) {}
 
 	protected int getDropItemId() {
 		return 0;

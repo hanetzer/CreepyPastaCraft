@@ -1,11 +1,11 @@
 package recraft.cpc.common.item;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.StatCollector;
 import recraft.cpc.CPC;
 
 import java.util.List;
@@ -19,7 +19,8 @@ public class ItemCPCKnife extends ItemSword {
 		this.setCreativeTab(CPC.tabCPC);
 	}
 
-	public boolean getIsRepairable(ItemStack itemToRepair, ItemStack itemToRepairWith) {
+	public boolean getIsRepairable(ItemStack itemToRepair,
+                                   ItemStack itemToRepairWith) {
 		return false;
 	}
 
@@ -46,8 +47,9 @@ public class ItemCPCKnife extends ItemSword {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-		list.add(StatCollector.translateToLocal(super.getUnlocalizedName()+".desc"));
+	public void addInformation(ItemStack itemStack, EntityPlayer player,
+                               List list, boolean par4) {
+		list.add(I18n.format(super.getUnlocalizedName() + ".desc"));
 	}
 
 }

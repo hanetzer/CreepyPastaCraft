@@ -9,20 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.passive.EntityStrider;
 
 @SideOnly(Side.CLIENT)
-public class RenderStrider extends RenderLiving
-{
-	public RenderStrider(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderStrider extends RenderLiving {
+	public RenderStrider(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityStrider par1EntityStrider)
-	{
+	protected ResourceLocation getTexture(EntityStrider entityStrider) {
 		return new ResourceLocation("cpc:textures/entity/strider.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityStrider)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityStrider)entity);
 	}
 }

@@ -8,11 +8,11 @@ import recraft.cpc.client.gui.inventory.GuiLaptop;
 import recraft.cpc.common.inventory.ContainerLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
-public class CPCLaptopGuiHandler implements IGuiHandler
-{
-	//returns an instance of the Container you made earlier
+public class CPCLaptopGuiHandler implements IGuiHandler {
+
 	@Override
-	public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getServerGuiElement(int id, EntityPlayer player,
+                                      World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityLaptop) {
 			return new ContainerLaptop(player.inventory, (TileEntityLaptop) tileEntity);
@@ -20,9 +20,9 @@ public class CPCLaptopGuiHandler implements IGuiHandler
 		return null;
 	}
 
-	//returns an instance of the Gui you made earlier
 	@Override
-	public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+	public Object getClientGuiElement(int id, EntityPlayer player,
+                                      World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if(tileEntity instanceof TileEntityLaptop) {
 			return new GuiLaptop(player.inventory, (TileEntityLaptop) tileEntity);

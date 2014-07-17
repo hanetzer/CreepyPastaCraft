@@ -9,22 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.monster.EntityJack;
 
 @SideOnly(Side.CLIENT)
-public class RenderJack extends RenderLiving
-{
-	public RenderJack(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderJack extends RenderLiving {
+	public RenderJack(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityJack par1EntityJack)
-	{
+	protected ResourceLocation getTexture(EntityJack entityJack) {
 		return new ResourceLocation("cpc:textures/entity/jack.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityJack)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityJack)entity);
 	}
-
 }
-

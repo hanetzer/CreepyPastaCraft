@@ -5,57 +5,57 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 import recraft.cpc.client.model.ModelLaptop;
 import recraft.cpc.common.tileentity.TileEntityLaptop;
 
+import static org.lwjgl.opengl.GL11.*;
+
 @SideOnly(Side.CLIENT)
 public class TileEntityLaptopRenderer extends TileEntitySpecialRenderer {
+	private ModelLaptop model = new ModelLaptop();
 
-	private ModelLaptop laptopModel = new ModelLaptop();
-
-	public void renderLaptop(TileEntityLaptop par1TileEntityLaptop, double x, double y, double z, float par8) {
+	public void renderLaptop(TileEntityLaptop laptop,
+                             double x, double y, double z, float par5) {
 		int i = 0;
-
-		if (par1TileEntityLaptop.hasWorldObj())	{
-			i = par1TileEntityLaptop.getBlockMetadata();
+		if (laptop.hasWorldObj()) {
+			i = laptop.getBlockMetadata();
 		}
 
-		GL11.glPushMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-		GL11.glScalef(1.0F, -1.0F, -1.0F);
+		glPushMatrix();
+		glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		glScalef(1.0F, -1.0F, -1.0F);
 		bindTexture(new ResourceLocation("cpc:textures/entity/laptop.png"));
-		short short1 = 0;
-				if (i == 2)
-		{
-			short1 = 180;
-		}
+		short short1;
+        switch (i) {
+            case 2:
+                short1 = 180;
+                break;
+            case 3:
+                short1 = 0;
+                break;
+            case 4:
+                short1 = 90;
+                break;
+            case 5:
+                short1 = -90;
+                break;
+            default:
+                short1 = 0;
+        }
 
-		if (i == 3) {
-			short1 = 0;
-		}
-
-		if (i == 4) {
-			short1 = 90;
-		}
-
-		if (i == 5) {
-			short1 = -90;
-		}
-		GL11.glRotatef((float) short1, 0.0F, 1.0F, 0.0F);
-		float f1 = par1TileEntityLaptop.prevLidAngle + (par1TileEntityLaptop.lidAngle - par1TileEntityLaptop.prevLidAngle) * par8;
+		glRotatef((float) short1, 0.0F, 1.0F, 0.0F);
+		float f1 = laptop.prevLidAngle + (laptop.lidAngle - laptop.prevLidAngle) * par5;
 		f1 = 1.0F - f1;
 		f1 = 1.0F - f1 * f1 * f1;
-		this.laptopModel.base.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
-		this.laptopModel.renderAll();
-		GL11.glPopMatrix();
+		model.base.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
+		model.renderAll();
+		glPopMatrix();
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
-	{
-		this.renderLaptop((TileEntityLaptop) par1TileEntity, par2, par4, par6, par8);
+	public void renderTileEntityAt(TileEntity tileEntity,
+                                   double x, double y, double z, float par5) {
+		renderLaptop((TileEntityLaptop) tileEntity, x, y, z, par5);
 	}
 }
-

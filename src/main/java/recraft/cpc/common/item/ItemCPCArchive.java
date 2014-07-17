@@ -21,7 +21,7 @@ import recraft.cpc.CPC;
 import recraft.cpc.api.registry.PastaRegistry;
 
 import java.util.List;
-
+@SuppressWarnings("unchecked")
 public class ItemCPCArchive extends Item {
 
 	public ItemCPCArchive() {

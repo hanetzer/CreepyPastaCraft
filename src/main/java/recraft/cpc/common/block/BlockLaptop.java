@@ -24,7 +24,7 @@ public class BlockLaptop extends BlockContainer {
 		setBlockName("cpc:laptop");
 	}
 
-	public Item getBlockDropped(int par1, Random par2Random, int par3) {
+	public Item getBlockDropped(int par1, Random random, int par3) {
 		return Item.getItemFromBlock(CPCBlocks.laptop);
 	}
 
@@ -44,9 +44,9 @@ public class BlockLaptop extends BlockContainer {
 		return false;
 	}
 
-	public void breakBlock(World par1world, int par2, int par3, int par4, Block par5Block, int par6) {
-		par1world.func_147453_f(par2, par3, par4, par5Block);
-		super.breakBlock(par1world, par2, par3, par4, par5Block, par6);
+	public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+		world.func_147453_f(x, y, z, block);
+		super.breakBlock(world, x, y, z, block, par6);
 	}
 
 	public boolean onBlockActivated(World world, int x, int y, int z,
@@ -61,29 +61,29 @@ public class BlockLaptop extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World par1, int par2) {
+	public TileEntity createNewTileEntity(World world, int par2) {
 		return new TileEntityLaptop();
 	}
 
-	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+                                EntityLivingBase entity, ItemStack stack) {
 		byte b0 = 0;
-		int l = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+		int l = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (l == 0) {
-			b0 = 2;
-		}
-
-		if (l == 1) {
-			b0 = 5;
-		}
-
-		if (l == 2) {
-			b0 = 3;
-		}
-
-		if (l == 3) {
-			b0 = 4;
-		}
-		par1World.setBlockMetadataWithNotify(par2, par3, par4, b0, 2);
+        switch (l) {
+            case 0:
+                b0 = 2;
+                break;
+            case 1:
+                b0 = 5;
+                break;
+            case 2:
+                b0 = 3;
+                break;
+            case 3:
+                b0 = 4;
+                break;
+        }
+		world.setBlockMetadataWithNotify(x, y, z, b0, 2);
 	}
 }

@@ -10,11 +10,9 @@ import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import recraft.cpc.common.entity.ai.ChildHunt;
 
-public class EntitySeed extends EntityMob
-{
-	public EntitySeed(World par1World)
-	{
-		super(par1World);
+public class EntitySeed extends EntityMob {
+	public EntitySeed(World world) {
+		super(world);
 		isImmuneToFire = true;
 		getNavigator().setBreakDoors(true);
 		tasks.addTask(0, new EntityAISwimming(this));
@@ -30,8 +28,8 @@ public class EntitySeed extends EntityMob
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, true));
 	}
-	protected void applyEntityAttributes()
-	{
+
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(7.0D);
@@ -39,13 +37,11 @@ public class EntitySeed extends EntityMob
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
-	protected boolean isAIEnabled()
-	{
+	protected boolean isAIEnabled() {
 		return true;
 	}
 
-	public void onLivingUpdate()
-	{
+	public void onLivingUpdate() {
 		super.onLivingUpdate();
 	}
 

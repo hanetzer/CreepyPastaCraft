@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 import recraft.cpc.CPC;
 import recraft.cpc.common.entity.projectile.EntityStephano;
 
-public class ItemCPCStephano extends Item
-{
+public class ItemCPCStephano extends Item {
+
 	public ItemCPCStephano() {
 		setMaxStackSize(8);
 		setMaxDamage(0);
@@ -18,18 +18,17 @@ public class ItemCPCStephano extends Item
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World par2World, EntityPlayer par3EntityPlayer) {
-		if(!par3EntityPlayer.capabilities.isCreativeMode)
-		{
-			--itemStack.stackSize;
+	public ItemStack onItemRightClick(ItemStack stack, World world,
+                                      EntityPlayer player) {
+		if(!player.capabilities.isCreativeMode) {
+			--stack.stackSize;
 		}
 
-		par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-		if(!par2World.isRemote)
-		{
-			par2World.spawnEntityInWorld(new EntityStephano(par2World, par3EntityPlayer, 1));
+		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		if(!world.isRemote) {
+			world.spawnEntityInWorld(new EntityStephano(world, player, 1));
 		}
-		return itemStack;
+		return stack;
 	}
 	
 }

@@ -9,21 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.passive.EntityPewds;
 
 @SideOnly(Side.CLIENT)
-public class RenderPewds extends RenderLiving
-{
-	public RenderPewds(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderPewds extends RenderLiving {
+	public RenderPewds(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityPewds par1EntityPewds)
-	{
+	protected ResourceLocation getTexture(EntityPewds entityPewds) {
 		return new ResourceLocation("cpc:textures/entity/pewds.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityPewds)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityPewds)entity);
 	}
-
 }

@@ -17,37 +17,44 @@ import java.util.*;
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 public class PastaRegistry {
 	private static final Logger logger = LogManager.getLogger();
-	public static Map pastaListStringClass = new HashMap();
-	public static Map pastaListClassString = new HashMap();
-	public static Map pastaListIDClass     = new HashMap();
-	public static Map pastaListClassID     = new HashMap();
-	public static Map pastaListStringID    = new HashMap();
-	public static HashMap pastaList        = new LinkedHashMap();
+	public static Map stringToClass = new HashMap();
+	public static Map classToString = new HashMap();
+	public static Map idToClass     = new HashMap();
+	public static Map classToId     = new HashMap();
+	public static Map stringToID    = new HashMap();
+	public static HashMap pastaList = new LinkedHashMap();
 
-	public static void registerPasta(Class pastaClass, String pastaName, int pastaID) {
-		if (pastaListStringClass.containsKey(pastaName)) {
-			throw new IllegalArgumentException("ID is already registered: " + pastaName);
+	public static void registerPasta(Class klazz, String name, int ID) {
+		if (stringToClass.containsKey(name)) {
+			throw new IllegalArgumentException("ID is already registered: " + name);
 		}
-		else if (pastaListIDClass.containsKey(pastaID)) {
-			throw new IllegalArgumentException("ID is already registered: " + pastaID);
+		else if (idToClass.containsKey(ID)) {
+			throw new IllegalArgumentException("ID is already registered: " + ID);
 		}
 		else {
-			pastaListStringClass.put(pastaName, pastaClass);
-			pastaListClassString.put(pastaClass, pastaName);
-			pastaListIDClass.put(pastaID, pastaClass);
-			pastaListClassID.put(pastaClass, pastaID);
-			pastaListStringID.put(pastaName, pastaID);
-			pastaList.put(pastaID, new PastaInfo(pastaID));
+			stringToClass.put(name, klazz);
+			classToString.put(klazz, name);
+			idToClass.put(ID, klazz);
+			classToId.put(klazz, ID);
+			stringToID.put(name, ID);
+			pastaList.put(ID, new PastaInfo(ID));
 		}
 	}
 
-	public static Entity createEntityByName(String par1PastaName, World par2World) {
+    public static int randInt(int min, int max) {
+        Random rand = new Random();
+        return rand.nextInt((max - min) + 1) + min;
+    }
+
+	public static Entity createEntityByName(String name, World world) {
 		Entity pasta = null;
 		try {
-			Class klazz = (Class) pastaListStringClass.get(par1PastaName);
+			Class klazz = (Class) stringToClass.get(name);
 
 			if (klazz != null) {
-				pasta = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(par1PastaName);
+				pasta = (Entity)klazz.getConstructor(new Class[] {
+                        World.class
+                }).newInstance(name);
 			}
 		}
 		catch (Exception exception) {
@@ -57,22 +64,24 @@ public class PastaRegistry {
 		return pasta;
 	}
 
-	public static Entity createEntityByID(int par1PastaID, World par2World) {
+	public static Entity createEntityByID(int ID, World world) {
 		Entity entity = null;
 
 		try {
-			Class klazz = getClassFromID(par1PastaID);
+			Class klazz = getClassFromID(ID);
 
 			if (klazz != null) {
-				entity = (Entity)klazz.getConstructor(new Class[] {World.class}).newInstance(par2World);
-			}
+                entity = (Entity) klazz.getConstructor(new Class[] {
+                        World.class
+                }).newInstance(world);
+            }
 		}
 		catch (Exception exception) {
 			exception.printStackTrace();
 		}
 
 		if (entity == null) {
-			logger.warn("Skipping Entity with id " + par1PastaID);
+			logger.warn("Skipping Entity with id " + ID);
 		}
 		return entity;
 	}
@@ -82,22 +91,26 @@ public class PastaRegistry {
 	 */
 	public static int getEntityID(Entity entity) {
 		Class klazz = entity.getClass();
-		return pastaListClassID.containsKey(klazz) ? ((Integer)pastaListClassID.get(klazz)) : 0;
+        if (classToId.containsKey(klazz)) {
+            return ((Integer) classToId.get(klazz));
+        }
+        else {
+            return 0;
+        }
 	}
 
 	/**
 	 * Return the class assigned to this entity ID.
 	 */
-	public static Class getClassFromID(int entityID)
-	{
-		return (Class)pastaListIDClass.get(entityID);
+	public static Class getClassFromID(int ID) {
+		return (Class) idToClass.get(ID);
 	}
 
 	/**
 	 * Gets the string representation of a specific entity.
 	 */
 	public static String getEntityString(Entity entity) {
-		return (String)pastaListClassString.get(entity.getClass());
+		return (String) classToString.get(entity.getClass());
 	}
 
 	/**
@@ -105,44 +118,51 @@ public class PastaRegistry {
 	 */
 	public static String getStringFromID(int entityID) {
 		Class klazz = getClassFromID(entityID);
-		return klazz != null ? (String)pastaListClassString.get(klazz) : null;
+        if (klazz != null) {
+            return (String) classToString.get(klazz);
+        }
+        else {
+            return null;
+        }
 	}
 
 	public static void func_151514_a() {}
 
-	public static Set func_151515_b()
-	{
-		return Collections.unmodifiableSet(pastaListStringID.keySet());
+	public static Set func_151515_b() {
+		return Collections.unmodifiableSet(stringToID.keySet());
 	}
 
 	public static void init() {
-		registerPasta(EntityJeff.class,      "cpc:jeff",     0);
-		registerPasta(EntityJane.class,      "cpc:jane",     1);
-		registerPasta(EntityJack.class,      "cpc:jack",     2);
-		registerPasta(EntityRake.class,      "cpc:rake",     3);
-		registerPasta(EntitySmile.class,     "cpc:smile",    4);
-		registerPasta(EntitySeed.class,      "cpc:seed",     5);
-		registerPasta(EntityMothman.class,   "cpc:moth",     6);
-		registerPasta(EntitySquidward.class, "cpc:squidward",7);
-		registerPasta(EntityStrider.class,   "cpc:strider",  8);
+		registerPasta(EntityJeff.class,      "cpc:jeff",     1);
+		registerPasta(EntityJane.class,      "cpc:jane",     2);
+		registerPasta(EntityJack.class,      "cpc:jack",     3);
+		registerPasta(EntityRake.class,      "cpc:rake",     4);
+		registerPasta(EntitySmile.class,     "cpc:smile",    5);
+		registerPasta(EntitySeed.class,      "cpc:seed",     6);
+		registerPasta(EntityMothman.class,   "cpc:moth",     7);
+		registerPasta(EntitySquidward.class, "cpc:squidward",8);
+		registerPasta(EntityStrider.class,   "cpc:strider",  9);
 	}
 
 	public static class PastaInfo {
 		public final int spawnedID;
-		public PastaInfo(int par1int) {
-			this.spawnedID = par1int;
+		public PastaInfo(int ID) {
+			this.spawnedID = ID;
 		}
 	}
 
-	public static ItemStack getPrintingResult(ItemStack itemStack) {
+	public static ItemStack getPrinting(ItemStack itemStack) {
 		ItemStack result = null;
+        int rand = randInt(0, stringToID.size() + 1);
 		if (itemStack.getItem() == Items.paper) {
-			if (new Random().nextInt(100) < 5) {
-				result = new ItemStack(CPCItems.smileJpg);
-			} else {
-				int randMax = pastaListStringID.size();
-				result = new ItemStack(CPCItems.archive, 1, (new Random().nextInt(randMax)));
-			}
+            switch(rand) {
+                case 0:
+                    result = new ItemStack(CPCItems.smileJpg);
+                    break;
+                default:
+                    result = new ItemStack(CPCItems.archive, 1, rand);
+                    break;
+            }
 		}
 		return result;
 	}

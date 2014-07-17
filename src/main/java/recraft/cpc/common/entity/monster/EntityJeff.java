@@ -25,9 +25,8 @@ public class EntityJeff extends EntityMob implements IMob
 	private boolean Said;
 	public boolean isAttacking;
 
-	public EntityJeff(World par1World)
-	{
-		super(par1World);
+	public EntityJeff(World world) {
+		super(world);
 		isImmuneToFire = true;
 		getNavigator().setBreakDoors(true);
 		experienceValue = 5;
@@ -52,8 +51,7 @@ public class EntityJeff extends EntityMob implements IMob
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityJane.class, 0, true));
 	}
 
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D);
@@ -61,8 +59,7 @@ public class EntityJeff extends EntityMob implements IMob
 		this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(32.0D);
 	}
 
-	public void addRandomArmor()
-	{
+	public void addRandomArmor() {
 		this.setCurrentItemOrArmor(0, new ItemStack(CPCItems.jeffKnife));
 	}
 
@@ -99,27 +96,21 @@ public class EntityJeff extends EntityMob implements IMob
 
 	}*/
 
-	public void onKillEntity(EntityLivingBase par1EntityLivingBase)
-	{
-		super.onKillEntity(par1EntityLivingBase);
-
+	public void onKillEntity(EntityLivingBase entityLivingBase) {
+		super.onKillEntity(entityLivingBase);
 		if (!this.isSaying) {
 			this.worldObj.playSoundAtEntity(this, "cpc:mob.jeff.kill", 1.0F, 1.0F);
 			this.isSaying = true;
 		}
 
-		if(this.isSaying)
-		{
+		if(this.isSaying) {
 			this.isSaying = false;
 		}
 	}
 
-	public void onDeath(DamageSource par1DamageSource)
-	{
-		super.onDeath(par1DamageSource);
-		if(par1DamageSource.getEntity() instanceof EntityJane)
-		{
-			EntityClientPlayerMP par1EntityPlayer = Minecraft.getMinecraft().thePlayer;
+	public void onDeath(DamageSource source) {
+		super.onDeath(source);
+		if(source.getEntity() instanceof EntityJane) {
 			this.dropItem(CPCItems.jeffKnife, 1);
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("\u00a7lJane The Killer: \u00a7rSleep well."));
 		}

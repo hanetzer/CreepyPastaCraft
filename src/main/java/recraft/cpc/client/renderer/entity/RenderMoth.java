@@ -9,22 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.monster.EntityMothman;
 
 @SideOnly(Side.CLIENT)
-public class RenderMoth extends RenderLiving
-{
-	public RenderMoth(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderMoth extends RenderLiving {
+	public RenderMoth(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityMothman par1EntityMoth)
-	{
+	protected ResourceLocation getTexture(EntityMothman entityMothman) {
 		return new ResourceLocation("cpc:textures/entity/mothman.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityMothman)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityMothman)entity);
 	}
-
 }
-

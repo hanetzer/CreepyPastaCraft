@@ -9,22 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.passive.EntityJane;
 
 @SideOnly(Side.CLIENT)
-public class RenderJane extends RenderLiving
-{
-	public RenderJane(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderJane extends RenderLiving {
+	public RenderJane(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityJane par1EntityJane)
-	{
+	protected ResourceLocation getTexture(EntityJane entityJane) {
 		return new ResourceLocation("cpc:textures/entity/jane.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityJane)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityJane)entity);
 	}
-
 }
-

@@ -9,22 +9,16 @@ import net.minecraft.util.ResourceLocation;
 import recraft.cpc.common.entity.passive.EntityMutahar;
 
 @SideOnly(Side.CLIENT)
-public class RenderMutahar extends RenderLiving
-{
-	public RenderMutahar(ModelBase par1ModelBase, float par2)
-	{
-		super(par1ModelBase, par2);
+public class RenderMutahar extends RenderLiving {
+	public RenderMutahar(ModelBase model, float par2) {
+		super(model, par2);
 	}
 
-	protected ResourceLocation getTexture(EntityMutahar par1EntityMutahar)
-	{
+	protected ResourceLocation getTexture(EntityMutahar entityMutahar) {
 		return new ResourceLocation("cpc:textures/entity/mutahar.png");
 	}
 
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-	{
-		return this.getTexture((EntityMutahar)par1Entity);
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getTexture((EntityMutahar)entity);
 	}
-
 }
-

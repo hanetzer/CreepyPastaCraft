@@ -92,7 +92,7 @@ public class ContainerLaptop extends Container {
 				slot.onSlotChange(itemStack1, itemStack);
 			}
 			else if (par2SlotIndex != INPUT) {
-				if (PastaRegistry.getPrintingResult(itemStack1) != null) {
+				if (PastaRegistry.getPrinting(itemStack1) != null) {
 					if (!this.mergeItemStack(itemStack1, INPUT, INPUT+1, false)) {
 						return null;
 					}
