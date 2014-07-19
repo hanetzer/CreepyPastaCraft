@@ -18,9 +18,8 @@ buildscript {
 apply plugin: 'curseforge'
 apply plugin: 'forge'
 
-version = "0.0.0"
-group= "recraft"
-archivesBaseName = "CreepyPastaCraft"
+version = "1.0.0"
+group= "creepypastacraft"
 minecraft {
     version = "1.7.10-10.13.0.1186"
     runDir = "run"
@@ -50,7 +49,7 @@ processResources
 curse {
     apiKey    = project.curseforge_key
     projectId = "222381"
-    releaseType = "beta"
+    releaseType = "release"
     changelog = ""
     addGameVersion "1.7.2"
 }
