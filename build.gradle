@@ -20,7 +20,6 @@ apply plugin: 'forge'
 
 ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
 ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
-version      = "r${revision}.${hash}"
 
 group= "creepypastacraft"
 minecraft {
@@ -29,7 +28,7 @@ minecraft {
     runDir     = "run"
 }
 
-version = "1.7.x-${version}"
+version = "1.7.x-r${revision}.${hash}"
 
 jar {
     classifier = 'universal'
@@ -51,9 +50,9 @@ processResources
 }
 
 curse {
-    apiKey    = project.curseforge_key
-    projectId = "222381"
-    releaseType = "release"
-    changelog = ""
-    addGameVersion "1.7.2"
+    apiKey         = project.curseforge_key
+    projectId      = "222381"
+    releaseType    = "release"
+    changelog      = ""
+    addGameVersion   "1.7.2"
 }
