@@ -18,14 +18,18 @@ buildscript {
 apply plugin: 'curseforge'
 apply plugin: 'forge'
 
-version = "1.0.0"
+ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
+ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
+version      = "r${revision}.${hash}"
+
 group= "creepypastacraft"
 minecraft {
-    version = "1.7.10-10.13.0.1186"
-    runDir = "run"
+    mcpVersion = "9.05"
+    version    = "1.7.10-10.13.0.1186"
+    runDir     = "run"
 }
 
-version = "1.7.x-${version}.${System.getenv().DRONE_BUILD_NUMBER}"
+version = "1.7.x-${version}"
 
 jar {
     classifier = 'universal'
@@ -53,4 +57,3 @@ curse {
     changelog = ""
     addGameVersion "1.7.2"
 }
-
