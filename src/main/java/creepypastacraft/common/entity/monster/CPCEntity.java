@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 import creepypastacraft.common.entity.passive.EntityCry;
 import creepypastacraft.common.entity.passive.EntityPewds;
 
-public abstract class CPEntity extends EntityMob implements IMob {
+public abstract class CPCEntity extends EntityMob implements IMob {
     protected int attackStrength = 2;
     float moveSpeed;
 
-    public CPEntity(World world) {
+    public CPCEntity(World world) {
         super(world);
         super.experienceValue = 5;
         super.tasks.addTask(1, new EntityAIAttackOnCollide(this, EntityPewds.class, moveSpeed, false));

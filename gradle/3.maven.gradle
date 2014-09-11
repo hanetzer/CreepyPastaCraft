@@ -1,0 +1,20 @@
+configurations {
+    deployerJars
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: "scp://ntz.demoxin.com/home/ntz/ntz.demoxin.com/CreepyPastaCraft/releases") {
+            authentication(userName: "ntz", password: "fq2qTxe^")
+        }
+    }
+}
