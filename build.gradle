@@ -22,25 +22,6 @@ fileTree('gradle').include('*.gradle').collect().sort().each { apply from: it }
 version = "2.8.0"
 ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
 
-group= "creepypastacraft"
+group= "com.teamfear"
 
 version = "${project.minecraft.version}-${project.version}.${ext.revision}"
-
-jar {
-    classifier = 'universal'
-}
-
-processResources
-{
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}

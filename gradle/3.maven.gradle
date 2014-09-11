@@ -13,8 +13,22 @@ dependencies {
 uploadArchives {
     repositories.mavenDeployer {
         configuration = configurations.deployerJars
-        repository(url: "scp://ntz.demoxin.com/home/ntz/ntz.demoxin.com/CreepyPastaCraft/releases") {
-            authentication(userName: "ntz", password: "fq2qTxe^")
+        repository(url: "scp://ntz.demoxin.com/home/ntz/ntz.demoxin.com/maven") {
+            authentication(userName: project.username, password: project.password)
         }
+        addFilter('deobf') {artifact, file ->
+            artifact.name == 'deobf'
+        }
+        pom('deobf').version = project.version
+        addFilter('sources') {artifact, file ->
+            artifact.name == 'sources'
+        }
+        pom('deobf').version = project.version
+        addFilter('universal') {artifact, file ->
+            artifact.name == 'universal'
+        }
+        pom('universal').version = project.version
     }
 }
+uploadArchives.dependsOn reobf
+install.dependsOn reobf
