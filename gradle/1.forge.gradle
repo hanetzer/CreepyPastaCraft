@@ -6,6 +6,8 @@ minecraft {
     replace      "@VERSION@", project.version
 }
 
+version = "${project.minecraft.version}-${project.version}.${ext.revision}"
+
 processResources
 {
     inputs.property "version", project.version

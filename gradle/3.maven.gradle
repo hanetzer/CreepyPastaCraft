@@ -17,15 +17,15 @@ uploadArchives {
             authentication(userName: project.username, password: project.password)
         }
         addFilter('deobf') {artifact, file ->
-            artifact.name == 'deobf'
+            artifact.attributes['classifier'] == null
         }
         pom('deobf').version = project.version
         addFilter('sources') {artifact, file ->
-            artifact.name == 'sources'
+            artifact.attributes['classifier'] == 'sources'
         }
         pom('deobf').version = project.version
         addFilter('universal') {artifact, file ->
-            artifact.name == 'universal'
+            artifact.attributes['classifier'] == 'universal'
         }
         pom('universal').version = project.version
     }
