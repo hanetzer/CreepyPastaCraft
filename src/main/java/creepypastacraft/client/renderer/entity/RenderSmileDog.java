@@ -13,10 +13,10 @@ public class RenderSmileDog extends RenderLiving {
 
     public ResourceLocation getTexture(EntitySmileDog entitySmile) {
         if (entitySmile.isTransformed()) {
-            return new ResourceLocation("cpc:textures/entity/smiledog/angry.png");
+            return new ResourceLocation("creepypastacraft:textures/entity/smiledog/angry.png");
         }
         else {
-            return new ResourceLocation("cpc:textures/entity/smiledog/idle.png");
+            return new ResourceLocation("creepypastacraft:textures/entity/smiledog/idle.png");
         }
     }
 

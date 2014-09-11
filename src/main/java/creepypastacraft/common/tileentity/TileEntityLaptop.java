@@ -74,7 +74,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 
     @Override
     public String getInventoryName() {
-        return "container.cpc:laptop";
+        return "container.creepypastacraft:laptop";
     }
 
     @Override

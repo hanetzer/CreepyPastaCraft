@@ -9,20 +9,20 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import creepypastacraft.common.tile.CPCTile;
 import net.minecraft.creativetab.CreativeTabs;
 import creepypastacraft.api.registry.PastaRegistry;
 import creepypastacraft.common.CommonProxy;
 import creepypastacraft.common.creativetab.CreativeTabCPC;
 import creepypastacraft.common.handlers.CPCEventHandler;
 import creepypastacraft.common.stats.CPCAchievementList;
-import creepypastacraft.core.CPCBlock;
-import creepypastacraft.core.CPCEntity;
-import creepypastacraft.core.CPCItem;
+import creepypastacraft.common.entity.CPCEntity;
+import creepypastacraft.common.item.CPCItem;
 
 @SuppressWarnings("unused")
-@Mod(modid = "cpc")
+@Mod(modid = "creepypastacraft", name = "CreepyPastaCraft", version = "@VERSION@")
 public class CPC {
-    @Instance("cpc")
+    @Instance("creepypastacraft")
     public static CPC instance;
 
     @SidedProxy(
@@ -34,10 +34,10 @@ public class CPC {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
-        tabCPC = new CreativeTabCPC(CreativeTabs.getNextID(), "tabCPC");
+        tabCPC = new CreativeTabCPC("tabCPC");
         CPCEventHandler.init();
         CPCItem.init();
-        CPCBlock.init();
+        CPCTile.init();
         CPCEntity.init();
         PastaRegistry.init();
         CPCAchievementList.init();

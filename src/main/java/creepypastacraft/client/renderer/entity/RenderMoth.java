@@ -15,7 +15,7 @@ public class RenderMoth extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityMothman entityMothman) {
-        return new ResourceLocation("cpc:textures/entity/mothman.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/mothman.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

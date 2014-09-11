@@ -45,6 +45,8 @@ public class ClientProxy extends CommonProxy {
                 new RenderMoth(new ModelMothman(), 0.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityStrider.class,
                 new RenderStrider(new ModelStrider(), 0.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityVampireBat.class,
+				new RenderVampireBat());
         RenderingRegistry.registerEntityRenderingHandler(EntityStephano.class,
                 new RenderSnowball(CPCItems.stephano, 0));
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaptop.class,

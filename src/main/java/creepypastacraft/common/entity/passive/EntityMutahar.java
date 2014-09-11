@@ -1,12 +1,12 @@
 package creepypastacraft.common.entity.passive;
 
+import creepypastacraft.common.entity.monster.CPCEntity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import creepypastacraft.common.entity.monster.CPEntity;
 
 public class EntityMutahar extends EntityAnimal {
     public EntityMutahar(World world) {
@@ -14,7 +14,7 @@ public class EntityMutahar extends EntityAnimal {
         setSize(0.6F, 1.8F);
         getNavigator().setBreakDoors(true);
         tasks.addTask(0, new EntityAISwimming(this));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, CPEntity.class, 6.0F, 0.25F, 0.3F));
+        tasks.addTask(1, new EntityAIAvoidEntity(this, CPCEntity.class, 6.0F, 0.25F, 0.3F));
         tasks.addTask(1, new EntityAIPanic(this, 0.38F));
         tasks.addTask(2, new EntityAIBreakDoor(this));
         tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 0.6D));

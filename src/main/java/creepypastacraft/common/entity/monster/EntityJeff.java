@@ -98,7 +98,7 @@ public class EntityJeff extends EntityMob implements IMob {
     public void onKillEntity(EntityLivingBase entity) {
         super.onKillEntity(entity);
         if (!this.isSaying) {
-            this.worldObj.playSoundAtEntity(this, "cpc:mob.jeff.kill", 1.0F, 1.0F);
+            this.worldObj.playSoundAtEntity(this, "creepypastacraft:mob.jeff.kill", 1.0F, 1.0F);
             this.isSaying = true;
         }
         else {
@@ -110,7 +110,7 @@ public class EntityJeff extends EntityMob implements IMob {
         super.onDeath(source);
         if (source.getEntity() instanceof EntityJane) {
             this.dropItem(CPCItems.jeffKnife, 1);
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("\u00a7lJane The Killer: \u00a7Sleep well."));
+            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("\u00a7lJane The Killer: \u00a7SSleep well."));
         }
 
     }

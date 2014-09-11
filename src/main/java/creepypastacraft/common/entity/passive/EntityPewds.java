@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import creepypastacraft.common.entity.ai.PewDieRun;
 import creepypastacraft.init.CPCItems;
 
+import static net.minecraft.entity.SharedMonsterAttributes.*;
+
 public class EntityPewds extends EntityAnimal {
     public EntityPewds(World world) {
         super(world);
@@ -30,7 +32,7 @@ public class EntityPewds extends EntityAnimal {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+        this.getEntityAttribute(movementSpeed).setBaseValue(0.5D);
     }
 
     public int getTalkInterval() {
@@ -46,15 +48,15 @@ public class EntityPewds extends EntityAnimal {
     }
 
     protected String getLivingSound() {
-        return "cpc:mob.pewds.say";
+        return "creepypastacraft:mob.pewds.say";
     }
 
     protected String getHurtSound() {
-        return "cpc:mob.pewds.hurt";
+        return "creepypastacraft:mob.pewds.hurt";
     }
 
     protected String getDeathSound() {
-        return "cpc:mob.pewds.death";
+        return "creepypastacraft:mob.pewds.death";
     }
 
     public void onLivingUpdate() {
@@ -64,7 +66,7 @@ public class EntityPewds extends EntityAnimal {
     public void onKillEntity(EntityLiving entity) {
     }
 
-    protected Item getDropItemId() {
+    protected Item getDropItem() {
         return CPCItems.stephano;
     }
 

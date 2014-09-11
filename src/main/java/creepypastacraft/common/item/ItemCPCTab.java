@@ -4,9 +4,9 @@ import net.minecraft.item.Item;
 
 public class ItemCPCTab extends Item {
     public ItemCPCTab() {
-        this.maxStackSize = 1;
-        this.setMaxDamage(0);
-        this.setTextureName("cpc:tabCPC");
+        this.setMaxStackSize(1);
+        this.setMaxDurability(0);
+        this.setTextureName("creepypastacraft:tabCPC");
         this.setUnlocalizedName("horror");
     }
 

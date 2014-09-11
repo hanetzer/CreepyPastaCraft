@@ -14,11 +14,11 @@ public class RenderSquidward extends RenderLiving {
     public ResourceLocation getTexture(EntitySquidward squidward) {
         switch (squidward.getMood()) {
             case 1:
-                return new ResourceLocation("cpc:textures/entity/squidward/suicide.png");
+                return new ResourceLocation("creepypastacraft:textures/entity/squidward/suicide.png");
             case 2:
-                return new ResourceLocation("cpc:textures/entity/squidward/mad.png");
+                return new ResourceLocation("creepypastacraft:textures/entity/squidward/mad.png");
             default:
-                return new ResourceLocation("cpc:textures/entity/squidward/happy.png");
+                return new ResourceLocation("creepypastacraft:textures/entity/squidward/happy.png");
         }
     }
 

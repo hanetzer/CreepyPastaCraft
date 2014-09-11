@@ -20,8 +20,8 @@ public class TileLaptop extends BlockContainer {
     public TileLaptop() {
         super(Material.iron);
         setCreativeTab(CPC.tabCPC);
-        setBlockTextureName("cpc:laptop");
-        setBlockName("cpc:laptop");
+        setTextureName("creepypastacraft:laptop");
+		setUnlocalizedName("creepypastacraft:laptop");
     }
 
     public Item getBlockDropped(int par1, Random random, int par3) {
@@ -45,7 +45,8 @@ public class TileLaptop extends BlockContainer {
     }
 
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
-        world.func_147453_f(x, y, z, block);
+        //world.func_147453_f(x, y, z, block);
+		world.removeTileEntity(x, y, z);
         super.breakBlock(world, x, y, z, block, par6);
     }
 

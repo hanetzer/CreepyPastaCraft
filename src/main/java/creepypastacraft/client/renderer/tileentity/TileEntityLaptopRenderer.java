@@ -25,7 +25,7 @@ public class TileEntityLaptopRenderer extends TileEntitySpecialRenderer {
         glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
         glScalef(1.0F, -1.0F, -1.0F);
-        bindTexture(new ResourceLocation("cpc:textures/entity/laptop.png"));
+        bindTexture(new ResourceLocation("creepypastacraft:textures/entity/laptop.png"));
         short short1;
         switch (i) {
             case 2:

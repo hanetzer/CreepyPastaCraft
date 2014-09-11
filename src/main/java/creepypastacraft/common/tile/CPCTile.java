@@ -15,14 +15,13 @@ import static net.minecraft.init.Items.redstone;
 
 public class CPCTile
 {
-
     public static void init() {
         regBlocks();
         addRecipes();
     }
 
     private static void regBlocks() {
-        laptop = registerBlock(new TileLaptop().setUnlocalizedName("creepypastacraft:laptop"));
+        laptop = registerBlock(new TileLaptop().setUnlocalizedName("cpc.laptop"));
         GameRegistry.registerTileEntity(TileEntityLaptop.class, "entityLaptop");
     }
 
@@ -34,19 +33,19 @@ public class CPCTile
     }
 
     public static Block registerBlock(Block block) {
-        GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.creepypastacraft:", ""));
+        GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.creepypastacraft.", ""));
 
         return block;
     }
 
     public static Block registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
-        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.creepypastacraft:", ""));
+        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.creepypastacraft.", ""));
 
         return block;
     }
 
     public static Block registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, Object... constructorArgs) {
-        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.creepypastacraft:", ""), constructorArgs);
+        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.creepypastacraft.", ""), constructorArgs);
 
         return block;
     }

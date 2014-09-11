@@ -15,7 +15,7 @@ public class RenderJack extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityJack entityJack) {
-        return new ResourceLocation("cpc:textures/entity/jack.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/jack.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

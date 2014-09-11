@@ -83,7 +83,7 @@ public class EntitySmileDog extends EntityMob {
 
     private void speak(EntityPlayer player) {
         player.addChatMessage(new ChatComponentText(
-                StatCollector.translateToLocal("entity.cpc:smile.say")
+                StatCollector.translateToLocal("entity.creepypastacraft:smile.say")
         ));
     }
 

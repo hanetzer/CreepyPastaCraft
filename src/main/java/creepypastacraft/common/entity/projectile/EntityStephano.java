@@ -47,7 +47,7 @@ public class EntityStephano extends EntityThrowable {
         return -20.0F;
     }
 
-    public void setPotionDamage(int damage) {
+/*    public void setPotionDamage(int damage) {
         if (stack == null) {
             stack = new ItemStack(CPCItems.stephano, 1, 0);
         }
@@ -60,7 +60,7 @@ public class EntityStephano extends EntityThrowable {
             stack = new ItemStack(CPCItems.stephano, 1, 0);
         }
         return stack.getItemDamage();
-    }
+    }*/
 
     @Override
     protected void onImpact(MovingObjectPosition objectPosition) {
@@ -80,11 +80,11 @@ public class EntityStephano extends EntityThrowable {
 
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
-        if (compound.hasKey("Potion")) {
+    /*    if (compound.hasKey("Potion")) {
             stack = ItemStack.loadItemStackFromNBT(compound.getCompoundTag("Potion"));
         } else {
             setPotionDamage(compound.getInteger("potionValue"));
-        }
+        }*/
 
         if (stack == null) {
             setDead();

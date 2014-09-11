@@ -15,7 +15,7 @@ public class RenderMutahar extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityMutahar entityMutahar) {
-        return new ResourceLocation("cpc:textures/entity/mutahar.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/mutahar.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

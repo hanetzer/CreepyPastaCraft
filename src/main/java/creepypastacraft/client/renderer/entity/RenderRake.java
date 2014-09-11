@@ -15,7 +15,7 @@ public class RenderRake extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityRake entityRake) {
-        return new ResourceLocation("cpc:textures/entity/rake.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/rake.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

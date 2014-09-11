@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import creepypastacraft.CPC;
 import creepypastacraft.api.registry.PastaRegistry;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
@@ -29,10 +30,11 @@ public class ItemCPCArchive extends Item {
         this.setHasSubtypes(true);
         this.setCreativeTab(CPC.tabCPC);
         this.setMaxStackSize(1);
+		this.setMaxDurability(0);
     }
 
-    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean bool) {
-        String s = PastaRegistry.getStringFromID(itemStack.getItemDamage());
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+        String s = PastaRegistry.pastaList.get(stack.getCurrentDurability()).name;
         list.add(I18n.format("entity." + s + ".name"));
     }
 
@@ -40,29 +42,32 @@ public class ItemCPCArchive extends Item {
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
-        if (par3World.isRemote) {
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world,
+							 int x, int y, int z, int dir,
+							 float hitX, float hitY, float hitZ) {
+        if (world.isRemote) {
             return true;
         } else {
-            Block block = par3World.getBlock(par4, par5, par6);
-            par4 += Facing.offsetsXForSide[par7];
-            par5 += Facing.offsetsYForSide[par7];
-            par6 += Facing.offsetsZForSide[par7];
+            Block block = world.getBlock(x, y, z);
+            x += Facing.offsetsXForSide[dir];
+            y += Facing.offsetsYForSide[dir];
+            z += Facing.offsetsZForSide[dir];
             double d0 = 0.0D;
 
-            if (par7 == 1 && block.getRenderType() == 11) {
+            if (dir == 1 && block.getRenderType() == 11) {
                 d0 = 0.5D;
             }
 
-            Entity entity = spawnCreature(par3World, par1ItemStack.getItemDamage(), (double) par4 + 0.5D, (double) par5 + d0, (double) par6 + 0.5D);
+            Entity entity = spawnCreature(world, stack.getCurrentDurability(), (double) x + 0.5D,
+					(double) y + d0, (double) z + 0.5D);
 
             if (entity != null) {
-                if (entity instanceof EntityLivingBase && par1ItemStack.hasDisplayName()) {
-                    ((EntityLiving) entity).setCustomNameTag(par1ItemStack.getDisplayName());
+                if (entity instanceof EntityLivingBase && stack.hasDisplayName()) {
+                    ((EntityLiving) entity).setCustomNameTag(stack.getDisplayName());
                 }
 
-                if (!par2EntityPlayer.capabilities.isCreativeMode) {
-                    --par1ItemStack.stackSize;
+                if (!player.capabilities.isCreativeMode) {
+                    --stack.stackSize;
                 }
             }
             return true;
@@ -72,44 +77,46 @@ public class ItemCPCArchive extends Item {
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        if (par2World.isRemote) {
-            return par1ItemStack;
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (world.isRemote) {
+            return stack;
         } else {
-            MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+            MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, player, true);
 
             if (movingobjectposition == null) {
-                return par1ItemStack;
+                return stack;
             } else {
                 if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
-                    int i = movingobjectposition.blockX;
-                    int j = movingobjectposition.blockY;
-                    int k = movingobjectposition.blockZ;
+                    int x = movingobjectposition.blockX;
+                    int y = movingobjectposition.blockY;
+                    int z = movingobjectposition.blockZ;
 
-                    if (!par2World.canMineBlock(par3EntityPlayer, i, j, k)) {
-                        return par1ItemStack;
+                    if (!world.canMineBlock(player, x, y, z)) {
+                        return stack;
                     }
 
-                    if (!par3EntityPlayer.canPlayerEdit(i, j, k, movingobjectposition.sideHit, par1ItemStack)) {
-                        return par1ItemStack;
+                    if (!player.canPlayerEdit(x, y, z, movingobjectposition.sideHit, stack)) {
+                        return stack;
                     }
 
-                    if (par2World.getBlock(i, j, k) instanceof BlockLiquid) {
-                        Entity entity = spawnCreature(par2World, par1ItemStack.getItemDamage(), (double) i, (double) j, (double) k);
+                    if (world.getBlock(x, y, z) instanceof BlockLiquid) {
+                        Entity entity = spawnCreature(world,
+								stack.getCurrentDurability(),
+								(double) x, (double) y, (double) z);
 
                         if (entity != null) {
-                            if (entity instanceof EntityLivingBase && par1ItemStack.hasDisplayName()) {
-                                ((EntityLiving) entity).setCustomNameTag(par1ItemStack.getDisplayName());
+                            if (entity instanceof EntityLivingBase && stack.hasDisplayName()) {
+                                ((EntityLiving) entity).setCustomNameTag(stack.getDisplayName());
                             }
 
-                            if (!par3EntityPlayer.capabilities.isCreativeMode) {
-                                --par1ItemStack.stackSize;
+                            if (!player.capabilities.isCreativeMode) {
+                                --stack.stackSize;
                             }
                         }
                     }
                 }
 
-                return par1ItemStack;
+                return stack;
             }
         }
     }
@@ -118,22 +125,28 @@ public class ItemCPCArchive extends Item {
      * Spawns the creature specified by the egg's type in the location specified by the last three parameters.
      * Parameters: world, par2EntityID, x, y, z.
      */
-    public static Entity spawnCreature(World par1World, int par2EntityID, double par3x, double par4y, double par5z) {
-        if (!PastaRegistry.pastaList.containsKey(par2EntityID)) {
+    public static Entity spawnCreature(World w, int ID, double x, double y, double z) {
+        if (PastaRegistry.pastaList.get(ID) == null) {
             return null;
         } else {
             Entity entity = null;
 
             for (int j = 0; j < 1; ++j) {
-                entity = PastaRegistry.createEntityByID(par2EntityID, par1World);
+				try
+				{
+					entity = (Entity)PastaRegistry.pastaList.get(ID).pasta.getConstructor(new Class[] {World.class}).newInstance(w);
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
 
-                if (entity != null && entity instanceof EntityLivingBase) {
+				if (entity != null && entity instanceof EntityLivingBase) {
                     EntityLiving entityliving = (EntityLiving) entity;
-                    entity.setLocationAndAngles(par3x, par4y, par5z, MathHelper.wrapAngleTo180_float(par1World.rand.nextFloat() * 360.0F), 0.0F);
+                    entity.setLocationAndAngles(x, y, z, MathHelper.wrapAngleTo180_float(w.rand.nextFloat() * 360.0F), 0.0F);
                     entityliving.rotationYawHead = entityliving.rotationYaw;
                     entityliving.renderYawOffset = entityliving.rotationYaw;
                     entityliving.onSpawnWithEgg(null);
-                    par1World.spawnEntityInWorld(entity);
+                    w.spawnEntityInWorld(entity);
                     entityliving.playLivingSound();
                 }
             }
@@ -145,16 +158,15 @@ public class ItemCPCArchive extends Item {
      * returns a list of items with the same ID, but different meta (eg: dye returns 16 items)
      */
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item par1Item, CreativeTabs par2CreativeTabs, List par3List) {
-
-        for (Object o : PastaRegistry.pastaList.values()) {
-            PastaRegistry.PastaInfo pastaInfo = (PastaRegistry.PastaInfo) o;
-            par3List.add(new ItemStack(par1Item, 1, pastaInfo.spawnedID));
-        }
+    public void getSubItems(Item item, CreativeTabs tabs, List list) {
+		for (int i = 0; i < PastaRegistry.pastaList.size(); ++i)
+		{
+			list.add(new ItemStack(item, 1, i));
+		}
     }
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("cpc:archive");
+        itemIcon = iconRegister.registerIcon("creepypastacraft:archive");
     }
 }

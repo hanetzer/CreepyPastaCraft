@@ -5,8 +5,8 @@ import net.minecraft.item.Item;
 import creepypastacraft.init.CPCItems;
 
 public class CreativeTabCPC extends CreativeTabs {
-    public CreativeTabCPC(int position, String tabID) {
-        super(position, tabID);
+    public CreativeTabCPC(String tabID) {
+        super(tabID);
     }
 
     public Item getTabIconItem() {

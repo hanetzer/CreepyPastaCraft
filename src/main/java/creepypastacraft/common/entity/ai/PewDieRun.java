@@ -83,7 +83,7 @@ public class PewDieRun extends EntityAIAvoidEntity {
 
     public void startExecuting() {
         entityPathNavigate.setPath(entityPathEntity, farSpeed);
-        theEntity.worldObj.playSoundAtEntity(theEntity, "cpc:mob.pewds.scare", 1.0F, 1.0F);
+        theEntity.worldObj.playSoundAtEntity(theEntity, "creepypastacraft:mob.pewds.scare", 1.0F, 1.0F);
     }
 
     public void resetTask() {

@@ -11,31 +11,39 @@ import creepypastacraft.CPC;
 public class ItemCPCFood extends ItemFood {
     public int foodType;
 
-    public ItemCPCFood(int par1healAmount, float par2SaturationModifier, boolean par3IsWolfsFavoriteFood, int par4FoodType) {
-        super(par1healAmount, par2SaturationModifier, par3IsWolfsFavoriteFood);
+    public ItemCPCFood(int heal, float saturation, boolean wolf, int type) {
+        super(heal, saturation, wolf);
         this.setAlwaysEdible();
         this.setMaxStackSize(1);
-        this.foodType = par4FoodType;
+        this.foodType = type;
         this.setCreativeTab(CPC.tabCPC);
     }
 
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        super.onEaten(par1ItemStack, par2World, par3EntityPlayer);
+    public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+        super.onItemUseFinish(stack, world, player);
         switch (foodType) {
             case 0:
+				if(!player.capabilities.isCreativeMode) {
+					if(stack.stackSize <= 0)
+					{
+						return new ItemStack(Items.bowl);
+					}
+					player.inventory.addItemStackToInventory(new ItemStack(Items.bowl));
+				}
                 return new ItemStack(Items.bowl);
             default:
                 return null;
         }
     }
 
+	@Override
     public void registerIcons(IIconRegister iconRegister) {
         switch (foodType) {
             case 0:
-                itemIcon = iconRegister.registerIcon("cpc:pasta");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:pasta");
                 break;
             default:
-                itemIcon = iconRegister.registerIcon("cpc:horror");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:horror");
                 break;
         }
     }

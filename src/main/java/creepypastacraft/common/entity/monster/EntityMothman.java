@@ -10,7 +10,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-public class EntityMothman extends CPEntity {
+public class EntityMothman extends CPCEntity
+{
     private ChunkCoordinates currentFlightTarget;
 
     public EntityMothman(World world) {

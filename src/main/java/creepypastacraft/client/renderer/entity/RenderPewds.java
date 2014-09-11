@@ -15,7 +15,7 @@ public class RenderPewds extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityPewds entityPewds) {
-        return new ResourceLocation("cpc:textures/entity/pewds.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/pewds.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

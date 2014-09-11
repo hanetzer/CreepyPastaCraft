@@ -20,19 +20,19 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class ItemCPCRecord extends ItemRecord {
     private static final Map records = new HashMap();
-    public final String recordName;
+    public final String name;
 
     public ItemCPCRecord(String recordName) {
         super(recordName);
-        this.recordName = recordName;
-        this.maxStackSize = 1;
+        this.name = recordName;
+		this.setMaxStackSize(1);
         this.setCreativeTab(CPC.tabCPC);
         records.put(recordName, this);
     }
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("cpc:" + "record_" + recordName);
+        itemIcon = iconRegister.registerIcon("creepypastacraft:record_" + name);
     }
 
     @Override
@@ -76,6 +76,6 @@ public class ItemCPCRecord extends ItemRecord {
 
     @Override
     public ResourceLocation getRecordResource(String name) {
-        return new ResourceLocation("cpc:" + name);
+        return new ResourceLocation("creepypastacraft:" + name);
     }
 }

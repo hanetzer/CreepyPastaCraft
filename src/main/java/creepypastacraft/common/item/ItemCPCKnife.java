@@ -13,9 +13,9 @@ import java.util.List;
 public class ItemCPCKnife extends ItemSword {
     public int textureID;
 
-    public ItemCPCKnife(ToolMaterial par1EnumToolMaterial, int par2Texture) {
-        super(par1EnumToolMaterial);
-        this.textureID = par2Texture;
+    public ItemCPCKnife(ToolMaterial material, int type) {
+        super(material);
+        this.textureID = type;
         this.setCreativeTab(CPC.tabCPC);
     }
 
@@ -27,13 +27,13 @@ public class ItemCPCKnife extends ItemSword {
     public void registerIcons(IIconRegister iconRegister) {
         switch (textureID) {
             case 0:
-                itemIcon = iconRegister.registerIcon("cpc:jeffKnife");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:jeffKnife");
                 break;
             case 1:
-                itemIcon = iconRegister.registerIcon("cpc:hiltBlack");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:hiltBlack");
                 break;
             default:
-                itemIcon = iconRegister.registerIcon("cpc:horror");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:horror");
                 break;
         }
     }
@@ -42,13 +42,12 @@ public class ItemCPCKnife extends ItemSword {
         return true;
     }
 
-    public EnumRarity getRarity(ItemStack par1ItemStack) {
+    public EnumRarity getRarity(ItemStack stack) {
         return EnumRarity.epic;
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public void addInformation(ItemStack itemStack, EntityPlayer player,
-                               List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean b) {
         list.add(I18n.format(super.getUnlocalizedName() + ".desc"));
     }
 

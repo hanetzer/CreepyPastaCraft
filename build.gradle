@@ -15,20 +15,16 @@ buildscript {
     }
 }
 
-apply plugin: 'curseforge'
 apply plugin: 'forge'
 
+fileTree('gradle').include('*.gradle').collect().sort().each { apply from: it }
+
+version = "2.8.0"
 ext.revision = 'git rev-list  --count HEAD'.execute().text.trim()
-ext.hash     = 'git rev-parse --short HEAD'.execute().text.trim()
 
 group= "creepypastacraft"
-minecraft {
-    mcpVersion = "9.05"
-    version    = "1.7.10-10.13.0.1186"
-    runDir     = "run"
-}
 
-version = "1.7.x-r${revision}.${hash}"
+version = "${project.minecraft.version}-${project.version}.${ext.revision}"
 
 jar {
     classifier = 'universal'
@@ -47,12 +43,4 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-curse {
-    apiKey         = project.curseforge_key
-    projectId      = "222381"
-    releaseType    = "release"
-    changelog      = ""
-    addGameVersion   "1.7.2"
 }

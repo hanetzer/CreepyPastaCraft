@@ -1,8 +1,6 @@
 package creepypastacraft.common.entity.monster;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,7 +15,8 @@ import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import creepypastacraft.common.entity.passive.EntityCry;
 import creepypastacraft.common.entity.passive.EntityPewds;
 
-public class EntityJack extends CPEntity {
+public class EntityJack extends CPCEntity
+{
     public boolean isAttacking;
     public static int sleepDelay;
     public static boolean wasPlayerSleeping;

@@ -11,6 +11,6 @@ public class ItemCPCSmileJPG extends Item {
     }
 
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("cpc:smile");
+        itemIcon = iconRegister.registerIcon("creepypastacraft:smile");
     }
 }

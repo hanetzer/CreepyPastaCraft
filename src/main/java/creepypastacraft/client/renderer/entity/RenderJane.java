@@ -15,7 +15,7 @@ public class RenderJane extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityJane entityJane) {
-        return new ResourceLocation("cpc:textures/entity/jane.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/jane.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

@@ -32,15 +32,15 @@ public class CPCItem {
     }
 
     private static void regItems() {
-        horror = registerItem(new ItemCPCTab().setUnlocalizedName("creepypastacraft:horror"));
-        jeffKnife = registerItem(new ItemCPCKnife(toolMaterialJeffKnife, 0).setUnlocalizedName("creepypastacraft:jeffKnife"));
-        hiltBlack = registerItem(new ItemCPCKnife(toolMaterialHiltBlack, 1).setUnlocalizedName("creepypastacraft:hiltBlack"));
-        diaper = registerItem(new ItemCPCArmorBaby(armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("creepypastacraft:diaper"));
-        stephano = registerItem(new ItemCPCStephano().setUnlocalizedName("creepypastacraft:stephano"));
-        pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("creepypastacraft:pasta"));
-        record_lavender = registerItem(new ItemCPCRecord("lavender").setUnlocalizedName("creepypastacraft:record_lavender"));
-        archive = registerItem(new ItemCPCArchive().setUnlocalizedName("creepypastacraft:archive"));
-        smileJpg = registerItem(new ItemCPCSmileJPG().setUnlocalizedName("creepypastacraft:smile.jpg"));
+		archive = registerItem(new ItemCPCArchive().setUnlocalizedName("cpc.archive"));
+        horror = registerItem(new ItemCPCTab().setUnlocalizedName("cpc.horror"));
+        jeffKnife = registerItem(new ItemCPCKnife(toolMaterialJeffKnife, 0).setUnlocalizedName("cpc.jeffKnife"));
+        hiltBlack = registerItem(new ItemCPCKnife(toolMaterialHiltBlack, 1).setUnlocalizedName("cpc.hiltBlack"));
+        diaper = registerItem(new ItemCPCArmorBaby(armorMaterialBaby, CPC.proxy.addArmor("baby"), 2).setUnlocalizedName("cpc.diaper"));
+        stephano = registerItem(new ItemCPCStephano().setUnlocalizedName("cpc.stephano"));
+        pasta = registerItem(new ItemCPCFood(5, 5.0F, false, 0).setUnlocalizedName("cpc.pasta"));
+        record_lavender = registerItem(new ItemCPCRecord("lavender").setUnlocalizedName("cpc.record_lavender"));
+        smileJpg = registerItem(new ItemCPCSmileJPG().setUnlocalizedName("cpc.smile.jpg"));
     }
 
     private static void addRecipes() {
@@ -60,7 +60,7 @@ public class CPCItem {
     }
 
     public static Item registerItem(Item item) {
-        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.creepypastacraft:", ""));
+        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.creepypastacraft.", ""));
         return item;
     }
 }
