@@ -8,6 +8,6 @@ jdk:
 
 # Run the Build
 script:
-- "./gradlew uploadArchives -Pusername=$MAVEN_USERNAME -Ppassword=$MAVEN_PASSWORD" # 
+  - "gradlew uploadArchives -Pusername=${MAVEN_USERNAME} -Ppassword=${MAVEN_PASSWORD}" # 
 
 
