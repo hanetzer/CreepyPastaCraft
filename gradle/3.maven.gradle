@@ -13,7 +13,7 @@ dependencies {
 uploadArchives {
     repositories.mavenDeployer {
         configuration = configurations.deployerJars
-        repository(url: "ftp://ntz.demoxin.com/maven") {
+        repository(url: "ftp://ntz.demoxin.com/home/ntz/ntz.demoxin.com/maven") {
             authentication(userName: project.username, password: project.password)
         }
         addFilter('deobf') {artifact, file ->
