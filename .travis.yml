@@ -10,6 +10,6 @@ install:
   - true
 # Run the Build
 script:
-  - TERM=dumb gradlew uploadArchives -Pusername=${MAVEN_USERNAME} -Ppassword=${MAVEN_PASSWORD} 
+  - TERM=dumb ./gradlew uploadArchives -Pusername=${MAVEN_USERNAME} -Ppassword=${MAVEN_PASSWORD} 
 
 
