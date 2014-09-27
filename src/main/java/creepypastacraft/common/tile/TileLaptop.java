@@ -44,10 +44,10 @@ public class TileLaptop extends BlockContainer {
         return false;
     }
 
-    public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
+    public void breakBlock(World world, int x, int y, int z, Block tile, int par6) {
         //world.func_147453_f(x, y, z, block);
 		world.removeTileEntity(x, y, z);
-        super.breakBlock(world, x, y, z, block, par6);
+        super.breakBlock(world, x, y, z, tile, par6);
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z,
