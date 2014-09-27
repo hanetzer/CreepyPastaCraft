@@ -4565,3 +4565,79 @@ field_151680_x,silverColor,2,
 field_151687_a,logger,2,
 field_155771_h,logger,2,
 field_164249_a,serverGuiFont,2,
+field_94557_a,selectAnything,2,
+field_94569_a,damageSrc,2,
+field_94579_S,pendingTickListEntriesThisTick,2,
+field_94593_a,theIcon,0,
+field_94598_a,theIcon,0,
+field_94600_b,iconArray,0,
+field_94601_a,bowPullIconNameArray,2,
+field_94603_a,EMPTY_SLOT_NAMES,2,
+field_94604_cx,emptySlotIcon,0,
+field_94605_cw,overlayIcon,0,
+field_94606_cu,CLOTH_OVERLAY_NAMES,2,
+field_96093_i,entityUniqueID,2,
+field_96113_a,isBlocked,2,Whether this hopper minecart is being blocked by an activator rail.
+field_96303_A,fancyStyling,2,
+field_96304_B,controlString,2,The control string (section sign + formatting code) that can be inserted into client-side text to display subsequent text in this format.
+field_96321_w,formattingCodeMapping,2,"Maps a formatting code (e.g., 'f') to its corresponding enum value (e.g., WHITE)."
+field_96329_z,formattingCode,2,The formatting code that produces this format.
+field_96330_y,formattingCodePattern,2,"Matches formatting codes that indicate that the client should treat the following text as bold, recolored, obfuscated, etc."
+field_96331_x,nameMapping,2,"Maps a name (e.g., 'underline') to its corresponding enum value (e.g., UNDERLINE)."
+field_96442_D,worldScoreboard,2,
+field_96452_b,flipU,0,
+field_96453_c,flipV,0,
+field_96454_a,baseIcon,0,
+field_96465_b,behaviourDefaultDispenseItem,2,
+field_96507_a,theScoreboard,2,
+field_96540_f,teamMemberships,2,Map of usernames to ScorePlayerTeam objects.
+field_96541_d,objectiveDisplaySlots,2,"Index 0 is tab menu, 1 is sidebar, and 2 is below name"
+field_96542_e,teams,2,Map of teamnames to ScorePlayerTeam instances
+field_96543_b,scoreObjectiveCriterias,2,
+field_96545_a,scoreObjectives,2,Map of objective names to ScoreObjective objects.
+field_96555_a,scoreboardMCServer,2,
+field_96566_b,selectInventories,2,
+field_96602_b,dispenserMinecartBehavior,2,
+field_96605_cw,dispenserBehavior,2,
+field_96638_f,health,2,
+field_96639_d,playerKillCount,2,
+field_96640_e,totalKillCount,2,
+field_96642_c,deathCount,2,
+field_96654_d,scorePlayerName,2,
+field_96655_e,scorePoints,2,
+field_96656_b,theScoreboard,2,
+field_96657_c,theScoreObjective,2,
+field_96658_a,scoreComparator,2,Used for sorting score by points
+field_96671_f,colorSuffix,2,
+field_96672_g,allowFriendlyFire,2,
+field_96673_d,teamNameSPT,2,
+field_96674_e,namePrefixSPT,2,
+field_96676_c,membershipSet,2,A set of all team member usernames.
+field_96677_a,theScoreboard,2,
+field_96683_d,displayName,2,
+field_96684_b,name,2,
+field_96685_c,objectiveCriteria,2,The ScoreObjectiveCriteria for this objetive
+field_96686_a,theScoreboard,2,
+field_96691_E,chatScale,0,
+field_96692_F,chatWidth,0,
+field_96693_G,chatHeightUnfocused,0,
+field_96694_H,chatHeightFocused,0,
+field_98038_p,forceSpawn,2,
+field_98040_a,mobSpawnerLogic,2,Mob spawner logic for this spawner minecart.
+field_98044_b,transferTicker,2,
+field_98151_a,theTexture,0,
+field_98223_c,entityType,2,
+field_98224_g,minecraftStartTimeMilis,2,
+field_98282_f,randomEntity,2,
+field_98283_g,minSpawnDelay,2,
+field_98285_e,minecartToSpawn,2,List of minecart to spawn.
+field_98286_b,spawnDelay,2,The delay to spawn.
+field_98288_a,mobID,2,
+field_98289_l,activatingRangeFromPlayer,2,The distance from which a player activates the spawner.
+field_98290_m,spawnRange,2,The range coefficient for spawning entities around.
+field_98291_j,cachedEntity,2,Cached instance of the entity to render inside the spawner.
+field_98292_k,maxNearbyEntities,2,
+field_98293_h,maxSpawnDelay,2,
+field_98294_i,spawnCount,2,
+field_98301_h,canSeeFriendlyInvisibles,2,
+field_98303_au,AMBIENT_OCCLUSIONS,0,
