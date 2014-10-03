@@ -32,7 +32,7 @@ public class ItemCPCRecord extends ItemRecord {
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:record_" + name);
+        itemIcon = iconRegister.registerIcon("creepypastacraft:record_" + name);
     }
 
     @Override
@@ -76,6 +76,6 @@ public class ItemCPCRecord extends ItemRecord {
 
     @Override
     public ResourceLocation getRecordResource(String name) {
-        return new ResourceLocation("com.teamfear.creepypastacraft:" + name);
+        return new ResourceLocation("creepypastacraft:" + name);
     }
 }

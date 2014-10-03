@@ -6,7 +6,7 @@ public class ItemCPCTab extends Item {
     public ItemCPCTab() {
         this.setMaxStackSize(1);
         this.setMaxDurability(0);
-        this.setTextureName("com.teamfear.creepypastacraft:tabCPC");
+        this.setTextureName("creepypastacraft:tabCPC");
         this.setUnlocalizedName("horror");
     }
 

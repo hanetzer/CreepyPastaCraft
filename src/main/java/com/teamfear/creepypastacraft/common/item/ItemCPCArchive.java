@@ -166,6 +166,6 @@ public class ItemCPCArchive extends Item {
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
-        itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:archive");
+        itemIcon = iconRegister.registerIcon("creepypastacraft:archive");
     }
 }

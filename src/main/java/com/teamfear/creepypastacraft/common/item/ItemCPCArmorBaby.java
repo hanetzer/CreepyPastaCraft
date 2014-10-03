@@ -21,7 +21,7 @@ public class ItemCPCArmorBaby extends ItemArmor {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        String textureLoc = "com.teamfear.creepypastacraft:textures/models/armor/baby_layer_";
+        String textureLoc = "creepypastacraft:textures/models/armor/baby_layer_";
         switch (this.armorType) {
             case 2:
                 return (textureLoc + "2.png");
@@ -34,19 +34,19 @@ public class ItemCPCArmorBaby extends ItemArmor {
     public void registerIcons(IIconRegister iconRegister) {
         switch (textureID) {
             case 0:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:bonnet");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:bonnet");
                 break;
             case 1:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:bib");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:bib");
                 break;
             case 2:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:diaper");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:diaper");
                 break;
             case 3:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:booties");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:booties");
                 break;
             default:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:horror");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:horror");
                 break;
         }
     }

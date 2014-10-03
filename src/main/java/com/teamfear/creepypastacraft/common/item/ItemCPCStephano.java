@@ -13,8 +13,8 @@ public class ItemCPCStephano extends Item {
         setMaxStackSize(8);
         setMaxDurability(0);
         setCreativeTab(CPC.tabCPC);
-        setUnlocalizedName("com.teamfear.creepypastacraft.stephano");
-        setTextureName("com.teamfear.creepypastacraft:stephano");
+        setUnlocalizedName("creepypastacraft.stephano");
+        setTextureName("creepypastacraft:stephano");
     }
 
     @Override

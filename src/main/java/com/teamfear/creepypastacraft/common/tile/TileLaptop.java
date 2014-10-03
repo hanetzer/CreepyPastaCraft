@@ -20,8 +20,8 @@ public class TileLaptop extends BlockContainer {
     public TileLaptop() {
         super(Material.iron);
         setCreativeTab(CPC.tabCPC);
-        setTextureName("com.teamfear.creepypastacraft:laptop");
-		setUnlocalizedName("com.teamfear.creepypastacraft:laptop");
+        setTextureName("creepypastacraft:laptop");
+		setUnlocalizedName("creepypastacraft:laptop");
     }
 
     public Item getBlockDropped(int par1, Random random, int par3) {

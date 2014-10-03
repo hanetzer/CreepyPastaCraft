@@ -27,13 +27,13 @@ public class ItemCPCKnife extends ItemSword {
     public void registerIcons(IIconRegister iconRegister) {
         switch (textureID) {
             case 0:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:jeffKnife");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:jeffKnife");
                 break;
             case 1:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:hiltBlack");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:hiltBlack");
                 break;
             default:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:horror");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:horror");
                 break;
         }
     }

@@ -20,7 +20,7 @@ public class GuiLaptop extends GuiContainer {
         int i = short1 - 108;
         int inventoryRows = inventory.getSizeInventory() / 9;
         this.ySize = i + inventoryRows * 18;
-        this.texture = new ResourceLocation("com.teamfear.creepypastacraft:textures/gui/laptop.png");
+        this.texture = new ResourceLocation("creepypastacraft:textures/gui/laptop.png");
     }
 
     protected void drawGuiContainerForegroundLayer(int i, int j) {

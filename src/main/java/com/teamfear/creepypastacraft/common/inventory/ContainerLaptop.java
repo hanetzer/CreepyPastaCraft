@@ -21,7 +21,7 @@ public class ContainerLaptop extends Container {
         laptop = entityLaptop;
         addSlotToContainer(new Slot(entityLaptop, INPUT, 56, 34));
         addSlotToContainer(new SlotLaptop(inventory.player, entityLaptop, OUTPUT, 116, 35));
-        laptop.openInventory();
+        laptop.openChest();
         int i;
 
         for (i = 0; i < 3; ++i) {
@@ -121,6 +121,6 @@ public class ContainerLaptop extends Container {
 
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
-        laptop.closeInventory();
+        laptop.closeChest();
     }
 }

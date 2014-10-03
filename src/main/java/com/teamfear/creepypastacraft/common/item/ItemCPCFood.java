@@ -40,10 +40,10 @@ public class ItemCPCFood extends ItemFood {
     public void registerIcons(IIconRegister iconRegister) {
         switch (foodType) {
             case 0:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:pasta");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:pasta");
                 break;
             default:
-                itemIcon = iconRegister.registerIcon("com.teamfear.creepypastacraft:horror");
+                itemIcon = iconRegister.registerIcon("creepypastacraft:horror");
                 break;
         }
     }
