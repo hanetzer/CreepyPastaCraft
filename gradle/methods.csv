@@ -1931,7 +1931,7 @@ func_70270_d,setIsBoatEmpty,0,true if no player in boat
 func_70271_g,getDamageTaken,2,Gets the damage taken from the last hit.
 func_70288_d,setAgeToCreativeDespawnTime,2,sets the age of the item so that it'll despawn one minute after it has been dropped (instead of five). Used when items are dropped from players in creative mode
 func_70289_a,combineItems,2,Tries to merge this item with the item passed as the parameter. Returns true if successful. Either this item or the other item will  be removed from the world.
-func_70295_k_,openChest,2,
+func_70295_k_,openInventory,2,
 func_70296_d,markDirty,2,"For tile entities, ensures the chunk containing the tile entity is saved to disk later - the game won't think it hasn't changed and skip it."
 func_70297_j_,getInventoryStackLimit,2,"Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended. *Isn't this more of a set than a get?*"
 func_70298_a,decrStackSize,2,Removes from an inventory slot (first arg) up to a specified number (second arg) of items and returns them in a new stack.
@@ -1940,7 +1940,7 @@ func_70300_a,isUseableByPlayer,2,Do not make give this method the name canIntera
 func_70301_a,getStackInSlot,2,Returns the stack in slot i
 func_70302_i_,getSizeInventory,2,Returns the number of slots in the inventory.
 func_70304_b,getStackInSlotOnClosing,2,"When some containers are closed they call this on each slot, then drop whatever it returns as an EntityItem - like when you close a workbench GUI."
-func_70305_f,closeChest,2,
+func_70305_f,closeInventory,2,
 func_70429_k,decrementAnimations,2,Decrement the number of animations remaining. Only called on client side. This is used to handle the animation of receiving a block.
 func_70430_l,getTotalArmorValue,2,"Based on the damage values and maximum damage values of each armor item, returns the current armor value."
 func_70431_c,hasItemStack,2,Returns true if the specified ItemStack exists in the inventory.
