@@ -1,7 +1,6 @@
 minecraft {
-    mcpVersion = "20140918"
-    mappings   = "snapshot_20140918"
-    version    = "1.7.10-10.13.1.1217"
+    mappings   = "stable_12"
+    version    = "1.7.10-10.13.2.1236"
     runDir     = "run"
     replaceIn    "com/teamfear/creepypastacraft/CPC.java"
     replace      "@VERSION@", project.version
