@@ -47,15 +47,15 @@ public class EntityPewds extends EntityAnimal {
     }
 
     protected String getLivingSound() {
-        return "com.teamfear.creepypastacraft:mob.pewds.say";
+        return "creepypastacraft:mob.pewds.say";
     }
 
     protected String getHurtSound() {
-        return "com.teamfear.creepypastacraft:mob.pewds.hurt";
+        return "creepypastacraft:mob.pewds.hurt";
     }
 
     protected String getDeathSound() {
-        return "com.teamfear.creepypastacraft:mob.pewds.death";
+        return "creepypastacraft:mob.pewds.death";
     }
 
     public void onLivingUpdate() {

@@ -15,7 +15,7 @@ public class RenderSeed extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntitySeed entitySeed) {
-        return new ResourceLocation("com.teamfear.creepypastacraft:textures/entity/seed.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/seed.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

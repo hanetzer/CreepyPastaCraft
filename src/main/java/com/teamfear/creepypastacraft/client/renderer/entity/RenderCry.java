@@ -15,7 +15,7 @@ public class RenderCry extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityCry entityCry) {
-        return new ResourceLocation("com.teamfear.creepypastacraft:textures/entity/cry.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/cry.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

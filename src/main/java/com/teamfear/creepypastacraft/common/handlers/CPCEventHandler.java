@@ -15,6 +15,7 @@ public class CPCEventHandler {
         FMLCommonHandler.instance().bus().register(new CPCCraftingHandler());
         FMLCommonHandler.instance().bus().register(new CPCItemPickupHandler());
         MinecraftForge.EVENT_BUS.register(new CPCHiltBlackHandler());
+		MinecraftForge.EVENT_BUS.register(new CPCSmileyChatHandler());
     }
 
     private static void registerEntityEventHandler() {

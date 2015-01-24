@@ -74,11 +74,11 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
 
     @Override
     public String getInventoryName() {
-        return "container.com.teamfear.creepypastacraft:laptop";
+        return "container.cpc.laptop";
     }
 
     @Override
-    public boolean hasCustomInventoryName() {
+    public boolean isCustomInventoryName() {
         return false;
     }
 
@@ -267,7 +267,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
         return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
     }
 
-    public void openInventory() {
+    public void openChest() {
         if (numUsingPlayers < 0) {
             numUsingPlayers = 0;
         }
@@ -278,7 +278,7 @@ public class TileEntityLaptop extends TileEntity implements IInventory {
                 this.getBlockType(), 1, this.numUsingPlayers);
     }
 
-    public void closeInventory() {
+    public void closeChest() {
         if (this.getBlockType() instanceof TileLaptop) {
             this.numUsingPlayers -= 1;
             opened = false;

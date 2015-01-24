@@ -15,7 +15,7 @@ public class RenderJeff extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityJeff entityJeff) {
-        return new ResourceLocation("com.teamfear.creepypastacraft:textures/entity/jeff.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/jeff.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {

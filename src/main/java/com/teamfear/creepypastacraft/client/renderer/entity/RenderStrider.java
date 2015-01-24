@@ -15,7 +15,7 @@ public class RenderStrider extends RenderLiving {
     }
 
     protected ResourceLocation getTexture(EntityStrider entityStrider) {
-        return new ResourceLocation("com.teamfear.creepypastacraft:textures/entity/strider.png");
+        return new ResourceLocation("creepypastacraft:textures/entity/strider.png");
     }
 
     protected ResourceLocation getEntityTexture(Entity entity) {
